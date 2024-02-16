@@ -66,12 +66,16 @@ namespace Programming
             {
                 ValuesListBox.Items.Add(enumValue);
             }
+            ValuesListBox.SelectedIndex = 0;
 
         }
 
         private void ValuesListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            IntEnumsIndex.Text = Convert.ToString(ValuesListBox.SelectedIndex);
+
 
         }
     }
 }
+//что-то
