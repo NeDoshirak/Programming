@@ -30,6 +30,7 @@
 
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             EnumTabPage = new TabPage();
             IntEnumsIndex = new TextBox();
             ValuesListBox = new ListBox();
@@ -67,6 +68,7 @@
             ValuesListBox.Name = "ValuesListBox";
             ValuesListBox.Size = new Size(135, 229);
             ValuesListBox.TabIndex = 1;
+            ValuesListBox.SelectedIndexChanged += ValuesListBox_SelectedIndexChanged;
             // 
             // EnumsListBox
             // 
@@ -95,6 +97,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(tabControl1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "MainForm";
             Text = "MainForm";
             Load += MainForm_Load;
