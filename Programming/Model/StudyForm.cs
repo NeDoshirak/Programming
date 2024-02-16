@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Programming.Model
 {
-    public enum StudentStudyForm
+    public enum StudyForm
     {
         FullTime, 
         PartTime, 
