@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Programming.Model
+namespace Programming
 {
-    public enum Seasons
+    public enum Manufacturers
     {
-        Spring,
-        Summer,
-        Autumn,
-        Winter
+        Apple,
+        Honor,
+        Realme,
+        Samsung,
+        Xiaomi
     }
 }

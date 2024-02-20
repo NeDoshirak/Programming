@@ -4,14 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Programming.Model
+namespace Programming
 {
-    public enum Manufacturers
+    public enum StudyForm
     {
-        Apple,
-        Honor,
-        Realme,
-        Samsung,
-        Xiaomi
+        FullTime, 
+        PartTime, 
+        Evening, 
+        Distance 
     }
 }

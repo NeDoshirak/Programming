@@ -1,4 +1,4 @@
-using Programming.Model;
+using Programming;
 
 namespace Programming
 {
@@ -7,12 +7,21 @@ namespace Programming
         public MainForm()
         {
             InitializeComponent();
-            EnumsListBox.SelectedIndex = 0;
-        }
 
-        //переменные для работы
-        string curValue;
-        //
+            EnumsListBox.SelectedIndex = 0;
+
+
+            var seasonsValue = Enum.GetValues(typeof(Seasons));
+            Enumerable.Cast<string>(seasonsValue);
+            foreach (var enumValue in seasonsValue)
+            {
+                SeasonsComboBox.Items.Add(enumValue);
+            }
+
+            SeasonsComboBox.SelectedIndex = 0;
+
+
+        }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
@@ -21,7 +30,7 @@ namespace Programming
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            curValue = Convert.ToString(EnumsListBox.SelectedItem);
+            string curValue = Convert.ToString(EnumsListBox.SelectedItem);
             var enumValues = Enum.GetValues(typeof(Colors));
 
             ValuesListBox.Items.Clear();
@@ -76,8 +85,59 @@ namespace Programming
 
 
         }
+
+        private void ParseButton_Click(object sender, EventArgs e)
+        {
+            var inputText = ParsingListBox.Text;
+
+            if (Enum.TryParse(typeof(Weekday), inputText, out var ParsedWeekday))
+            {
+                WeekdayResultLable.Text = $"Текст является днём недели ({inputText} = {Convert.ToInt64(ParsedWeekday) + 1})";
+                WeekdayResultLable.Visible = true;
+            }
+            else
+            {
+                WeekdayResultLable.Text = "Такого дня недели нету :(";
+                WeekdayResultLable.Visible = true;
+            }
+
+
+        }
+
+        private void SeasonsComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SeasonResulrButton_Click(object sender, EventArgs e)
+        {
+            var curValue = Convert.ToString(SeasonsComboBox.SelectedItem);
+            switch (curValue)
+            {
+                case "Summer":
+                    {
+                        SeasonResultLable.Text = "Ура! Солнце!";
+                        SeasonResultLable.Visible = true;
+                        break;
+                    }
+                case "Autumn":
+                    {
+                        BackColor = Color.Orange;
+                        break;
+                    }
+                case "Spring":
+                    {
+                        BackColor = Color.Green;
+                        break;
+                    }
+                case "Winter":
+                    {
+                        SeasonResultLable.Text = "Брррр! Холодно!";
+                        SeasonResultLable.Visible = true;
+                        break;
+                    }
+      
+            }
+        }
     }
 }
-
-
-//чтл-то 

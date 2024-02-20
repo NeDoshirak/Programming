@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Programming.Model
+namespace Programming
 {
-    public enum StudyForm
+    public enum Seasons
     {
-        FullTime, 
-        PartTime, 
-        Evening, 
-        Distance 
+        Spring,
+        Summer,
+        Autumn,
+        Winter
     }
 }
