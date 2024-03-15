@@ -20,7 +20,7 @@ namespace Programming
             } 
             set
             {
-                if (value < 0) throw new ArgumentException();
+                if (value < 1) throw new ArgumentException();
                 _lenght = value;
             }
         }
@@ -33,7 +33,7 @@ namespace Programming
             } 
             set 
             {
-                if (value < 0) throw new ArgumentException();
+                if (value < 1) throw new ArgumentException();
                 _wide = value;
             } 
         }
@@ -45,7 +45,11 @@ namespace Programming
                 return _color;
             }
             set 
-            { 
+            {
+                if ((int.TryParse(value, out var result1)))
+                {
+                    throw new ArgumentException();
+                }
                 if (!(Enum.TryParse(typeof(Colors), value, out var result))) throw new ArgumentException();
                 _color = value; 
             }

@@ -19,7 +19,7 @@ namespace Programming.Model.Classes
             get { return _mark; }
             set 
             {
-                if ((value < 0) && (value > 5)) throw ArgumentException();
+                if ((value < 0) && (value > 5)) throw new ArgumentException();
                 _mark = value; 
             }
         }

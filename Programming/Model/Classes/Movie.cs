@@ -15,7 +15,7 @@ namespace Programming.Model.Classes
         private string _genre;
         private int _rating;
 
-        public string Title { get { return _title; }; set { _title = value; } }
+        public string Title { get { return _title; } set { _title = value; } }
 
         public int Duration { get { return _duration; } 
             set 
@@ -28,7 +28,7 @@ namespace Programming.Model.Classes
         public int Year { get { return _year; } 
             set 
             { 
-                if ((value < 1900)&&(value > 2024)) throw new ArgumentException();
+                if ((value < 1900)||(value > 2024)) throw new ArgumentException();
                 _year = value; 
             } 
         }
@@ -51,7 +51,7 @@ namespace Programming.Model.Classes
             get { return _rating; }
             set
             {
-                if ((value < 0) && (value > 10)) throw new ArgumentException();
+                if ((value < 0) || (value > 10)) throw new ArgumentException();
                 _rating = value;
             }
         }
