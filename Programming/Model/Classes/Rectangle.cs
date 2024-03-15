@@ -57,5 +57,7 @@ namespace Programming
             Wide = wide;
             Color = color;
         }
+
+        public Rectangle() { } 
     }
 }

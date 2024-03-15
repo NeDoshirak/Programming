@@ -33,6 +33,7 @@ namespace Programming.Model.Classes
             Departure = departure;
             Destination = destination;
         }
-        
+
+        public Flight() { }
     }
 }

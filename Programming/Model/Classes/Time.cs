@@ -45,5 +45,7 @@ namespace Programming.Model.Classes
             Minutes = minutes;
             Seconds = seconds;
         }
+
+        public Time() { }
     }
 }

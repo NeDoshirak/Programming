@@ -25,6 +25,14 @@ namespace Programming.Model.Classes
                 _number = value; 
             } 
         }
+        public Contact (string name, string surname, int number)
+        {
+            Name = name;
+            Surname = surname;
+            Number = number;
+        }
+
+        public Contact() { }
 
     }
 }

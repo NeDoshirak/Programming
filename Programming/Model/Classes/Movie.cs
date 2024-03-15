@@ -65,5 +65,6 @@ namespace Programming.Model.Classes
             Rating = rating;
         }
 
+        public Movie() { }
     }
 }

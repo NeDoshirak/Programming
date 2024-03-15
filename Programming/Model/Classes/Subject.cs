@@ -40,5 +40,7 @@ namespace Programming.Model.Classes
             StudyForm = studyForm;
             Mark = mark;
         }
+
+        public Subject () { }
     }
 }
