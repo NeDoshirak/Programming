@@ -120,7 +120,6 @@
             SeasonsComboBox.Name = "SeasonsComboBox";
             SeasonsComboBox.Size = new Size(124, 23);
             SeasonsComboBox.TabIndex = 0;
-            SeasonsComboBox.SelectedIndexChanged += SeasonsComboBox_SelectedIndexChanged;
             // 
             // WeekdayParsingGB
             // 

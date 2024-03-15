@@ -8,24 +8,19 @@ namespace Programming
         {
             InitializeComponent();
 
-            EnumsListBox.SelectedIndex = 0;
-
-
-            var seasonsValue = Enum.GetValues(typeof(Seasons));
-            Enumerable.Cast<string>(seasonsValue);
-            foreach (var enumValue in seasonsValue)
-            {
-                SeasonsComboBox.Items.Add(enumValue);
-            }
-
-            SeasonsComboBox.SelectedIndex = 0;
-
-
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            EnumsListBox.SelectedIndex = 0;
 
+
+            var seasonsValue = Enum.GetValues(typeof(Seasons));
+            object[] SeasonValues = Enum.GetValues(typeof(Seasons)).Cast<object>().ToArray();
+            SeasonsComboBox.Items.AddRange(SeasonValues);
+
+
+            SeasonsComboBox.SelectedIndex = 0;
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -69,13 +64,8 @@ namespace Programming
                     }
             }
 
-
-            Enumerable.Cast<string>(enumValues);
-            foreach (var enumValue in enumValues)
-            {
-                ValuesListBox.Items.Add(enumValue);
-            }
-            ValuesListBox.SelectedIndex = 0;
+            object [] temp = enumValues.Cast<object>().ToArray();
+            ValuesListBox.Items.AddRange(temp);
 
         }
 
@@ -90,22 +80,26 @@ namespace Programming
         {
             var inputText = ParsingListBox.Text;
 
-            if (Enum.TryParse(typeof(Weekday), inputText, out var ParsedWeekday))
+            if (int.TryParse(inputText, out var result))
             {
-                WeekdayResultLable.Text = $"Текст является днём недели ({inputText} = {Convert.ToInt64(ParsedWeekday) + 1})";
-                WeekdayResultLable.Visible = true;
+                WeekdayResultLable.Text = "Введённое значение не является текстом";
+
             }
             else
-            {
-                WeekdayResultLable.Text = "Такого дня недели нету :(";
-                WeekdayResultLable.Visible = true;
+            { 
+                if (Enum.TryParse(typeof(Weekday), inputText, out var ParsedWeekday))
+                {
+                    WeekdayResultLable.Text = $"Текст является днём недели ({inputText} = {Convert.ToInt64(ParsedWeekday) + 1})";
+                    
+                }
+                else
+                {
+                     WeekdayResultLable.Text = "Такого дня недели нету :(";
+
+                }
             }
 
-
-        }
-
-        private void SeasonsComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
+            WeekdayResultLable.Visible = true;
 
         }
 
