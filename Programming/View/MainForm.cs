@@ -12,11 +12,9 @@ namespace Programming
 
 
             var seasonsValue = Enum.GetValues(typeof(Seasons));
-            Enumerable.Cast<string>(seasonsValue);
-            foreach (var enumValue in seasonsValue)
-            {
-                SeasonsComboBox.Items.Add(enumValue);
-            }
+            object[] SeasonValues = Enum.GetValues(typeof(Seasons)).Cast<object>().ToArray();
+            SeasonsComboBox.Items.AddRange(SeasonValues);
+
 
             SeasonsComboBox.SelectedIndex = 0;
 
