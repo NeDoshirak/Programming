@@ -69,6 +69,9 @@
             WidthTB = new TextBox();
             LenghtTB = new TextBox();
             RectanglesListBox = new ListBox();
+            textBox1 = new TextBox();
+            textBox2 = new TextBox();
+            label10 = new Label();
             EnumTabPage.SuspendLayout();
             SeasonHandleGB.SuspendLayout();
             WeekdayParsingGB.SuspendLayout();
@@ -377,6 +380,9 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(label10);
+            groupBox1.Controls.Add(textBox2);
+            groupBox1.Controls.Add(textBox1);
             groupBox1.Controls.Add(FindRecButton);
             groupBox1.Controls.Add(label8);
             groupBox1.Controls.Add(lable3241);
@@ -464,6 +470,29 @@
             RectanglesListBox.TabIndex = 0;
             RectanglesListBox.SelectedIndexChanged += RectanglesListBox_SelectedIndexChanged;
             // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(170, 173);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(62, 23);
+            textBox1.TabIndex = 9;
+            // 
+            // textBox2
+            // 
+            textBox2.Location = new Point(238, 173);
+            textBox2.Name = "textBox2";
+            textBox2.Size = new Size(62, 23);
+            textBox2.TabIndex = 10;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(170, 155);
+            label10.Name = "label10";
+            label10.Size = new Size(45, 15);
+            label10.TabIndex = 11;
+            label10.Text = "Center:";
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -531,5 +560,8 @@
         public TextBox YearTB;
         public TextBox TittleTB;
         public ListBox MoviesListBox;
+        private Label label10;
+        private TextBox textBox2;
+        private TextBox textBox1;
     }
 }

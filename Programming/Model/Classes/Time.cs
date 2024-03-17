@@ -15,7 +15,7 @@ namespace Programming.Model.Classes
         public int Hours { get { return _hours; } 
             set 
             {
-                if ((value < 0)&&(value > 23)) throw new ArgumentException();
+                Validator.AssertValueInRange(value, 0, 23);
                 _hours = value;
             }
         }
@@ -25,7 +25,7 @@ namespace Programming.Model.Classes
             get { return _minutes; }
             set
             {
-                if ((value < 0)&& (value > 60)) throw new ArgumentException();
+                Validator.AssertValueInRange(value, 0, 60);
                 _minutes = value;
             }
         }
@@ -34,7 +34,7 @@ namespace Programming.Model.Classes
             get { return _seconds; }
             set
             {
-                if ((value < 0) && (value > 60)) throw new ArgumentException();
+                Validator.AssertValueInRange(value, 0, 60);
                 _seconds = value;
             }
         }

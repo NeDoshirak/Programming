@@ -20,7 +20,7 @@ namespace Programming.Model.Classes
         public int Duration { get { return _duration; } 
             set 
             {
-                if (value < 0) throw new ArgumentException();
+                Validator.AssertOnPositiveValue(value);
                 _duration = value;
             } 
         }
@@ -28,7 +28,7 @@ namespace Programming.Model.Classes
         public int Year { get { return _year; } 
             set 
             { 
-                if ((value < 1900)||(value > 2024)) throw new ArgumentException();
+                Validator.AssertValueInRange(value,1900,2024);
                 _year = value; 
             } 
         }
@@ -51,7 +51,7 @@ namespace Programming.Model.Classes
             get { return _rating; }
             set
             {
-                if ((value < 0) || (value > 10)) throw new ArgumentException();
+                Validator.AssertValueInRange(value,0,10);
                 _rating = value;
             }
         }

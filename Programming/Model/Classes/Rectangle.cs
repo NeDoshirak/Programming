@@ -11,7 +11,8 @@ namespace Programming
         private double _lenght;
         private double _wide;
         private string _color;
-
+        private Point2D Center;
+             
         public double Legth 
         { 
             get 
@@ -20,7 +21,7 @@ namespace Programming
             } 
             set
             {
-                if (value < 1) throw new ArgumentException();
+                Validator.AssertOnPositiveValue(value);
                 _lenght = value;
             }
         }
@@ -33,7 +34,7 @@ namespace Programming
             } 
             set 
             {
-                if (value < 1) throw new ArgumentException();
+                Validator.AssertOnPositiveValue(value);
                 _wide = value;
             } 
         }
@@ -55,11 +56,12 @@ namespace Programming
             }
         }
 
-        public Rectangle(double lenght, double wide, string color)
+        public Rectangle(double lenght, double wide, string color, double x, double y)
         {
             Legth = lenght;
             Wide = wide;
             Color = color;
+            Center = new Point2D(x, y);
         }
 
         public Rectangle() { } 

@@ -22,7 +22,7 @@ namespace Programming.Model.Classes
             } 
             set
             {
-                if (value < 0) throw new ArgumentException();
+                Validator.AssertOnPositiveValue(value);
                 _duration = value;
             }
         }

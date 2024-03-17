@@ -35,7 +35,7 @@ namespace Programming
 
             for (int i = 0; i < _rectangles.Length; i++)
             {
-                _rectangles[i] = new Rectangle(rdn.Next(1, 10), rdn.Next(1, 10), "Red");
+                _rectangles[i] = new Rectangle(rdn.Next(1, 10), rdn.Next(1, 10), "Red", rdn.Next(1, 10), rdn.Next(1, 10));
             }
 
             RectanglesListBox.SelectedIndex = 0;
@@ -169,6 +169,7 @@ namespace Programming
             LenghtTB.Text = _curretRentagles.Legth.ToString();
             WidthTB.Text = _curretRentagles.Wide.ToString();
             ColorTB.Text = _curretRentagles.Color;
+            
 
         }
 
