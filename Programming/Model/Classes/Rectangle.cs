@@ -11,7 +11,7 @@ namespace Programming
         private double _lenght;
         private double _wide;
         private string _color;
-        private Point2D Center;
+        public Point2D Center { get; set; }
              
         public double Legth 
         { 

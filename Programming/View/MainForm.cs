@@ -1,5 +1,4 @@
 using Programming;
-using Programming.Model.Classes;
 using System.Security.Cryptography.X509Certificates;
 
 namespace Programming
@@ -169,7 +168,8 @@ namespace Programming
             LenghtTB.Text = _curretRentagles.Legth.ToString();
             WidthTB.Text = _curretRentagles.Wide.ToString();
             ColorTB.Text = _curretRentagles.Color;
-            
+            CenterXTB.Text = _curretRentagles.Center.X.ToString();
+            CenterYTB.Text = _curretRentagles.Center.Y.ToString();
 
         }
 
