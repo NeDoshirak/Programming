@@ -15,7 +15,7 @@ namespace Programming
         public int id {  get; } 
         public Point2D Center { get; set; }
              
-        public double Legth 
+        public double Length 
         { 
             get 
             { 
@@ -62,7 +62,7 @@ namespace Programming
 
         public Rectangle(double lenght, double wide, string color, double x, double y)
         {
-            Legth = lenght;
+            Length = lenght;
             Wide = wide;
             Color = color;
             Center = new Point2D(x, y);

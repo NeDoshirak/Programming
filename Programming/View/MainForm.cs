@@ -165,7 +165,7 @@ namespace Programming
         {
             _curretRentagles = _rectangles[RectanglesListBox.SelectedIndex];
 
-            LenghtTB.Text = _curretRentagles.Legth.ToString();
+            LenghtTB.Text = _curretRentagles.Length.ToString();
             WidthTB.Text = _curretRentagles.Wide.ToString();
             ColorTB.Text = _curretRentagles.Color;
             CenterXTB.Text = _curretRentagles.Center.X.ToString();
@@ -179,7 +179,7 @@ namespace Programming
 
             try
             {
-                _curretRentagles.Legth = Convert.ToDouble(LenghtTB.Text);
+                _curretRentagles.Length = Convert.ToDouble(LenghtTB.Text);
                 LenghtTB.BackColor = Color.White;
             }
             catch

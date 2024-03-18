@@ -11,7 +11,7 @@ namespace Programming.Model.Classes
         static public bool IsCollision(Rectangle rectangle1, Rectangle rectangle2)
         {
             double differenceX = Math.Abs(rectangle1.Center.X - rectangle2.Center.X);
-            double halfLatitude = Math.Abs(rectangle1.Legthe + rectangle2.Legth) / 2;
+            double halfLatitude = Math.Abs(rectangle1.Length + rectangle2.Length) / 2;
             double differenceY = Math.Abs(rectangle1.Center.Y - rectangle2.Center.Y);
             double halfLength = Math.Abs(rectangle1.Wide + rectangle2.Wide) / 2;
             return differenceX < halfLatitude && differenceY < halfLength;
