@@ -170,6 +170,7 @@ namespace Programming
             ColorTB.Text = _curretRentagles.Color;
             CenterXTB.Text = _curretRentagles.Center.X.ToString();
             CenterYTB.Text = _curretRentagles.Center.Y.ToString();
+            IDTB.Text = _curretRentagles.id.ToString();
 
         }
 

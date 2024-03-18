@@ -11,6 +11,8 @@ namespace Programming
         private double _lenght;
         private double _wide;
         private string _color;
+        private static int _allRectanglesCount;
+        public int id {  get; } 
         public Point2D Center { get; set; }
              
         public double Legth 
@@ -56,12 +58,18 @@ namespace Programming
             }
         }
 
+        public static int AllRectanglesCount() { return _allRectanglesCount; }
+
         public Rectangle(double lenght, double wide, string color, double x, double y)
         {
             Legth = lenght;
             Wide = wide;
             Color = color;
             Center = new Point2D(x, y);
+            _allRectanglesCount++;
+            id = _allRectanglesCount;
+
+
         }
 
         public Rectangle() { } 

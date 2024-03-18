@@ -72,6 +72,8 @@
             WidthTB = new TextBox();
             LenghtTB = new TextBox();
             RectanglesListBox = new ListBox();
+            IDTB = new TextBox();
+            label11 = new Label();
             EnumTabPage.SuspendLayout();
             SeasonHandleGB.SuspendLayout();
             WeekdayParsingGB.SuspendLayout();
@@ -301,14 +303,14 @@
             groupBox2.Controls.Add(MoviesListBox);
             groupBox2.Location = new Point(333, 22);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(310, 269);
+            groupBox2.Size = new Size(310, 325);
             groupBox2.TabIndex = 10;
             groupBox2.TabStop = false;
             groupBox2.Text = "Movies";
             // 
             // FindMovButton
             // 
-            FindMovButton.Location = new Point(170, 229);
+            FindMovButton.Location = new Point(170, 244);
             FindMovButton.Name = "FindMovButton";
             FindMovButton.Size = new Size(130, 23);
             FindMovButton.TabIndex = 8;
@@ -374,12 +376,14 @@
             MoviesListBox.Items.AddRange(new object[] { "Movie 1", "Movie 2", "Movie 3", "Movie 4", "Movie 5" });
             MoviesListBox.Location = new Point(8, 23);
             MoviesListBox.Name = "MoviesListBox";
-            MoviesListBox.Size = new Size(156, 229);
+            MoviesListBox.Size = new Size(156, 244);
             MoviesListBox.TabIndex = 0;
             MoviesListBox.SelectedIndexChanged += MoviesListBox_SelectedIndexChanged;
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(IDTB);
+            groupBox1.Controls.Add(label11);
             groupBox1.Controls.Add(label10);
             groupBox1.Controls.Add(CenterYTB);
             groupBox1.Controls.Add(CenterXTB);
@@ -393,7 +397,7 @@
             groupBox1.Controls.Add(RectanglesListBox);
             groupBox1.Location = new Point(17, 22);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(310, 269);
+            groupBox1.Size = new Size(310, 325);
             groupBox1.TabIndex = 9;
             groupBox1.TabStop = false;
             groupBox1.Text = "Rectangles";
@@ -425,7 +429,7 @@
             // 
             // FindRecButton
             // 
-            FindRecButton.Location = new Point(170, 229);
+            FindRecButton.Location = new Point(170, 246);
             FindRecButton.Name = "FindRecButton";
             FindRecButton.Size = new Size(130, 23);
             FindRecButton.TabIndex = 8;
@@ -491,9 +495,26 @@
             RectanglesListBox.Items.AddRange(new object[] { "Rectangles 1", "Rectangles 2", "Rectangles 3", "Rectangles 4", "Rectangles 5" });
             RectanglesListBox.Location = new Point(8, 23);
             RectanglesListBox.Name = "RectanglesListBox";
-            RectanglesListBox.Size = new Size(156, 229);
+            RectanglesListBox.Size = new Size(156, 244);
             RectanglesListBox.TabIndex = 0;
             RectanglesListBox.SelectedIndexChanged += RectanglesListBox_SelectedIndexChanged;
+            // 
+            // IDTB
+            // 
+            IDTB.Location = new Point(170, 217);
+            IDTB.Name = "IDTB";
+            IDTB.ReadOnly = true;
+            IDTB.Size = new Size(62, 23);
+            IDTB.TabIndex = 12;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Location = new Point(170, 199);
+            label11.Name = "label11";
+            label11.Size = new Size(18, 15);
+            label11.TabIndex = 12;
+            label11.Text = "ID";
             // 
             // MainForm
             // 
@@ -565,5 +586,7 @@
         private Label label10;
         public TextBox CenterYTB;
         public TextBox CenterXTB;
+        public TextBox IDTB;
+        private Label label11;
     }
 }
