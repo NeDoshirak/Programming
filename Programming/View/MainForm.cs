@@ -1,18 +1,16 @@
-using Programming;
-using System.Security.Cryptography.X509Certificates;
-
 namespace Programming
 {
     public partial class MainForm : Form
     {
-        private Rectangle[] _rectangles = new Rectangle[5];
+        private Rectangle[] _Rectangles = new Rectangle[5];
         private Rectangle _curretRentagles;
+        private List<Rectangle> _rentagles = new List<Rectangle>();
+        private int index = 0;
 
         private Movie[] _movies = new Movie[5];
         private Movie _curretMovie;
 
-        Random rdn = new Random();
-
+        Random rnd = new Random();
 
         public MainForm()
         {
@@ -32,19 +30,20 @@ namespace Programming
 
             SeasonsComboBox.SelectedIndex = 0;
 
-            for (int i = 0; i < _rectangles.Length; i++)
+            for (int i = 0; i < _Rectangles.Length; i++)
             {
-                _rectangles[i] = new Rectangle(rdn.Next(1, 10), rdn.Next(1, 10), "Red", rdn.Next(1, 10), rdn.Next(1, 10));
+                _Rectangles[i] = new Rectangle(rnd.Next(1, 10), rnd.Next(1, 10), "Red", rnd.Next(1, 10), rnd.Next(1, 10));
             }
 
-            RectanglesListBox.SelectedIndex = 0;
+
+            RectanglesLB.SelectedIndex = 0;
 
             for (int i = 0; i < _movies.Length; i++)
             {
                 _movies[i] = new Movie();
                 _movies[i].Title = "Название фильма";
-                _movies[i].Year = rdn.Next(1900, 2024);
-                _movies[i].Rating = rdn.Next(1, 10);
+                _movies[i].Year = rnd.Next(1900, 2024);
+                _movies[i].Rating = rnd.Next(1, 10);
             }
             MoviesListBox.SelectedIndex = 0;
 
@@ -163,14 +162,14 @@ namespace Programming
 
         private void RectanglesListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _curretRentagles = _rectangles[RectanglesListBox.SelectedIndex];
+            _curretRentagles = _Rectangles[RectanglesLB.SelectedIndex];
 
-            LenghtTB.Text = _curretRentagles.Length.ToString();
-            WidthTB.Text = _curretRentagles.Wide.ToString();
-            ColorTB.Text = _curretRentagles.Color;
-            CenterXTB.Text = _curretRentagles.Center.X.ToString();
-            CenterYTB.Text = _curretRentagles.Center.Y.ToString();
-            IDTB.Text = _curretRentagles.id.ToString();
+            LenghtTextBox.Text = _curretRentagles.Length.ToString();
+            WidthTextBox.Text = _curretRentagles.Wide.ToString();
+            ColorTextBox.Text = _curretRentagles.Color;
+            CenterXTextBox.Text = _curretRentagles.Center.X.ToString();
+            CenterYTextBox.Text = _curretRentagles.Center.Y.ToString();
+            IDTextBox.Text = _curretRentagles.id.ToString();
 
         }
 
@@ -179,12 +178,12 @@ namespace Programming
 
             try
             {
-                _curretRentagles.Length = Convert.ToDouble(LenghtTB.Text);
-                LenghtTB.BackColor = Color.White;
+                _curretRentagles.Length = Convert.ToDouble(LenghtTextBox.Text);
+                LenghtTextBox.BackColor = Color.White;
             }
             catch
             {
-                LenghtTB.BackColor = Color.LightPink;
+                LenghtTextBox.BackColor = Color.LightPink;
             }
         }
 
@@ -192,12 +191,12 @@ namespace Programming
         {
             try
             {
-                _curretRentagles.Wide = Convert.ToDouble(WidthTB.Text);
-                WidthTB.BackColor = Color.White;
+                _curretRentagles.Wide = Convert.ToDouble(WidthTextBox.Text);
+                WidthTextBox.BackColor = Color.White;
             }
             catch
             {
-                WidthTB.BackColor = Color.LightPink;
+                WidthTextBox.BackColor = Color.LightPink;
             }
         }
 
@@ -205,12 +204,12 @@ namespace Programming
         {
             try
             {
-                _curretRentagles.Color = ColorTB.Text;
-                ColorTB.BackColor = Color.White;
+                _curretRentagles.Color = ColorTextBox.Text;
+                ColorTextBox.BackColor = Color.White;
             }
             catch
             {
-                ColorTB.BackColor = Color.LightPink;
+                ColorTextBox.BackColor = Color.LightPink;
             }
         }
 
@@ -231,7 +230,7 @@ namespace Programming
 
         private void FindButton_Click(object sender, EventArgs e)
         {
-            RectanglesListBox.SelectedIndex = FindRectangleWithMaxWidth(_rectangles);
+            RectanglesLB.SelectedIndex = FindRectangleWithMaxWidth(_Rectangles);
         }
 
         private void MoviesListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -294,6 +293,146 @@ namespace Programming
         private void FindMovButton_Click(object sender, EventArgs e)
         {
             MoviesListBox.SelectedIndex = FindMovieleWithRating(_movies);
+        }
+
+        private void AddButton_Click(object sender, EventArgs e)
+        {
+            _rentagles.Add(new Rectangle(rnd.Next(1, 10), rnd.Next(1, 10), "Green", rnd.Next(1, 10), rnd.Next(1, 10)));
+            RectanglesListBox.Items.Add($"{_rentagles[_rentagles.Count - 1].id}: X: {_rentagles[_rentagles.Count - 1].Center.X} Y:{_rentagles[_rentagles.Count - 1].Center.Y} W: {_rentagles[_rentagles.Count - 1].Wide} L: {_rentagles[_rentagles.Count - 1].Length}");
+            RectanglesListBox.SelectedIndex = _rentagles.Count - 1;
+            index++;
+
+        }
+
+        private void DelButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _curretRentagles = _rentagles[RectanglesListBox.SelectedIndex];
+                RectanglesListBox.Items.RemoveAt(RectanglesListBox.SelectedIndex);
+                _rentagles.Remove(_curretRentagles);
+            }
+            catch { }
+            ColorClear();
+        }
+
+        private void RectanglesListBox_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            try
+            {
+                _curretRentagles = _rentagles[RectanglesListBox.SelectedIndex];
+
+                IDTB.Text = _curretRentagles.id.ToString();
+                XTB.Text = _curretRentagles.Center.X.ToString();
+                YTB.Text = _curretRentagles.Center.Y.ToString();
+                LengthTB.Text = _curretRentagles.Length.ToString();
+                WidthTB.Text = _curretRentagles.Wide.ToString();
+            }
+            catch
+            {
+                IDTB.Clear();
+                XTB.Clear();
+                YTB.Clear();
+                LengthTB.Clear();
+                WidthTB.Clear();
+            }
+        }
+
+        private void XTB_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                _curretRentagles.Center.X = Convert.ToUInt16(XTB.Text);
+                XTB.BackColor = Color.White;
+            }
+            catch
+            {
+                XTB.BackColor = Color.Red;
+            }
+        }
+
+        private void YTB_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                _curretRentagles.Center.Y = Convert.ToUInt16(YTB.Text);
+                YTB.BackColor = Color.White;
+            }
+            catch
+            {
+                YTB.BackColor = Color.Red;
+            }
+        }
+
+        private void LengthTB_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                _curretRentagles.Length = Convert.ToDouble(LengthTB.Text);
+                LengthTB.BackColor = Color.White;
+            }
+            catch
+            {
+                LengthTB.BackColor = Color.Red;
+            }
+        }
+
+        private void WidthTB_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                _curretRentagles.Wide = Convert.ToDouble(WidthTB.Text);
+                WidthTB.BackColor = Color.White;
+            }
+            catch
+            {
+                WidthTB.BackColor = Color.Red;
+            }
+        }
+
+        private void XTB_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                RectanglesListBox.Items[RectanglesListBox.SelectedIndex] = ($"{_rentagles[RectanglesListBox.SelectedIndex].id}: X: {_rentagles[RectanglesListBox.SelectedIndex].Center.X} Y:{_rentagles[RectanglesListBox.SelectedIndex].Center.Y} W: {_rentagles[RectanglesListBox.SelectedIndex].Wide} L: {_rentagles[RectanglesListBox.SelectedIndex].Length}");
+            }
+            catch { }
+        }
+
+        private void YTB_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                RectanglesListBox.Items[RectanglesListBox.SelectedIndex] = ($"{_rentagles[RectanglesListBox.SelectedIndex].id}: X: {_rentagles[RectanglesListBox.SelectedIndex].Center.X} Y:{_rentagles[RectanglesListBox.SelectedIndex].Center.Y} W: {_rentagles[RectanglesListBox.SelectedIndex].Wide} L: {_rentagles[RectanglesListBox.SelectedIndex].Length}");
+            }
+            catch { }
+        }
+
+        private void LengthTB_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                RectanglesListBox.Items[RectanglesListBox.SelectedIndex] = ($"{_rentagles[RectanglesListBox.SelectedIndex].id}: X: {_rentagles[RectanglesListBox.SelectedIndex].Center.X} Y:{_rentagles[RectanglesListBox.SelectedIndex].Center.Y} W: {_rentagles[RectanglesListBox.SelectedIndex].Wide} L: {_rentagles[RectanglesListBox.SelectedIndex].Length}");
+            }
+            catch { }
+        }
+
+        private void WidthTB_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                RectanglesListBox.Items[RectanglesListBox.SelectedIndex] = ($"{_rentagles[RectanglesListBox.SelectedIndex].id}: X: {_rentagles[RectanglesListBox.SelectedIndex].Center.X} Y:{_rentagles[RectanglesListBox.SelectedIndex].Center.Y} W: {_rentagles[RectanglesListBox.SelectedIndex].Wide} L: {_rentagles[RectanglesListBox.SelectedIndex].Length}");
+            }
+            catch { }
+
+        }
+
+        private void ColorClear()
+        {
+            WidthTB.BackColor = Color.White;
+            LengthTB.BackColor = Color.White;
+            XTB.BackColor = Color.White;
+            YTB.BackColor = Color.White;
         }
     }
 

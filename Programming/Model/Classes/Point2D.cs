@@ -14,7 +14,7 @@ namespace Programming
         public double X
         {
             get { return _x; }
-            private set
+            set
             {
                 Validator.AssertOnPositiveValue(value);
                 _x = value;
@@ -24,7 +24,7 @@ namespace Programming
         public double Y
         {
             get { return _y; }
-            private set
+            set
             {
                 Validator.AssertOnPositiveValue(value);
                 _y = value;
