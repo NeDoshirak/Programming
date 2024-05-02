@@ -8,36 +8,36 @@ namespace Programming
 {
     internal class Rectangle
     {
-        private double _lenght;
-        private double _wide;
+        private int _height;
+        private int _width;
         private string _color;
         private static int _allRectanglesCount;
         public int id {  get; } 
         public Point2D Center { get; set; }
              
-        public double Length 
+        public int Width
         { 
             get 
             { 
-                return _lenght; 
+                return _width; 
             } 
             set
             {
                 Validator.AssertOnPositiveValue(value);
-                _lenght = value;
+                _width = value;
             }
         }
 
-        public double Wide 
+        public int Height
         { 
             get 
             { 
-                return _wide; 
+                return _height; 
             } 
             set 
             {
                 Validator.AssertOnPositiveValue(value);
-                _wide = value;
+                _height = value;
             } 
         }
 
@@ -60,10 +60,10 @@ namespace Programming
 
         public static int AllRectanglesCount() { return _allRectanglesCount; }
 
-        public Rectangle(double lenght, double wide, string color, double x, double y)
+        public Rectangle(int height, int width, string color, double x, double y)
         {
-            Length = lenght;
-            Wide = wide;
+            Height = height;
+            Width = width;
             Color = color;
             Center = new Point2D(x, y);
             _allRectanglesCount++;
@@ -72,8 +72,11 @@ namespace Programming
 
         }
 
-        
+        public Rectangle() { }
 
-        public Rectangle() { } 
+        public override string ToString()
+        {
+            return $"{id}: X: {Center.X} Y:{Center.Y} H: {_height} W: {_width}";
+        }
     }
 }

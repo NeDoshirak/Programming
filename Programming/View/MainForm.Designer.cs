@@ -75,20 +75,20 @@
             LenghtTextBox = new TextBox();
             RectanglesLB = new ListBox();
             RectangleTabPage = new TabPage();
+            pictureBox2 = new PictureBox();
+            pictureBox1 = new PictureBox();
             label17 = new Label();
             label16 = new Label();
             label15 = new Label();
             label14 = new Label();
             label13 = new Label();
             label12 = new Label();
-            RectanlePanel = new Panel();
+            RectanglePanel = new Panel();
             WidthTB = new TextBox();
-            LengthTB = new TextBox();
+            HeightTB = new TextBox();
             YTB = new TextBox();
             XTB = new TextBox();
             IDTB = new TextBox();
-            DelButton = new Button();
-            AddButton = new Button();
             RectanglesListBox = new ListBox();
             EnumTabPage.SuspendLayout();
             SeasonHandleGB.SuspendLayout();
@@ -99,6 +99,8 @@
             groupBox2.SuspendLayout();
             groupBox1.SuspendLayout();
             RectangleTabPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // EnumTabPage
@@ -308,6 +310,7 @@
             ClassesTabPage.TabIndex = 1;
             ClassesTabPage.Text = "Classes";
             ClassesTabPage.UseVisualStyleBackColor = true;
+            ClassesTabPage.Enter += ClassesTabPage_Enter;
             // 
             // groupBox2
             // 
@@ -536,20 +539,20 @@
             // 
             // RectangleTabPage
             // 
+            RectangleTabPage.Controls.Add(pictureBox2);
+            RectangleTabPage.Controls.Add(pictureBox1);
             RectangleTabPage.Controls.Add(label17);
             RectangleTabPage.Controls.Add(label16);
             RectangleTabPage.Controls.Add(label15);
             RectangleTabPage.Controls.Add(label14);
             RectangleTabPage.Controls.Add(label13);
             RectangleTabPage.Controls.Add(label12);
-            RectangleTabPage.Controls.Add(RectanlePanel);
+            RectangleTabPage.Controls.Add(RectanglePanel);
             RectangleTabPage.Controls.Add(WidthTB);
-            RectangleTabPage.Controls.Add(LengthTB);
+            RectangleTabPage.Controls.Add(HeightTB);
             RectangleTabPage.Controls.Add(YTB);
             RectangleTabPage.Controls.Add(XTB);
             RectangleTabPage.Controls.Add(IDTB);
-            RectangleTabPage.Controls.Add(DelButton);
-            RectangleTabPage.Controls.Add(AddButton);
             RectangleTabPage.Controls.Add(RectanglesListBox);
             RectangleTabPage.Location = new Point(4, 24);
             RectangleTabPage.Name = "RectangleTabPage";
@@ -557,6 +560,32 @@
             RectangleTabPage.TabIndex = 2;
             RectangleTabPage.Text = "Rectangle";
             RectangleTabPage.UseVisualStyleBackColor = true;
+            RectangleTabPage.MouseLeave += RectangleTabPage_MouseLeave;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(144, 192);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(21, 21);
+            pictureBox2.TabIndex = 16;
+            pictureBox2.TabStop = false;
+            pictureBox2.Click += pictureBox2_Click;
+            pictureBox2.MouseEnter += pictureBox2_MouseEnter;
+            pictureBox2.MouseLeave += pictureBox2_MouseLeave;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.ErrorImage = Properties.Resources._3jMsISjGmMw;
+            pictureBox1.Image = Properties.Resources._3jMsISjGmMw;
+            pictureBox1.InitialImage = Properties.Resources._3jMsISjGmMw;
+            pictureBox1.Location = new Point(73, 192);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(21, 21);
+            pictureBox1.TabIndex = 15;
+            pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click;
+            pictureBox1.MouseEnter += pictureBox1_MouseEnter;
             // 
             // label17
             // 
@@ -572,18 +601,18 @@
             label16.AutoSize = true;
             label16.Location = new Point(23, 371);
             label16.Name = "label16";
-            label16.Size = new Size(37, 15);
+            label16.Size = new Size(42, 15);
             label16.TabIndex = 13;
-            label16.Text = "Wide:";
+            label16.Text = "Width:";
             // 
             // label15
             // 
             label15.AutoSize = true;
             label15.Location = new Point(20, 342);
             label15.Name = "label15";
-            label15.Size = new Size(47, 15);
+            label15.Size = new Size(46, 15);
             label15.TabIndex = 12;
-            label15.Text = "Lenght:";
+            label15.Text = "Height:";
             // 
             // label14
             // 
@@ -612,13 +641,13 @@
             label12.TabIndex = 9;
             label12.Text = "ID:";
             // 
-            // RectanlePanel
+            // RectanglePanel
             // 
-            RectanlePanel.BorderStyle = BorderStyle.FixedSingle;
-            RectanlePanel.Location = new Point(235, 32);
-            RectanlePanel.Name = "RectanlePanel";
-            RectanlePanel.Size = new Size(406, 363);
-            RectanlePanel.TabIndex = 8;
+            RectanglePanel.BorderStyle = BorderStyle.FixedSingle;
+            RectanglePanel.Location = new Point(235, 32);
+            RectanglePanel.Name = "RectanglePanel";
+            RectanglePanel.Size = new Size(406, 363);
+            RectanglePanel.TabIndex = 8;
             // 
             // WidthTB
             // 
@@ -629,14 +658,14 @@
             WidthTB.TextChanged += WidthTB_TextChanged;
             WidthTB.Leave += WidthTB_Leave;
             // 
-            // LengthTB
+            // HeightTB
             // 
-            LengthTB.Location = new Point(73, 339);
-            LengthTB.Name = "LengthTB";
-            LengthTB.Size = new Size(156, 23);
-            LengthTB.TabIndex = 6;
-            LengthTB.TextChanged += LengthTB_TextChanged;
-            LengthTB.Leave += LengthTB_Leave;
+            HeightTB.Location = new Point(73, 339);
+            HeightTB.Name = "HeightTB";
+            HeightTB.Size = new Size(156, 23);
+            HeightTB.TabIndex = 6;
+            HeightTB.TextChanged += HeightTB_TextChanged;
+            HeightTB.Leave += HeightTB_Leave;
             // 
             // YTB
             // 
@@ -664,26 +693,6 @@
             IDTB.Size = new Size(156, 23);
             IDTB.TabIndex = 3;
             // 
-            // DelButton
-            // 
-            DelButton.Location = new Point(131, 192);
-            DelButton.Name = "DelButton";
-            DelButton.Size = new Size(98, 22);
-            DelButton.TabIndex = 2;
-            DelButton.Text = "Del";
-            DelButton.UseVisualStyleBackColor = true;
-            DelButton.Click += DelButton_Click;
-            // 
-            // AddButton
-            // 
-            AddButton.Location = new Point(19, 192);
-            AddButton.Name = "AddButton";
-            AddButton.Size = new Size(95, 22);
-            AddButton.TabIndex = 1;
-            AddButton.Text = "Add";
-            AddButton.UseVisualStyleBackColor = true;
-            AddButton.Click += AddButton_Click;
-            // 
             // RectanglesListBox
             // 
             RectanglesListBox.FormattingEnabled = true;
@@ -702,6 +711,7 @@
             ClientSize = new Size(657, 433);
             Controls.Add(tabControl1);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
             Name = "MainForm";
             Text = "MainForm";
             Load += MainForm_Load;
@@ -720,6 +730,8 @@
             groupBox1.PerformLayout();
             RectangleTabPage.ResumeLayout(false);
             RectangleTabPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -769,9 +781,7 @@
         public TextBox IDTextBox;
         private Label label11;
         private TabPage RectangleTabPage;
-        private Panel RectanlePanel;
-        private Button DelButton;
-        private Button AddButton;
+        private Panel RectanglePanel;
         private Label label15;
         private Label label14;
         private Label label13;
@@ -780,9 +790,11 @@
         private Label label17;
         public ListBox RectanglesListBox;
         public TextBox WidthTB;
-        public TextBox LengthTB;
+        public TextBox HeightTB;
         public TextBox YTB;
         public TextBox XTB;
         public TextBox IDTB;
+        private PictureBox pictureBox1;
+        private PictureBox pictureBox2;
     }
 }
