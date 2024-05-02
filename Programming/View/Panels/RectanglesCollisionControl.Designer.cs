@@ -53,27 +53,33 @@ namespace Programming.View.Panels
             // pictureBox2
             // 
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(184, 237);
+            pictureBox2.Location = new Point(135, 187);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(21, 21);
             pictureBox2.TabIndex = 31;
             pictureBox2.TabStop = false;
+            pictureBox2.Click += pictureBox2_Click;
+            pictureBox2.MouseEnter += pictureBox2_MouseEnter;
+            pictureBox2.MouseLeave += pictureBox2_MouseLeave;
             // 
             // pictureBox1
             // 
             pictureBox1.ErrorImage = Properties.Resources._3jMsISjGmMw;
             pictureBox1.Image = Properties.Resources._3jMsISjGmMw;
             pictureBox1.InitialImage = Properties.Resources._3jMsISjGmMw;
-            pictureBox1.Location = new Point(113, 237);
+            pictureBox1.Location = new Point(64, 187);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(21, 21);
             pictureBox1.TabIndex = 30;
             pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click;
+            pictureBox1.MouseEnter += pictureBox1_MouseEnter;
+            pictureBox1.MouseLeave += pictureBox1_MouseEnter;
             // 
             // label17
             // 
             label17.AutoSize = true;
-            label17.Location = new Point(70, 56);
+            label17.Location = new Point(21, 6);
             label17.Name = "label17";
             label17.Size = new Size(62, 15);
             label17.TabIndex = 29;
@@ -82,7 +88,7 @@ namespace Programming.View.Panels
             // label16
             // 
             label16.AutoSize = true;
-            label16.Location = new Point(63, 416);
+            label16.Location = new Point(14, 366);
             label16.Name = "label16";
             label16.Size = new Size(42, 15);
             label16.TabIndex = 28;
@@ -91,7 +97,7 @@ namespace Programming.View.Panels
             // label15
             // 
             label15.AutoSize = true;
-            label15.Location = new Point(60, 387);
+            label15.Location = new Point(11, 337);
             label15.Name = "label15";
             label15.Size = new Size(46, 15);
             label15.TabIndex = 27;
@@ -100,7 +106,7 @@ namespace Programming.View.Panels
             // label14
             // 
             label14.AutoSize = true;
-            label14.Location = new Point(86, 358);
+            label14.Location = new Point(37, 308);
             label14.Name = "label14";
             label14.Size = new Size(17, 15);
             label14.TabIndex = 26;
@@ -109,7 +115,7 @@ namespace Programming.View.Panels
             // label13
             // 
             label13.AutoSize = true;
-            label13.Location = new Point(86, 329);
+            label13.Location = new Point(37, 279);
             label13.Name = "label13";
             label13.Size = new Size(17, 15);
             label13.TabIndex = 25;
@@ -118,7 +124,7 @@ namespace Programming.View.Panels
             // label12
             // 
             label12.AutoSize = true;
-            label12.Location = new Point(86, 300);
+            label12.Location = new Point(37, 250);
             label12.Name = "label12";
             label12.Size = new Size(21, 15);
             label12.TabIndex = 24;
@@ -127,42 +133,50 @@ namespace Programming.View.Panels
             // RectanglePanel
             // 
             RectanglePanel.BorderStyle = BorderStyle.FixedSingle;
-            RectanglePanel.Location = new Point(275, 77);
+            RectanglePanel.Location = new Point(226, 27);
             RectanglePanel.Name = "RectanglePanel";
             RectanglePanel.Size = new Size(406, 363);
             RectanglePanel.TabIndex = 23;
             // 
             // WidthTB
             // 
-            WidthTB.Location = new Point(113, 413);
+            WidthTB.Location = new Point(64, 363);
             WidthTB.Name = "WidthTB";
             WidthTB.Size = new Size(156, 23);
             WidthTB.TabIndex = 22;
+            WidthTB.TextChanged += WidthTB_TextChanged;
+            WidthTB.Leave += WidthTB_Leave;
             // 
             // HeightTB
             // 
-            HeightTB.Location = new Point(113, 384);
+            HeightTB.Location = new Point(64, 334);
             HeightTB.Name = "HeightTB";
             HeightTB.Size = new Size(156, 23);
             HeightTB.TabIndex = 21;
+            HeightTB.TextChanged += HeightTB_TextChanged;
+            HeightTB.Leave += HeightTB_Leave;
             // 
             // YTB
             // 
-            YTB.Location = new Point(113, 355);
+            YTB.Location = new Point(64, 305);
             YTB.Name = "YTB";
             YTB.Size = new Size(156, 23);
             YTB.TabIndex = 20;
+            YTB.TextChanged += YTB_TextChanged;
+            YTB.Leave += YTB_Leave;
             // 
             // XTB
             // 
-            XTB.Location = new Point(113, 326);
+            XTB.Location = new Point(64, 276);
             XTB.Name = "XTB";
             XTB.Size = new Size(156, 23);
             XTB.TabIndex = 19;
+            XTB.TextChanged += XTB_TextChanged;
+            XTB.Leave += XTB_Leave;
             // 
             // IDTB
             // 
-            IDTB.Location = new Point(113, 297);
+            IDTB.Location = new Point(64, 247);
             IDTB.Name = "IDTB";
             IDTB.ReadOnly = true;
             IDTB.Size = new Size(156, 23);
@@ -172,10 +186,11 @@ namespace Programming.View.Panels
             // 
             RectanglesListBox.FormattingEnabled = true;
             RectanglesListBox.ItemHeight = 15;
-            RectanglesListBox.Location = new Point(59, 77);
+            RectanglesListBox.Location = new Point(10, 27);
             RectanglesListBox.Name = "RectanglesListBox";
             RectanglesListBox.Size = new Size(210, 154);
             RectanglesListBox.TabIndex = 17;
+            RectanglesListBox.SelectedIndexChanged += RectanglesListBox_SelectedIndexChanged_1;
             // 
             // RectanglesCollisionControl
             // 
@@ -195,7 +210,7 @@ namespace Programming.View.Panels
             Controls.Add(IDTB);
             Controls.Add(RectanglesListBox);
             Name = "RectanglesCollisionControl";
-            Size = new Size(740, 496);
+            Size = new Size(640, 401);
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
