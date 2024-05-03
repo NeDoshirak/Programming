@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Programming
 {
     /// <summary>
-    /// Хранит данные о временах года.
+    /// Хранит данные о временах года.фц
     /// </summary>
     public enum Seasons
     {
