@@ -13,6 +13,7 @@ namespace Programming.View.Panels
 {
     public partial class RectanglesCollisionControl : UserControl
     {
+
         private Rectangle _curretRentagles;
         private List<Rectangle> _rectangles = new List<Rectangle>();
         private List<Panel> _rectanglePanels = new List<Panel>();
@@ -59,11 +60,11 @@ namespace Programming.View.Panels
             try
             {
                 _curretRentagles.Center.X = Convert.ToUInt16(XTB.Text);
-                XTB.BackColor = Color.White;
+                XTB.BackColor = AppColors.Default;
             }
             catch
             {
-                XTB.BackColor = Color.Red;
+                XTB.BackColor = AppColors.Invalid;
             }
         }
 
@@ -72,11 +73,11 @@ namespace Programming.View.Panels
             try
             {
                 _curretRentagles.Center.Y = Convert.ToUInt16(YTB.Text);
-                YTB.BackColor = Color.White;
+                YTB.BackColor = AppColors.Default;
             }
             catch
             {
-                YTB.BackColor = Color.Red;
+                YTB.BackColor = AppColors.Invalid;
             }
         }
 
@@ -85,11 +86,11 @@ namespace Programming.View.Panels
             try
             {
                 _curretRentagles.Height = Convert.ToInt32(HeightTB.Text);
-                HeightTB.BackColor = Color.White;
+                HeightTB.BackColor = AppColors.Default;
             }
             catch
             {
-                HeightTB.BackColor = Color.Red;
+                HeightTB.BackColor = AppColors.Invalid;
             }
         }
 
@@ -98,11 +99,11 @@ namespace Programming.View.Panels
             try
             {
                 _curretRentagles.Width = Convert.ToInt32(WidthTB.Text);
-                WidthTB.BackColor = Color.White;
+                WidthTB.BackColor = AppColors.Default;
             }
             catch
             {
-                WidthTB.BackColor = Color.Red;
+                WidthTB.BackColor = AppColors.Invalid;
             }
         }
 
@@ -156,14 +157,21 @@ namespace Programming.View.Panels
 
         }
 
+        /// <summary>
+        /// Очищает цвета текстовых полей.
+        /// </summary>
         private void ColorClear()
         {
-            WidthTB.BackColor = Color.White;
-            HeightTB.BackColor = Color.White;
-            XTB.BackColor = Color.White;
-            YTB.BackColor = Color.White;
+            WidthTB.BackColor = AppColors.Default;
+            HeightTB.BackColor = AppColors.Default;
+            XTB.BackColor = AppColors.Default;
+            YTB.BackColor = AppColors.Default;
         }
 
+        /// <summary>
+        /// Создаёт и добавляет панель, соответствующую прямоугольнику.
+        /// </summary>
+        /// <param name="rect">Прямогульник, для которого нужно создать панель. <see cref="Rectangle"/></param>
         private void Addpanel(Rectangle rect)
         {
             Panel panel = new Panel();
@@ -176,6 +184,10 @@ namespace Programming.View.Panels
 
         }
 
+        /// <summary>
+        /// Обновляет информацию в текстовых полях по соответствующему прямоугольнику.
+        /// </summary>
+        /// <param name="rectangle">Прямоугольник, данные которого необходимо внести.<see cref="Rectangle"></see> </param>
         private void UpdateRectangleInfo(Rectangle rectangle)
         {
             IDTB.Text = rectangle.id.ToString();
@@ -186,6 +198,9 @@ namespace Programming.View.Panels
 
         }
 
+        /// <summary>
+        /// Очищает текстовые поля.
+        /// </summary>
         private void ClearRectangleInfo()
         {
             IDTB.Clear();
@@ -195,12 +210,15 @@ namespace Programming.View.Panels
             HeightTB.Clear();
         }
 
+        /// <summary>
+        /// Проверяет все прямоугольники на пересечения. При пересечении перекрашивает их в красный.
+        /// </summary>
         private void FindCollisions()
         {
             for (int i = 0; i < _rectanglePanels.Count; i++)
             {
-                _rectanglePanels[i].BackColor = Color.FromArgb(127, 127, 255, 0);
-                RectanglePanel.Controls[i].BackColor = Color.FromArgb(127, 127, 255, 0);
+                _rectanglePanels[i].BackColor = AppColors.Success;
+                RectanglePanel.Controls[i].BackColor = AppColors.Success;
 
             }
             for (int i = 0; i < _rectanglePanels.Count; i++)
@@ -209,10 +227,10 @@ namespace Programming.View.Panels
                 {
                     if ((i != j) && CollisionManager.IsCollision(_rectangles[i], _rectangles[j]))
                     {
-                        _rectanglePanels[i].BackColor = Color.FromArgb(127, 255, 127, 0);
-                        _rectanglePanels[j].BackColor = Color.FromArgb(127, 255, 127, 0);
-                        RectanglePanel.Controls[i].BackColor = Color.FromArgb(127, 255, 127, 0);
-                        RectanglePanel.Controls[j].BackColor = Color.FromArgb(127, 255, 127, 0);
+                        _rectanglePanels[i].BackColor = AppColors.Danger;
+                        _rectanglePanels[j].BackColor = AppColors.Danger;
+                        RectanglePanel.Controls[i].BackColor = AppColors.Danger;
+                        RectanglePanel.Controls[j].BackColor = AppColors.Danger;
                     }
                 }
             }

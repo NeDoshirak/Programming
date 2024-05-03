@@ -45,11 +45,11 @@ namespace Programming.View.Panels
             try
             {
                 _curretRentagles.Height = Convert.ToInt32(LenghtTextBox.Text);
-                LenghtTextBox.BackColor = Color.White;
+                LenghtTextBox.BackColor = AppColors.Default;
             }
             catch
             {
-                LenghtTextBox.BackColor = Color.LightPink;
+                LenghtTextBox.BackColor = AppColors.Invalid;
             }
         }
 
@@ -58,7 +58,7 @@ namespace Programming.View.Panels
             try
             {
                 _curretRentagles.Width = Convert.ToInt32(WidthTextBox.Text);
-                WidthTextBox.BackColor = Color.White;
+                WidthTextBox.BackColor = AppColors.Default;
             }
             catch
             {
@@ -71,14 +71,19 @@ namespace Programming.View.Panels
             try
             {
                 _curretRentagles.Color = ColorTextBox.Text;
-                ColorTextBox.BackColor = Color.White;
+                ColorTextBox.BackColor = AppColors.Default;
             }
             catch
             {
-                ColorTextBox.BackColor = Color.LightPink;
+                ColorTextBox.BackColor = AppColors.Invalid;
             }
         }
 
+        /// <summary>
+        /// Ищет прямоугольк из массива с наибольшей шириной.
+        /// </summary>
+        /// <param name="array">Исходный массив прямоугольников.</param>
+        /// <returns></returns>
         private int FindRectangleWithMaxWidth(Rectangle[] array)
         {
             double maxWidth = array[0].Width;

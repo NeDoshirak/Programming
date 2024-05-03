@@ -53,11 +53,11 @@ namespace Programming.View.Panels
             try
             {
                 _curretMovie.Year = Convert.ToInt32(YearTB.Text);
-                YearTB.BackColor = Color.White;
+                YearTB.BackColor = AppColors.Default;
             }
             catch
             {
-                YearTB.BackColor = Color.LightPink;
+                YearTB.BackColor = AppColors.Invalid;
             }
 
         }
@@ -67,14 +67,19 @@ namespace Programming.View.Panels
             try
             {
                 _curretMovie.Rating = Convert.ToInt32(RatingTB.Text);
-                RatingTB.BackColor = Color.White;
+                RatingTB.BackColor = AppColors.Default;
             }
             catch
             {
-                RatingTB.BackColor = Color.LightPink;
+                RatingTB.BackColor = AppColors.Invalid;
             }
         }
 
+        /// <summary>
+        /// Ищет фильм из массива с наибольшим рейтингом.
+        /// </summary>
+        /// <param name="array">Исходный массив с данными о фильмах.</param>
+        /// <returns></returns>
         private int FindMovieleWithRating(Movie[] array)
         {
             int maxRating = array[0].Rating;
