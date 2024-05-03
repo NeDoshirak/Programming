@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Programming.Model.Classes
 {
+    /// <summary>
+    /// Хранит цвета для элементов интерфейса.
+    /// </summary>
     static class AppColors
     {
         public static readonly System.Drawing.Color Default = System.Drawing.Color.White;
