@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Programming
 {
+    /// <summary>
+    /// Хранит данные о жанрах.
+    /// </summary>
     public enum Genre
     {
         Сomedy,

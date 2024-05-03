@@ -147,7 +147,7 @@
             // groupBox2
             // 
             groupBox2.Controls.Add(moviesControl1);
-            groupBox2.Location = new Point(333, 22);
+            groupBox2.Location = new Point(339, 22);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(310, 325);
             groupBox2.TabIndex = 10;
@@ -156,9 +156,10 @@
             // 
             // moviesControl1
             // 
-            moviesControl1.Location = new Point(5, 21);
+            moviesControl1.Dock = DockStyle.Fill;
+            moviesControl1.Location = new Point(3, 19);
             moviesControl1.Name = "moviesControl1";
-            moviesControl1.Size = new Size(299, 252);
+            moviesControl1.Size = new Size(304, 303);
             moviesControl1.TabIndex = 0;
             // 
             // groupBox1
@@ -173,9 +174,10 @@
             // 
             // rectanglesControl1
             // 
-            rectanglesControl1.Location = new Point(0, 13);
+            rectanglesControl1.Dock = DockStyle.Left;
+            rectanglesControl1.Location = new Point(3, 19);
             rectanglesControl1.Name = "rectanglesControl1";
-            rectanglesControl1.Size = new Size(298, 260);
+            rectanglesControl1.Size = new Size(298, 303);
             rectanglesControl1.TabIndex = 0;
             // 
             // RectangleTabPage
@@ -190,9 +192,10 @@
             // 
             // rectanglesCollisionControl1
             // 
-            rectanglesCollisionControl1.Location = new Point(3, 0);
+            rectanglesCollisionControl1.Dock = DockStyle.Fill;
+            rectanglesCollisionControl1.Location = new Point(0, 0);
             rectanglesCollisionControl1.Name = "rectanglesCollisionControl1";
-            rectanglesCollisionControl1.Size = new Size(640, 401);
+            rectanglesCollisionControl1.Size = new Size(649, 405);
             rectanglesCollisionControl1.TabIndex = 0;
             // 
             // MainForm
@@ -203,7 +206,6 @@
             ClientSize = new Size(657, 433);
             Controls.Add(tabControl1);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            MaximizeBox = false;
             Name = "MainForm";
             Text = "MainForm";
             EnumTabPage.ResumeLayout(false);

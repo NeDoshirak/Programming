@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Programming
 {
+    /// <summary>
+    /// Хранит данные о временах года.
+    /// </summary>
     public enum Seasons
     {
         Spring,

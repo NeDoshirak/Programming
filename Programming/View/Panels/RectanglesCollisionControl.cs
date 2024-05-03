@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Programming;
 
 namespace Programming.View.Panels
 {
@@ -30,7 +31,7 @@ namespace Programming.View.Panels
             RectanglesListBox.Items.Add(rectangle);
             RectanglesListBox.SelectedIndex = _rectangles.Count - 1;
             Addpanel(rectangle);
-            FindCollisions(rectangle);
+            FindCollisions();
 
         }
 
@@ -217,20 +218,6 @@ namespace Programming.View.Panels
             }
         }
 
-        private void FindCollisions(Rectangle rect)
-        {
-            for (int i = 0; i < _rectangles.Count; i++)
-            {
-                if ((rect != _rectangles[i]) && (CollisionManager.IsCollision(rect, _rectangles[i])))
-                {
-                    _rectanglePanels[i].BackColor = Color.FromArgb(127, 255, 127, 0);
-                    RectanglePanel.Controls[i].BackColor = Color.FromArgb(127, 255, 127, 0);
-                    _rectanglePanels[_rectangles.IndexOf(rect)].BackColor = Color.FromArgb(127, 255, 127, 0);
-                    RectanglePanel.Controls[_rectangles.IndexOf(rect)].BackColor = Color.FromArgb(127, 255, 127, 0);
-                }
-
-            }
-        }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
@@ -239,7 +226,7 @@ namespace Programming.View.Panels
             RectanglesListBox.Items.Add(rectangle);
             RectanglesListBox.SelectedIndex = _rectangles.Count - 1;
             Addpanel(rectangle);
-            FindCollisions(rectangle);
+            FindCollisions();
         }
 
         private void pictureBox1_MouseEnter(object sender, EventArgs e)
