@@ -25,22 +25,6 @@ namespace Programming.View.Panels
             InitializeComponent();
         }
 
-        private void AddButton_Click(object sender, EventArgs e)
-        {
-            Rectangle rectangle = RectangleFactory.Randomize();
-            _rectangles.Add(rectangle);
-            RectanglesListBox.Items.Add(rectangle);
-            RectanglesListBox.SelectedIndex = _rectangles.Count - 1;
-            Addpanel(rectangle);
-            FindCollisions();
-
-        }
-
-        private void DelButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void RectanglesListBox_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             try
