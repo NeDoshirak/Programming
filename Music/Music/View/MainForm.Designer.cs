@@ -31,6 +31,7 @@ namespace Music
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             songControl1 = new SongControl();
             SuspendLayout();
             // 
@@ -39,7 +40,7 @@ namespace Music
             songControl1.Dock = DockStyle.Fill;
             songControl1.Location = new Point(0, 0);
             songControl1.Name = "songControl1";
-            songControl1.Size = new Size(466, 354);
+            songControl1.Size = new Size(638, 354);
             songControl1.TabIndex = 0;
             songControl1.Load += songControl1_Load;
             // 
@@ -47,10 +48,13 @@ namespace Music
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(466, 354);
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            ClientSize = new Size(638, 354);
             Controls.Add(songControl1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "MainForm";
-            Text = "Form1";
+            Text = "Songs";
+            FormClosed += MainForm_FormClosed;
             ResumeLayout(false);
         }
 

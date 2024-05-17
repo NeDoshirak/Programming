@@ -11,4 +11,8 @@ public partial class MainForm : Form
     {
 
     }
+
+    private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+    {
+    }
 }

@@ -40,9 +40,15 @@ namespace Music
         /// <exception cref="ArgumentException">Число не принадлежит интервалу.</exception>
         public static void AssertValueInRange(int value, int min, int max) 
         {
-            if ((value <= min) || (value >= max)) throw new ArgumentException(nameof(value));
+            if ((value <= min) || (value > max)) throw new ArgumentException(nameof(value));
         }
 
+        /// <summary>
+        /// Проверяет длину строки.
+        /// </summary>
+        /// <param name="value">Исходная строка.</param>
+        /// <param name="lenght">Максимальная длина.</param>
+        /// <exception cref="ArgumentException"> Вызывает ошибку, если строка длинее заданого значения.</exception>
         public static void AssertOnLenghtValue(string value,int lenght)
         {
             if (value.Length > lenght) throw new ArgumentException(nameof(value));

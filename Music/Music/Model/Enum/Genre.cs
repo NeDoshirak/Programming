@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Music
 {
+    /// <summary>
+    /// Содержит данные о жанрах.
+    /// </summary>
     public enum Genre
     {
         Alternative, 

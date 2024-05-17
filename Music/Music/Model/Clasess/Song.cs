@@ -48,6 +48,10 @@ namespace Music
                 } 
             }
 
+
+            /// <summary>
+            /// Задаёт и возвращает жанр песни, должен быть элементом перечесления Genre <see cref="Genre"/>
+            /// </summary>
             public string Genre { get { return _genre; } set
             {
                 if (!(Enum.TryParse(typeof(Genre), value, out var result))) throw new ArgumentException();
@@ -88,15 +92,30 @@ namespace Music
                 Author = author;
                 Genre = genre;
             }
-            /// <summary>
-            /// Пустой конструктор класса.
-            /// </summary>
-            public Song() { }
+        /// <summary>
+        /// Пустой конструктор класса.
+        /// </summary>
+        public Song() { }
 
-            public override string ToString()
-            {
-                return $"{Author} {Title} {Duration}";
-            }
+        /// <summary>
+        /// Переводит поля класса в строку.
+        /// </summary>
+        /// <returns>Строка с данными о классе.</returns>
+        public override string ToString()
+        {
+            return $"Исполнитель: {Author} Название: {Title} Длина: {ToMinutes(Duration)}";
+        }
+
+        /// <summary>
+        /// Переводит секунды в минуты. 
+        /// </summary>
+        /// <param name="seconds">Длительность песни в секундах.</param>
+        /// <returns>Строка, сожержащая длительность песни в минутах.</returns>
+        private string ToMinutes(int seconds)
+        {
+            return $"{seconds / 60}:{seconds - (seconds / 60) * 60}";
+        }
+
     }
 }
 

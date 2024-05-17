@@ -43,6 +43,7 @@
             label1 = new Label();
             DelButton = new Button();
             label5 = new Label();
+            colorDialog1 = new ColorDialog();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -52,13 +53,14 @@
             SongsListBox.ItemHeight = 15;
             SongsListBox.Location = new Point(1, 18);
             SongsListBox.Name = "SongsListBox";
-            SongsListBox.Size = new Size(237, 304);
+            SongsListBox.Size = new Size(401, 304);
             SongsListBox.TabIndex = 0;
             SongsListBox.SelectedIndexChanged += SongsListBox_SelectedIndexChanged;
+            SongsListBox.Enter += SongsListBox_Enter;
             // 
             // AddButton
             // 
-            AddButton.Location = new Point(1, 328);
+            AddButton.Location = new Point(78, 326);
             AddButton.Name = "AddButton";
             AddButton.Size = new Size(75, 23);
             AddButton.TabIndex = 1;
@@ -68,7 +70,7 @@
             // 
             // EditButton
             // 
-            EditButton.Location = new Point(82, 328);
+            EditButton.Location = new Point(159, 326);
             EditButton.Name = "EditButton";
             EditButton.Size = new Size(75, 23);
             EditButton.TabIndex = 2;
@@ -87,7 +89,7 @@
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(AuthorTextBox);
             groupBox1.Controls.Add(label1);
-            groupBox1.Location = new Point(244, 3);
+            groupBox1.Location = new Point(408, 3);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(225, 227);
             groupBox1.TabIndex = 3;
@@ -175,7 +177,7 @@
             // 
             // DelButton
             // 
-            DelButton.Location = new Point(163, 328);
+            DelButton.Location = new Point(240, 326);
             DelButton.Name = "DelButton";
             DelButton.Size = new Size(75, 23);
             DelButton.TabIndex = 4;
@@ -203,8 +205,7 @@
             Controls.Add(AddButton);
             Controls.Add(SongsListBox);
             Name = "SongControl";
-            Size = new Size(465, 352);
-            Enter += SongControl_Enter;
+            Size = new Size(636, 352);
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ResumeLayout(false);
@@ -228,5 +229,6 @@
         private Button DelButton;
         private Label label5;
         private Button SaveButton;
+        private ColorDialog colorDialog1;
     }
 }
