@@ -70,11 +70,15 @@ namespace Music
 
         private void DelButton_Click(object sender, EventArgs e)
         {
+            try
+            { 
             int index = SongsListBox.SelectedIndex;
             _songs.RemoveAt(index);
             SongsListBox.Items.RemoveAt(index);
             TextBoxClear();
             SongSave();
+            }
+            catch { }
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
