@@ -43,6 +43,7 @@ namespace ObjectOrientedPractics.Model
             set
             {
                 ValueValidator.AssertValueInRange(value, 0, 100000, "cost");
+                _cost = value;
             }
         }
 
@@ -54,5 +55,7 @@ namespace ObjectOrientedPractics.Model
         }
 
         public Item() { }
+
+        public override string ToString() => $"Item name: {Name} cost: {Cost}";
     }
 }

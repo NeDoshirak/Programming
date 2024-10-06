@@ -94,6 +94,7 @@
             RemoveButton.TabIndex = 2;
             RemoveButton.Text = "Remove";
             RemoveButton.UseVisualStyleBackColor = true;
+            RemoveButton.Click += RemoveButton_Click;
             // 
             // AddButton
             // 
@@ -104,6 +105,7 @@
             AddButton.TabIndex = 1;
             AddButton.Text = "Add";
             AddButton.UseVisualStyleBackColor = true;
+            AddButton.Click += AddButton_Click;
             // 
             // ItemsListBox
             // 
@@ -114,6 +116,7 @@
             ItemsListBox.Name = "ItemsListBox";
             ItemsListBox.Size = new Size(360, 439);
             ItemsListBox.TabIndex = 0;
+            ItemsListBox.SelectedIndexChanged += ItemsListBox_SelectedIndexChanged;
             // 
             // DescriptionTextBox
             // 
@@ -123,6 +126,8 @@
             DescriptionTextBox.Name = "DescriptionTextBox";
             DescriptionTextBox.Size = new Size(346, 163);
             DescriptionTextBox.TabIndex = 12;
+            DescriptionTextBox.TextChanged += DescriptionTextBox_TextChanged;
+            DescriptionTextBox.Leave += DescriptionTextBox_Leave;
             // 
             // label6
             // 
@@ -141,6 +146,8 @@
             NameTextBox.Name = "NameTextBox";
             NameTextBox.Size = new Size(346, 96);
             NameTextBox.TabIndex = 10;
+            NameTextBox.TextChanged += NameTextBox_TextChanged;
+            NameTextBox.Leave += NameTextBox_Leave;
             // 
             // label5
             // 
@@ -167,13 +174,15 @@
             CostTextBox.Name = "CostTextBox";
             CostTextBox.Size = new Size(214, 23);
             CostTextBox.TabIndex = 7;
-            CostTextBox.TextChanged += textBox2_TextChanged;
+            CostTextBox.TextChanged += CostTextBox_TextChanged;
+            CostTextBox.Leave += CostTextBox_Leave;
             // 
             // IdTextBox
             // 
             IdTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             IdTextBox.Location = new Point(47, 31);
             IdTextBox.Name = "IdTextBox";
+            IdTextBox.ReadOnly = true;
             IdTextBox.Size = new Size(214, 23);
             IdTextBox.TabIndex = 6;
             // 

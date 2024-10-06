@@ -11,7 +11,7 @@ namespace ObjectOrientedPractics.Services
     {
         public static void AssertStringOnLength(string value, int maxLength, string propertyName)
         {
-            if (value.Length > maxLength) throw new ArgumentOutOfRangeException(propertyName);
+            if (value.Length > maxLength) throw new ArgumentException(propertyName);
         }
 
         public static void AssertValueInRange(int value, int min, int max, string propertyName)

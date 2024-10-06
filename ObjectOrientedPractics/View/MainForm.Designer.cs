@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
             ItemsTabs = new View.Panels.ItemsTabs();
@@ -46,6 +47,7 @@
             tabControl1.SelectedIndex = 0;
             tabControl1.Size = new Size(705, 507);
             tabControl1.TabIndex = 0;
+            tabControl1.UseWaitCursor = true;
             // 
             // tabPage1
             // 
@@ -57,6 +59,7 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Items";
             tabPage1.UseVisualStyleBackColor = true;
+            tabPage1.UseWaitCursor = true;
             // 
             // ItemsTabs
             // 
@@ -65,6 +68,7 @@
             ItemsTabs.Name = "ItemsTabs";
             ItemsTabs.Size = new Size(691, 473);
             ItemsTabs.TabIndex = 0;
+            ItemsTabs.UseWaitCursor = true;
             // 
             // CustomersPage
             // 
@@ -75,6 +79,7 @@
             CustomersPage.TabIndex = 1;
             CustomersPage.Text = "Customers";
             CustomersPage.UseVisualStyleBackColor = true;
+            CustomersPage.UseWaitCursor = true;
             // 
             // MainForm
             // 
@@ -82,9 +87,10 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(705, 507);
             Controls.Add(tabControl1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "MainForm";
-            Text = "Form1";
-            Load += Form1_Load;
+            Text = "Object Oriented Practics";
+            UseWaitCursor = true;
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             ResumeLayout(false);
