@@ -9,7 +9,7 @@ namespace ObjectOrientedPractics.Services
     /// <summary>
     /// Класс для генерации уникальных идентификаторов
     /// </summary>
-    static class IdGenerator
+    internal static class IdGenerator
     {
         /// <remarks>
         /// Текущий идентификатор, увеличивается при каждом вызове GetNextId

@@ -12,7 +12,7 @@ namespace ObjectOrientedPractics.Model
     /// <summary>
     /// Класс для представления клиента
     /// </summary>
-    class Customer
+    internal class Customer
     {
         /// <summary>
         /// Уникальный идентификатор клиента

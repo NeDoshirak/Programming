@@ -10,7 +10,7 @@ namespace ObjectOrientedPractics.Model
     /// <summary>
     /// Класс для представления товара
     /// </summary>
-    class Item
+    internal class Item
     {
         /// <summary>
         /// Уникальный идентификатор товара
