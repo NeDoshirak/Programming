@@ -33,8 +33,10 @@
             tabPage1 = new TabPage();
             ItemsTabs = new View.Panels.ItemsTabs();
             CustomersPage = new TabPage();
+            customersTab1 = new View.Panels.CustomersTab();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
+            CustomersPage.SuspendLayout();
             SuspendLayout();
             // 
             // tabControl1
@@ -72,6 +74,7 @@
             // 
             // CustomersPage
             // 
+            CustomersPage.Controls.Add(customersTab1);
             CustomersPage.Location = new Point(4, 24);
             CustomersPage.Name = "CustomersPage";
             CustomersPage.Padding = new Padding(3);
@@ -80,6 +83,14 @@
             CustomersPage.Text = "Customers";
             CustomersPage.UseVisualStyleBackColor = true;
             CustomersPage.UseWaitCursor = true;
+            // 
+            // customersTab1
+            // 
+            customersTab1.Dock = DockStyle.Fill;
+            customersTab1.Location = new Point(3, 3);
+            customersTab1.Name = "customersTab1";
+            customersTab1.Size = new Size(691, 473);
+            customersTab1.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -93,6 +104,7 @@
             UseWaitCursor = true;
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
+            CustomersPage.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -102,5 +114,6 @@
         private TabPage tabPage1;
         private View.Panels.ItemsTabs ItemsTabs;
         private TabPage CustomersPage;
+        private View.Panels.CustomersTab customersTab1;
     }
 }

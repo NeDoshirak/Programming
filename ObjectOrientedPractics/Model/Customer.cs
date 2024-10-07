@@ -2,42 +2,77 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace ObjectOrientedPractics.Model
 {
+    /// <summary>
+    /// Класс для представления клиента
+    /// </summary>
     internal class Customer
     {
+        /// <summary>
+        /// Уникальный идентификатор клиента
+        /// </summary>
         public readonly int Id = IdGenerator.GetNextId;
 
         private string _fullname;
         private string _address;
 
-        public string Fullname 
+        /// <summary>
+        /// Полное имя клиента
+        /// </summary>
+        public string FullName
         {
             get { return _fullname; }
-            set 
+            set
             {
                 ValueValidator.AssertStringOnLength(value, 200, "fullname");
-                _fullname = value; 
-            } 
+                _fullname = value;
+            }
         }
 
-        public string Address { 
-            get { return _address; } 
-            set 
+        /// <summary>
+        /// Адрес клиента
+        /// </summary>
+        public string Address
+        {
+            get { return _address; }
+            set
             {
+                /// <remarks>
+                /// Проверка длины строки на 500 символов
+                /// </remarks>
                 ValueValidator.AssertStringOnLength(value, 500, "address");
-            } 
+                _address = value;
+            }
         }
 
+        /// <summary>
+        /// Конструктор для инициализации клиента с полным именем и адресом
+        /// </summary>
+        /// <param name="fullname">Полное имя клиента</param>
+        /// <param name="address">Адрес клиента</param>
         public Customer(string fullname, string address)
         {
-            Fullname = fullname;
+            FullName = fullname;
             Address = address;
         }
 
+        /// <summary>
+        /// Пустой конструктор для инициализации клиента без параметров
+        /// </summary>
         public Customer() { }
+
+        /// <summary>
+        /// Метод для строкового представления клиента
+        /// </summary>
+        public override string ToString() => $"Customer name: {FullName} address: {Address}";
+    }
+
+    Найти еще
     }
 }
