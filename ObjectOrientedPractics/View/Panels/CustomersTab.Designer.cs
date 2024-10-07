@@ -34,10 +34,9 @@
             CustomersListBox = new ListBox();
             label1 = new Label();
             splitContainer2 = new SplitContainer();
-            label5 = new Label();
+            addressControl1 = new AddressControl();
             label4 = new Label();
             label3 = new Label();
-            AddressTextBox = new TextBox();
             FullNameTextBox = new TextBox();
             IdTextBox = new TextBox();
             label2 = new Label();
@@ -67,7 +66,7 @@
             // 
             splitContainer1.Panel2.Controls.Add(splitContainer2);
             splitContainer1.Size = new Size(726, 549);
-            splitContainer1.SplitterDistance = 335;
+            splitContainer1.SplitterDistance = 218;
             splitContainer1.TabIndex = 0;
             // 
             // DelButton
@@ -99,7 +98,7 @@
             CustomersListBox.ItemHeight = 15;
             CustomersListBox.Location = new Point(3, 21);
             CustomersListBox.Name = "CustomersListBox";
-            CustomersListBox.Size = new Size(310, 469);
+            CustomersListBox.Size = new Size(208, 469);
             CustomersListBox.TabIndex = 1;
             CustomersListBox.SelectedIndexChanged += CustomersListBox_SelectedIndexChanged;
             // 
@@ -121,25 +120,23 @@
             // 
             // splitContainer2.Panel1
             // 
-            splitContainer2.Panel1.Controls.Add(label5);
+            splitContainer2.Panel1.Controls.Add(addressControl1);
             splitContainer2.Panel1.Controls.Add(label4);
             splitContainer2.Panel1.Controls.Add(label3);
-            splitContainer2.Panel1.Controls.Add(AddressTextBox);
             splitContainer2.Panel1.Controls.Add(FullNameTextBox);
             splitContainer2.Panel1.Controls.Add(IdTextBox);
             splitContainer2.Panel1.Controls.Add(label2);
-            splitContainer2.Size = new Size(387, 549);
-            splitContainer2.SplitterDistance = 213;
+            splitContainer2.Size = new Size(504, 549);
+            splitContainer2.SplitterDistance = 323;
             splitContainer2.TabIndex = 0;
             // 
-            // label5
+            // addressControl1
             // 
-            label5.AutoSize = true;
-            label5.Location = new Point(6, 86);
-            label5.Name = "label5";
-            label5.Size = new Size(52, 15);
-            label5.TabIndex = 7;
-            label5.Text = "Address:";
+            addressControl1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            addressControl1.Location = new Point(3, 81);
+            addressControl1.Name = "addressControl1";
+            addressControl1.Size = new Size(498, 171);
+            addressControl1.TabIndex = 7;
             // 
             // label4
             // 
@@ -159,23 +156,12 @@
             label3.TabIndex = 5;
             label3.Text = "ID:";
             // 
-            // AddressTextBox
-            // 
-            AddressTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            AddressTextBox.Location = new Point(74, 83);
-            AddressTextBox.Multiline = true;
-            AddressTextBox.Name = "AddressTextBox";
-            AddressTextBox.Size = new Size(303, 127);
-            AddressTextBox.TabIndex = 4;
-            AddressTextBox.TextChanged += AddressTextBox_TextChanged;
-            AddressTextBox.Leave += AddressTextBox_Leave;
-            // 
             // FullNameTextBox
             // 
             FullNameTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             FullNameTextBox.Location = new Point(74, 52);
             FullNameTextBox.Name = "FullNameTextBox";
-            FullNameTextBox.Size = new Size(178, 23);
+            FullNameTextBox.Size = new Size(383, 23);
             FullNameTextBox.TabIndex = 3;
             FullNameTextBox.TextChanged += FullNameTextBox_TextChanged;
             FullNameTextBox.Leave += FullNameTextBox_Leave;
@@ -186,7 +172,7 @@
             IdTextBox.Location = new Point(74, 21);
             IdTextBox.Name = "IdTextBox";
             IdTextBox.ReadOnly = true;
-            IdTextBox.Size = new Size(178, 23);
+            IdTextBox.Size = new Size(383, 23);
             IdTextBox.TabIndex = 2;
             // 
             // label2
@@ -226,11 +212,10 @@
         private Label label2;
         private Button DelButton;
         private Button AddButton;
-        private Label label5;
         private Label label4;
         private Label label3;
-        private TextBox AddressTextBox;
         private TextBox FullNameTextBox;
         private TextBox IdTextBox;
+        private AddressControl addressControl1;
     }
 }

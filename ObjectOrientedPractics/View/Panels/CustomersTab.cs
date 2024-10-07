@@ -33,14 +33,12 @@ namespace ObjectOrientedPractics.View.Panels
         {
             IdTextBox.Text = customer.Id.ToString();
             FullNameTextBox.Text = customer.FullName.ToString();
-            AddressTextBox.Text = customer.Address.ToString();
         }
 
         private void ClearTextBox()
         {
             IdTextBox.Clear();
             FullNameTextBox.Clear();
-            AddressTextBox.Clear();
         }
 
         private void DelButton_Click(object sender, EventArgs e)
@@ -81,22 +79,6 @@ namespace ObjectOrientedPractics.View.Panels
             };
         }
 
-        private void AddressTextBox_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                AddressTextBox.BackColor = Color.White;
-                int index = CustomersListBox.SelectedIndex;
-                if (index >= 0)
-                {
-                    _customers[index].Address = AddressTextBox.Text;
-                }
-            }
-            catch
-            {
-                AddressTextBox.BackColor = Color.Red;
-            };
-        }
 
         private void FullNameTextBox_Leave(object sender, EventArgs e)
         {
@@ -106,12 +88,5 @@ namespace ObjectOrientedPractics.View.Panels
             }
         }
 
-        private void AddressTextBox_Leave(object sender, EventArgs e)
-        {
-            if (CustomersListBox.SelectedIndex != -1)
-            {
-                CustomersListBox.Items[CustomersListBox.SelectedIndex] = _customers[CustomersListBox.SelectedIndex];
-            }
-        }
     }
 }
