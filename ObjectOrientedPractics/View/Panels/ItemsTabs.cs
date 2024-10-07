@@ -20,7 +20,6 @@ namespace ObjectOrientedPractics.View.Panels
         }
 
         private List<Item> _items = new List<Item>();
-        private Item _currentItem;
 
         private void AddButton_Click(object sender, EventArgs e)
         {
@@ -33,15 +32,11 @@ namespace ObjectOrientedPractics.View.Panels
 
         private void RemoveButton_Click(object sender, EventArgs e)
         {
-            try
-            {
-
+            if (ItemsListBox.SelectedIndex != -1)
+            { 
                 var index = ItemsListBox.SelectedIndex;
                 _items.RemoveAt(index);
                 ItemsListBox.Items.RemoveAt(index);
-            }
-            catch
-            {
                 ClearTextBox();
             }
 
@@ -49,11 +44,10 @@ namespace ObjectOrientedPractics.View.Panels
 
         private void ItemsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
+            if (ItemsListBox.SelectedIndex != -1)
             {
                 UpdateTextBoxInfo(_items[ItemsListBox.SelectedIndex]);
             }
-            catch { }
         }
 
         private void UpdateTextBoxInfo(Item item)
@@ -125,17 +119,26 @@ namespace ObjectOrientedPractics.View.Panels
 
         private void CostTextBox_Leave(object sender, EventArgs e)
         {
-            ItemsListBox.Items[ItemsListBox.SelectedIndex] = _items[ItemsListBox.SelectedIndex];
+            if (ItemsListBox.SelectedIndex != -1)
+            { 
+                ItemsListBox.Items[ItemsListBox.SelectedIndex] = _items[ItemsListBox.SelectedIndex]; 
+            }
         }
 
         private void NameTextBox_Leave(object sender, EventArgs e)
         {
-            ItemsListBox.Items[ItemsListBox.SelectedIndex] = _items[ItemsListBox.SelectedIndex];
+            if (ItemsListBox.SelectedIndex != -1)
+            {
+                ItemsListBox.Items[ItemsListBox.SelectedIndex] = _items[ItemsListBox.SelectedIndex];
+            }
         }
 
         private void DescriptionTextBox_Leave(object sender, EventArgs e)
         {
-            ItemsListBox.Items[ItemsListBox.SelectedIndex] = _items[ItemsListBox.SelectedIndex];
+            if (ItemsListBox.SelectedIndex != -1)
+            {
+                ItemsListBox.Items[ItemsListBox.SelectedIndex] = _items[ItemsListBox.SelectedIndex];
+            }
         }
     }
 }

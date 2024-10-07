@@ -45,26 +45,22 @@ namespace ObjectOrientedPractics.View.Panels
 
         private void DelButton_Click(object sender, EventArgs e)
         {
-            try
+            if (CustomersListBox.SelectedIndex != -1) 
             {
                 var index = CustomersListBox.SelectedIndex;
                 _customers.RemoveAt(index);
                 CustomersListBox.Items.RemoveAt(index);
-            }
-            catch
-            {
                 ClearTextBox();
             }
-
         }
 
         private void CustomersListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
+            if (CustomersListBox.SelectedIndex != -1)
             {
                 UpdateTextBoxInfo(_customers[CustomersListBox.SelectedIndex]);
             }
-            catch { }
+
         }
 
 
@@ -104,12 +100,18 @@ namespace ObjectOrientedPractics.View.Panels
 
         private void FullNameTextBox_Leave(object sender, EventArgs e)
         {
-            CustomersListBox.Items[CustomersListBox.SelectedIndex] = _customers[CustomersListBox.SelectedIndex];
+            if (CustomersListBox.SelectedIndex != -1)
+            {
+                CustomersListBox.Items[CustomersListBox.SelectedIndex] = _customers[CustomersListBox.SelectedIndex];
+            }
         }
 
         private void AddressTextBox_Leave(object sender, EventArgs e)
         {
-            CustomersListBox.Items[CustomersListBox.SelectedIndex] = _customers[CustomersListBox.SelectedIndex];
+            if (CustomersListBox.SelectedIndex != -1)
+            {
+                CustomersListBox.Items[CustomersListBox.SelectedIndex] = _customers[CustomersListBox.SelectedIndex];
+            }
         }
     }
 }

@@ -43,9 +43,6 @@ namespace ObjectOrientedPractics.Model
             get { return _address; }
             set
             {
-                /// <remarks>
-                /// Проверка длины строки на 500 символов
-                /// </remarks>
                 ValueValidator.AssertStringOnLength(value, 500, "address");
                 _address = value;
             }

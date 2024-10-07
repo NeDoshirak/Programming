@@ -6,10 +6,5 @@ namespace ObjectOrientedPractics
         {
             InitializeComponent();
         }
-
-        private void itemsTabs1_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }
