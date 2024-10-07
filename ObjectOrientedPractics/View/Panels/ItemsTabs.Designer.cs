@@ -33,6 +33,8 @@
             RemoveButton = new Button();
             AddButton = new Button();
             ItemsListBox = new ListBox();
+            CategoryComboBox = new ComboBox();
+            label7 = new Label();
             DescriptionTextBox = new TextBox();
             label6 = new Label();
             NameTextBox = new TextBox();
@@ -63,6 +65,8 @@
             // 
             // splitContainer1.Panel2
             // 
+            splitContainer1.Panel2.Controls.Add(CategoryComboBox);
+            splitContainer1.Panel2.Controls.Add(label7);
             splitContainer1.Panel2.Controls.Add(DescriptionTextBox);
             splitContainer1.Panel2.Controls.Add(label6);
             splitContainer1.Panel2.Controls.Add(NameTextBox);
@@ -118,10 +122,31 @@
             ItemsListBox.TabIndex = 0;
             ItemsListBox.SelectedIndexChanged += ItemsListBox_SelectedIndexChanged;
             // 
+            // CategoryComboBox
+            // 
+            CategoryComboBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            CategoryComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            CategoryComboBox.FormattingEnabled = true;
+            CategoryComboBox.Location = new Point(66, 89);
+            CategoryComboBox.Name = "CategoryComboBox";
+            CategoryComboBox.Size = new Size(214, 23);
+            CategoryComboBox.TabIndex = 15;
+            CategoryComboBox.SelectedIndexChanged += CategoryComboBox_SelectedIndexChanged;
+            CategoryComboBox.Enter += CategoryComboBox_Enter;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(3, 92);
+            label7.Name = "label7";
+            label7.Size = new Size(58, 15);
+            label7.TabIndex = 14;
+            label7.Text = "Category:";
+            // 
             // DescriptionTextBox
             // 
             DescriptionTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            DescriptionTextBox.Location = new Point(3, 241);
+            DescriptionTextBox.Location = new Point(3, 269);
             DescriptionTextBox.Multiline = true;
             DescriptionTextBox.Name = "DescriptionTextBox";
             DescriptionTextBox.Size = new Size(346, 163);
@@ -132,7 +157,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(3, 223);
+            label6.Location = new Point(3, 251);
             label6.Name = "label6";
             label6.Size = new Size(70, 15);
             label6.TabIndex = 11;
@@ -141,7 +166,7 @@
             // NameTextBox
             // 
             NameTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            NameTextBox.Location = new Point(3, 113);
+            NameTextBox.Location = new Point(3, 141);
             NameTextBox.Multiline = true;
             NameTextBox.Name = "NameTextBox";
             NameTextBox.Size = new Size(346, 96);
@@ -152,7 +177,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(3, 95);
+            label5.Location = new Point(3, 122);
             label5.Name = "label5";
             label5.Size = new Size(42, 15);
             label5.TabIndex = 9;
@@ -170,7 +195,7 @@
             // CostTextBox
             // 
             CostTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            CostTextBox.Location = new Point(47, 60);
+            CostTextBox.Location = new Point(66, 60);
             CostTextBox.Name = "CostTextBox";
             CostTextBox.Size = new Size(214, 23);
             CostTextBox.TabIndex = 7;
@@ -180,7 +205,7 @@
             // IdTextBox
             // 
             IdTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            IdTextBox.Location = new Point(47, 31);
+            IdTextBox.Location = new Point(66, 31);
             IdTextBox.Name = "IdTextBox";
             IdTextBox.ReadOnly = true;
             IdTextBox.Size = new Size(214, 23);
@@ -236,5 +261,7 @@
         private Label label6;
         private TextBox NameTextBox;
         private Label label5;
+        private ComboBox CategoryComboBox;
+        private Label label7;
     }
 }

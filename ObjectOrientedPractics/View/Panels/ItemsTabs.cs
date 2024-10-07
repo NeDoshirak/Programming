@@ -21,9 +21,17 @@ namespace ObjectOrientedPractics.View.Panels
 
         private List<Item> _items = new List<Item>();
 
+        private void CategoryComboBox_Enter(object sender, EventArgs e)
+        {
+            if (CategoryComboBox.Items.Count == 0)
+            {
+                CategoryComboBox.Items.AddRange(Enum.GetValues(typeof(Category)).Cast<Object>().ToArray());
+            }
+        }
+
         private void AddButton_Click(object sender, EventArgs e)
         {
-            Item item = new Item("---", "---", 0);
+            Item item = new Item("---", "---", 0, Category.None);
             _items.Add(item);
             ItemsListBox.Items.Add(item);
             ItemsListBox.SelectedIndex = _items.Count - 1;
@@ -33,7 +41,7 @@ namespace ObjectOrientedPractics.View.Panels
         private void RemoveButton_Click(object sender, EventArgs e)
         {
             if (ItemsListBox.SelectedIndex != -1)
-            { 
+            {
                 var index = ItemsListBox.SelectedIndex;
                 _items.RemoveAt(index);
                 ItemsListBox.Items.RemoveAt(index);
@@ -50,12 +58,21 @@ namespace ObjectOrientedPractics.View.Panels
             }
         }
 
+        private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ItemsListBox.SelectedIndex != -1)
+            { 
+                _items[ItemsListBox.SelectedIndex].Category = Enum.Parse<Category>(CategoryComboBox.Text);
+            }
+        }
+
         private void UpdateTextBoxInfo(Item item)
         {
             IdTextBox.Text = item.Id.ToString();
             CostTextBox.Text = item.Cost.ToString();
             NameTextBox.Text = item.Name.ToString();
             DescriptionTextBox.Text = item.Info.ToString();
+            CategoryComboBox.Text = item.Category.ToString();
         }
 
         private void ClearTextBox()
@@ -64,6 +81,7 @@ namespace ObjectOrientedPractics.View.Panels
             CostTextBox.Clear();
             NameTextBox.Clear();
             DescriptionTextBox.Clear();
+            CategoryComboBox.Text = string.Empty;
         }
 
         private void CostTextBox_TextChanged(object sender, EventArgs e)
@@ -77,7 +95,7 @@ namespace ObjectOrientedPractics.View.Panels
                     _items[index].Cost = Convert.ToInt32(CostTextBox.Text);
                 }
             }
-            catch 
+            catch
             {
                 CostTextBox.BackColor = Color.Red;
             };
@@ -94,7 +112,7 @@ namespace ObjectOrientedPractics.View.Panels
                     _items[index].Name = NameTextBox.Text;
                 }
             }
-            catch 
+            catch
             {
                 NameTextBox.BackColor = Color.Red;
             };
@@ -111,8 +129,8 @@ namespace ObjectOrientedPractics.View.Panels
                     _items[index].Info = DescriptionTextBox.Text;
                 }
             }
-            catch 
-            { 
+            catch
+            {
                 DescriptionTextBox.BackColor = Color.Red;
             };
         }
@@ -120,8 +138,8 @@ namespace ObjectOrientedPractics.View.Panels
         private void CostTextBox_Leave(object sender, EventArgs e)
         {
             if (ItemsListBox.SelectedIndex != -1)
-            { 
-                ItemsListBox.Items[ItemsListBox.SelectedIndex] = _items[ItemsListBox.SelectedIndex]; 
+            {
+                ItemsListBox.Items[ItemsListBox.SelectedIndex] = _items[ItemsListBox.SelectedIndex];
             }
         }
 
@@ -140,5 +158,7 @@ namespace ObjectOrientedPractics.View.Panels
                 ItemsListBox.Items[ItemsListBox.SelectedIndex] = _items[ItemsListBox.SelectedIndex];
             }
         }
+
+
     }
 }

@@ -12,14 +12,11 @@ namespace ObjectOrientedPractics.Model
     /// </summary>
     class Item
     {
-        /// <summary>
-        /// Уникальный идентификатор товара
-        /// </summary>
-        public readonly int Id = IdGenerator.GetNextId;
-
         private string _name;
         private string _info;
         private double _cost;
+
+        public readonly int Id = IdGenerator.GetNextId;
 
         /// <summary>
         /// Название товара
@@ -63,17 +60,20 @@ namespace ObjectOrientedPractics.Model
             }
         }
 
+        public Category Category { get; set; }
+
         /// <summary>
         /// Конструктор для инициализации товара с названием, описанием и ценой
         /// </summary>
         /// <param name="name">Название товара</param>
         /// <param name="info">Описание товара</param>
         /// <param name="cost">Цена товара</param>
-        public Item(string name, string info, double cost)
+        public Item(string name, string info, double cost, Category category)
         {
             Name = name;
             Info = info;
             Cost = cost;
+            Category = category;
         }
 
         /// <summary>
