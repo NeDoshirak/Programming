@@ -12,7 +12,7 @@ namespace ObjectOrientedPractics.Model
     /// <summary>
     /// Класс для представления клиента
     /// </summary>
-    internal class Customer
+    class Customer
     {
         /// <summary>
         /// Уникальный идентификатор клиента
@@ -73,6 +73,4 @@ namespace ObjectOrientedPractics.Model
         public override string ToString() => $"Customer name: {FullName} address: {Address}";
     }
 
-    Найти еще
-    }
 }
