@@ -133,7 +133,7 @@
             // addressControl1
             // 
             addressControl1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            addressControl1.Location = new Point(3, 81);
+            addressControl1.Location = new Point(-9, 92);
             addressControl1.Name = "addressControl1";
             addressControl1.Size = new Size(498, 171);
             addressControl1.TabIndex = 7;

@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
-            textBox4 = new TextBox();
-            textBox5 = new TextBox();
-            textBox6 = new TextBox();
+            PostIndexTextBox = new TextBox();
+            CountryTextBox = new TextBox();
+            StreetTextBox = new TextBox();
+            BuildingTextBox = new TextBox();
+            CityTextBox = new TextBox();
+            ApartmentTextBox = new TextBox();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
@@ -43,79 +43,80 @@
             label7 = new Label();
             SuspendLayout();
             // 
-            // textBox1
+            // PostIndexTextBox
             // 
-            textBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            textBox1.Location = new Point(58, 35);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(136, 23);
-            textBox1.TabIndex = 0;
+            PostIndexTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            PostIndexTextBox.Location = new Point(82, 35);
+            PostIndexTextBox.Name = "PostIndexTextBox";
+            PostIndexTextBox.Size = new Size(136, 23);
+            PostIndexTextBox.TabIndex = 0;
             // 
-            // textBox2
+            // CountryTextBox
             // 
-            textBox2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            textBox2.Location = new Point(58, 64);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(194, 23);
-            textBox2.TabIndex = 1;
+            CountryTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            CountryTextBox.Location = new Point(82, 64);
+            CountryTextBox.Name = "CountryTextBox";
+            CountryTextBox.Size = new Size(194, 23);
+            CountryTextBox.TabIndex = 1;
             // 
-            // textBox3
+            // StreetTextBox
             // 
-            textBox3.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            textBox3.Location = new Point(58, 93);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(441, 23);
-            textBox3.TabIndex = 2;
+            StreetTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            StreetTextBox.Location = new Point(82, 93);
+            StreetTextBox.Name = "StreetTextBox";
+            StreetTextBox.Size = new Size(405, 23);
+            StreetTextBox.TabIndex = 2;
             // 
-            // textBox4
+            // BuildingTextBox
             // 
-            textBox4.Location = new Point(58, 122);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(109, 23);
-            textBox4.TabIndex = 3;
+            BuildingTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            BuildingTextBox.Location = new Point(82, 122);
+            BuildingTextBox.Name = "BuildingTextBox";
+            BuildingTextBox.Size = new Size(109, 23);
+            BuildingTextBox.TabIndex = 3;
             // 
-            // textBox5
+            // CityTextBox
             // 
-            textBox5.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            textBox5.Location = new Point(305, 64);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(194, 23);
-            textBox5.TabIndex = 4;
+            CityTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            CityTextBox.Location = new Point(329, 64);
+            CityTextBox.Name = "CityTextBox";
+            CityTextBox.Size = new Size(158, 23);
+            CityTextBox.TabIndex = 4;
             // 
-            // textBox6
+            // ApartmentTextBox
             // 
-            textBox6.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            textBox6.Location = new Point(288, 122);
-            textBox6.Name = "textBox6";
-            textBox6.Size = new Size(109, 23);
-            textBox6.TabIndex = 5;
+            ApartmentTextBox.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            ApartmentTextBox.Location = new Point(270, 122);
+            ApartmentTextBox.Name = "ApartmentTextBox";
+            ApartmentTextBox.Size = new Size(109, 23);
+            ApartmentTextBox.TabIndex = 5;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Location = new Point(14, 38);
             label1.Name = "label1";
-            label1.Size = new Size(38, 15);
+            label1.Size = new Size(65, 15);
             label1.TabIndex = 6;
-            label1.Text = "label1";
+            label1.Text = "Post Index:";
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Location = new Point(14, 72);
             label2.Name = "label2";
-            label2.Size = new Size(38, 15);
+            label2.Size = new Size(53, 15);
             label2.TabIndex = 7;
-            label2.Text = "label2";
+            label2.Text = "Country:";
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Location = new Point(14, 101);
             label3.Name = "label3";
-            label3.Size = new Size(38, 15);
+            label3.Size = new Size(40, 15);
             label3.TabIndex = 8;
-            label3.Text = "label3";
+            label3.Text = "Street:";
             // 
             // label4
             // 
@@ -123,38 +124,38 @@
             label4.AutoSize = true;
             label4.Location = new Point(14, 130);
             label4.Name = "label4";
-            label4.Size = new Size(38, 15);
+            label4.Size = new Size(54, 15);
             label4.TabIndex = 9;
-            label4.Text = "label4";
+            label4.Text = "Building:";
             // 
             // label5
             // 
             label5.Anchor = AnchorStyles.Right;
             label5.AutoSize = true;
-            label5.Location = new Point(266, 72);
+            label5.Location = new Point(290, 72);
             label5.Name = "label5";
-            label5.Size = new Size(38, 15);
+            label5.Size = new Size(31, 15);
             label5.TabIndex = 10;
-            label5.Text = "label5";
+            label5.Text = "City:";
             // 
             // label6
             // 
             label6.Anchor = AnchorStyles.Right;
             label6.AutoSize = true;
-            label6.Location = new Point(249, 130);
+            label6.Location = new Point(197, 125);
             label6.Name = "label6";
-            label6.Size = new Size(38, 15);
+            label6.Size = new Size(67, 15);
             label6.TabIndex = 11;
-            label6.Text = "label6";
+            label6.Text = "Apartment:";
             // 
             // label7
             // 
             label7.AutoSize = true;
             label7.Location = new Point(14, 11);
             label7.Name = "label7";
-            label7.Size = new Size(38, 15);
+            label7.Size = new Size(94, 15);
             label7.TabIndex = 12;
-            label7.Text = "label7";
+            label7.Text = "Delivery Address";
             // 
             // AddressControl
             // 
@@ -167,12 +168,12 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(textBox6);
-            Controls.Add(textBox5);
-            Controls.Add(textBox4);
-            Controls.Add(textBox3);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(ApartmentTextBox);
+            Controls.Add(CityTextBox);
+            Controls.Add(BuildingTextBox);
+            Controls.Add(StreetTextBox);
+            Controls.Add(CountryTextBox);
+            Controls.Add(PostIndexTextBox);
             Name = "AddressControl";
             Size = new Size(528, 171);
             ResumeLayout(false);
@@ -181,12 +182,12 @@
 
         #endregion
 
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private TextBox textBox3;
-        private TextBox textBox4;
-        private TextBox textBox5;
-        private TextBox textBox6;
+        private TextBox PostIndexTextBox;
+        private TextBox CountryTextBox;
+        private TextBox StreetTextBox;
+        private TextBox BuildingTextBox;
+        private TextBox CityTextBox;
+        private TextBox ApartmentTextBox;
         private Label label1;
         private Label label2;
         private Label label3;
