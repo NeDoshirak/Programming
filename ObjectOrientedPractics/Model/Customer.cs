@@ -20,7 +20,7 @@ namespace ObjectOrientedPractics.Model
         public readonly int Id = IdGenerator.GetNextId;
 
         private string _fullname;
-        private string _address;
+        private Address _address;
 
         /// <summary>
         /// Полное имя клиента
@@ -38,12 +38,11 @@ namespace ObjectOrientedPractics.Model
         /// <summary>
         /// Адрес клиента
         /// </summary>
-        public string Address
+        public Address Address
         {
             get { return _address; }
             set
             {
-                ValueValidator.AssertStringOnLength(value, 500, "address");
                 _address = value;
             }
         }
@@ -53,7 +52,7 @@ namespace ObjectOrientedPractics.Model
         /// </summary>
         /// <param name="fullname">Полное имя клиента</param>
         /// <param name="address">Адрес клиента</param>
-        public Customer(string fullname, string address)
+        public Customer(string fullname, Address address)
         {
             FullName = fullname;
             Address = address;
@@ -67,7 +66,7 @@ namespace ObjectOrientedPractics.Model
         /// <summary>
         /// Метод для строкового представления клиента
         /// </summary>
-        public override string ToString() => $"Customer name: {FullName} address: {Address}";
+        public override string ToString() => $"Customer name: {FullName}";
     }
 
 }

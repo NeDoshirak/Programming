@@ -34,7 +34,7 @@
             CustomersListBox = new ListBox();
             label1 = new Label();
             splitContainer2 = new SplitContainer();
-            addressControl1 = new AddressControl();
+            AddressControl = new AddressControl();
             label4 = new Label();
             label3 = new Label();
             FullNameTextBox = new TextBox();
@@ -120,7 +120,7 @@
             // 
             // splitContainer2.Panel1
             // 
-            splitContainer2.Panel1.Controls.Add(addressControl1);
+            splitContainer2.Panel1.Controls.Add(AddressControl);
             splitContainer2.Panel1.Controls.Add(label4);
             splitContainer2.Panel1.Controls.Add(label3);
             splitContainer2.Panel1.Controls.Add(FullNameTextBox);
@@ -130,13 +130,12 @@
             splitContainer2.SplitterDistance = 323;
             splitContainer2.TabIndex = 0;
             // 
-            // addressControl1
+            // AddressControl
             // 
-            addressControl1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            addressControl1.Location = new Point(-9, 92);
-            addressControl1.Name = "addressControl1";
-            addressControl1.Size = new Size(498, 171);
-            addressControl1.TabIndex = 7;
+            AddressControl.Location = new Point(-10, 89);
+            AddressControl.Name = "AddressControl";
+            AddressControl.Size = new Size(528, 171);
+            AddressControl.TabIndex = 7;
             // 
             // label4
             // 
@@ -216,6 +215,6 @@
         private Label label3;
         private TextBox FullNameTextBox;
         private TextBox IdTextBox;
-        private AddressControl addressControl1;
+        private AddressControl AddressControl;
     }
 }

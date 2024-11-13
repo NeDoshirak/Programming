@@ -18,8 +18,9 @@ namespace ObjectOrientedPractics.Services
         /// <param name="value">Проверяемая строка</param>
         /// <param name="maxLength">Максимальная длина строки</param>
         /// <param name="propertyName">Имя свойства, для которого происходит проверка</param>
-        public static void AssertStringOnLength(string value, int maxLength, string propertyName)
+        public static void AssertStringOnLength(string? value, int maxLength, string propertyName)
         {
+            value = value ?? "0";
             if (value.Length > maxLength) throw new ArgumentException(propertyName);
         }
 

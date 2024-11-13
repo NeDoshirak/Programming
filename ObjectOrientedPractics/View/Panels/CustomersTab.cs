@@ -18,21 +18,15 @@ namespace ObjectOrientedPractics.View.Panels
             InitializeComponent();
         }
 
-        List<Customer> _customers = new List<Customer>();
+        private List<Customer> _customers = new List<Customer>();
+
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            Customer customer = new Customer("---", "---");
+            Customer customer = new Customer("---", new Address());
             _customers.Add(customer);
             CustomersListBox.Items.Add(customer);
             CustomersListBox.SelectedIndex = _customers.Count - 1;
-            UpdateTextBoxInfo(_customers[CustomersListBox.SelectedIndex]);
-        }
-
-        private void UpdateTextBoxInfo(Customer customer)
-        {
-            IdTextBox.Text = customer.Id.ToString();
-            FullNameTextBox.Text = customer.FullName.ToString();
         }
 
         private void ClearTextBox()
@@ -43,7 +37,7 @@ namespace ObjectOrientedPractics.View.Panels
 
         private void DelButton_Click(object sender, EventArgs e)
         {
-            if (CustomersListBox.SelectedIndex != -1) 
+            if (CustomersListBox.SelectedIndex != -1)
             {
                 var index = CustomersListBox.SelectedIndex;
                 _customers.RemoveAt(index);
@@ -56,11 +50,14 @@ namespace ObjectOrientedPractics.View.Panels
         {
             if (CustomersListBox.SelectedIndex != -1)
             {
-                UpdateTextBoxInfo(_customers[CustomersListBox.SelectedIndex]);
+                var _currentCustomer = _customers[CustomersListBox.SelectedIndex];
+                IdTextBox.Text = _currentCustomer.Id.ToString();
+                FullNameTextBox.Text = _currentCustomer.FullName;
+                AddressControl.currentAddress = _currentCustomer.Address;
+                AddressControl.UpdateControl();
             }
 
         }
-
 
         private void FullNameTextBox_TextChanged(object sender, EventArgs e)
         {
@@ -88,5 +85,12 @@ namespace ObjectOrientedPractics.View.Panels
             }
         }
 
+        private void AddressControl_Leave(object sender, EventArgs e)
+        {
+            if (CustomersListBox.SelectedIndex != -1)
+            {
+                CustomersListBox.Items[CustomersListBox.SelectedIndex] = _customers[CustomersListBox.SelectedIndex];
+            }
+        }
     }
 }

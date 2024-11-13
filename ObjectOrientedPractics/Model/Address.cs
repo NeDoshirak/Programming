@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ObjectOrientedPractics.Model
 {
-    internal class Address
+    public class Address
     {
         private int _index;
         private string _country;
