@@ -19,7 +19,7 @@ namespace ObjectOrientedPractics.View.Panels
             InitializeComponent();
         }
 
-        private List<Item> _items = new List<Item>();
+        internal List<Item> Items { get; set; } = new List<Item>();
 
         private void CategoryComboBox_Enter(object sender, EventArgs e)
         {
@@ -31,11 +31,14 @@ namespace ObjectOrientedPractics.View.Panels
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            Item item = new Item("---", "---", 0, Category.None);
-            _items.Add(item);
-            ItemsListBox.Items.Add(item);
-            ItemsListBox.SelectedIndex = _items.Count - 1;
-            UpdateTextBoxInfo(_items[ItemsListBox.SelectedIndex]);
+            if (Items != null)
+            {
+                Item item = new Item("---", "---", 0, Category.None);
+                Items.Add(item);
+                ItemsListBox.Items.Add(item);
+                ItemsListBox.SelectedIndex = Items.Count - 1;
+                UpdateTextBoxInfo(Items[ItemsListBox.SelectedIndex]);
+            }
         }
 
         private void RemoveButton_Click(object sender, EventArgs e)
@@ -43,7 +46,7 @@ namespace ObjectOrientedPractics.View.Panels
             if (ItemsListBox.SelectedIndex != -1)
             {
                 var index = ItemsListBox.SelectedIndex;
-                _items.RemoveAt(index);
+                Items.RemoveAt(index);
                 ItemsListBox.Items.RemoveAt(index);
                 ClearTextBox();
             }
@@ -54,7 +57,7 @@ namespace ObjectOrientedPractics.View.Panels
         {
             if (ItemsListBox.SelectedIndex != -1)
             {
-                UpdateTextBoxInfo(_items[ItemsListBox.SelectedIndex]);
+                UpdateTextBoxInfo(Items[ItemsListBox.SelectedIndex]);
             }
         }
 
@@ -62,7 +65,7 @@ namespace ObjectOrientedPractics.View.Panels
         {
             if (ItemsListBox.SelectedIndex != -1)
             { 
-                _items[ItemsListBox.SelectedIndex].Category = Enum.Parse<Category>(CategoryComboBox.Text);
+                Items[ItemsListBox.SelectedIndex].Category = Enum.Parse<Category>(CategoryComboBox.Text);
             }
         }
 
@@ -92,7 +95,7 @@ namespace ObjectOrientedPractics.View.Panels
                 int index = ItemsListBox.SelectedIndex;
                 if (index >= 0)
                 {
-                    _items[index].Cost = Convert.ToInt32(CostTextBox.Text);
+                    Items[index].Cost = Convert.ToInt32(CostTextBox.Text);
                 }
             }
             catch
@@ -109,7 +112,7 @@ namespace ObjectOrientedPractics.View.Panels
                 int index = ItemsListBox.SelectedIndex;
                 if (index >= 0)
                 {
-                    _items[index].Name = NameTextBox.Text;
+                    Items[index].Name = NameTextBox.Text;
                 }
             }
             catch
@@ -126,7 +129,7 @@ namespace ObjectOrientedPractics.View.Panels
                 int index = ItemsListBox.SelectedIndex;
                 if (index >= 0)
                 {
-                    _items[index].Info = DescriptionTextBox.Text;
+                    Items[index].Info = DescriptionTextBox.Text;
                 }
             }
             catch
@@ -139,7 +142,7 @@ namespace ObjectOrientedPractics.View.Panels
         {
             if (ItemsListBox.SelectedIndex != -1)
             {
-                ItemsListBox.Items[ItemsListBox.SelectedIndex] = _items[ItemsListBox.SelectedIndex];
+                ItemsListBox.Items[ItemsListBox.SelectedIndex] = Items[ItemsListBox.SelectedIndex];
             }
         }
 
@@ -147,7 +150,7 @@ namespace ObjectOrientedPractics.View.Panels
         {
             if (ItemsListBox.SelectedIndex != -1)
             {
-                ItemsListBox.Items[ItemsListBox.SelectedIndex] = _items[ItemsListBox.SelectedIndex];
+                ItemsListBox.Items[ItemsListBox.SelectedIndex] = Items[ItemsListBox.SelectedIndex];
             }
         }
 
@@ -155,7 +158,7 @@ namespace ObjectOrientedPractics.View.Panels
         {
             if (ItemsListBox.SelectedIndex != -1)
             {
-                ItemsListBox.Items[ItemsListBox.SelectedIndex] = _items[ItemsListBox.SelectedIndex];
+                ItemsListBox.Items[ItemsListBox.SelectedIndex] = Items[ItemsListBox.SelectedIndex];
             }
         }
 

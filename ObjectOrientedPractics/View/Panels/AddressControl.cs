@@ -13,11 +13,12 @@ namespace ObjectOrientedPractics.View.Panels
 {
     public partial class AddressControl : UserControl
     {
-        internal Address currentAddress;
         public AddressControl()
         {
             InitializeComponent();
         }
+
+        internal Address currentAddress;
 
         public void UpdateControl()
         {

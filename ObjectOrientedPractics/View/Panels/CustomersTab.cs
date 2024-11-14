@@ -18,15 +18,14 @@ namespace ObjectOrientedPractics.View.Panels
             InitializeComponent();
         }
 
-        private List<Customer> _customers = new List<Customer>();
-
+        internal List<Customer> Customers { get; set; } = new List<Customer>();
 
         private void AddButton_Click(object sender, EventArgs e)
         {
             Customer customer = new Customer("---", new Address());
-            _customers.Add(customer);
+            Customers.Add(customer);
             CustomersListBox.Items.Add(customer);
-            CustomersListBox.SelectedIndex = _customers.Count - 1;
+            CustomersListBox.SelectedIndex = Customers.Count - 1;
         }
 
         private void ClearTextBox()
@@ -40,7 +39,7 @@ namespace ObjectOrientedPractics.View.Panels
             if (CustomersListBox.SelectedIndex != -1)
             {
                 var index = CustomersListBox.SelectedIndex;
-                _customers.RemoveAt(index);
+                Customers.RemoveAt(index);
                 CustomersListBox.Items.RemoveAt(index);
                 ClearTextBox();
             }
@@ -50,7 +49,7 @@ namespace ObjectOrientedPractics.View.Panels
         {
             if (CustomersListBox.SelectedIndex != -1)
             {
-                var _currentCustomer = _customers[CustomersListBox.SelectedIndex];
+                var _currentCustomer = Customers[CustomersListBox.SelectedIndex];
                 IdTextBox.Text = _currentCustomer.Id.ToString();
                 FullNameTextBox.Text = _currentCustomer.FullName;
                 AddressControl.currentAddress = _currentCustomer.Address;
@@ -67,7 +66,7 @@ namespace ObjectOrientedPractics.View.Panels
                 int index = CustomersListBox.SelectedIndex;
                 if (index >= 0)
                 {
-                    _customers[index].FullName = FullNameTextBox.Text;
+                    Customers[index].FullName = FullNameTextBox.Text;
                 }
             }
             catch
@@ -81,7 +80,7 @@ namespace ObjectOrientedPractics.View.Panels
         {
             if (CustomersListBox.SelectedIndex != -1)
             {
-                CustomersListBox.Items[CustomersListBox.SelectedIndex] = _customers[CustomersListBox.SelectedIndex];
+                CustomersListBox.Items[CustomersListBox.SelectedIndex] = Customers[CustomersListBox.SelectedIndex];
             }
         }
 
@@ -89,7 +88,7 @@ namespace ObjectOrientedPractics.View.Panels
         {
             if (CustomersListBox.SelectedIndex != -1)
             {
-                CustomersListBox.Items[CustomersListBox.SelectedIndex] = _customers[CustomersListBox.SelectedIndex];
+                CustomersListBox.Items[CustomersListBox.SelectedIndex] = Customers[CustomersListBox.SelectedIndex];
             }
         }
     }
