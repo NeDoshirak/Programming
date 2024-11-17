@@ -33,7 +33,7 @@
             tabPage1 = new TabPage();
             ItemsTabs = new View.Panels.ItemsTabs();
             CustomersPage = new TabPage();
-            customersTab1 = new View.Panels.CustomersTab();
+            CustomersTab = new View.Panels.CustomersTab();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             CustomersPage.SuspendLayout();
@@ -74,7 +74,7 @@
             // 
             // CustomersPage
             // 
-            CustomersPage.Controls.Add(customersTab1);
+            CustomersPage.Controls.Add(CustomersTab);
             CustomersPage.Location = new Point(4, 24);
             CustomersPage.Name = "CustomersPage";
             CustomersPage.Padding = new Padding(3);
@@ -84,13 +84,14 @@
             CustomersPage.UseVisualStyleBackColor = true;
             CustomersPage.UseWaitCursor = true;
             // 
-            // customersTab1
+            // CustomersTab
             // 
-            customersTab1.Dock = DockStyle.Fill;
-            customersTab1.Location = new Point(3, 3);
-            customersTab1.Name = "customersTab1";
-            customersTab1.Size = new Size(691, 473);
-            customersTab1.TabIndex = 0;
+            CustomersTab.Dock = DockStyle.Fill;
+            CustomersTab.Location = new Point(3, 3);
+            CustomersTab.Name = "CustomersTab";
+            CustomersTab.Size = new Size(691, 473);
+            CustomersTab.TabIndex = 0;
+            CustomersTab.UseWaitCursor = true;
             // 
             // MainForm
             // 
@@ -102,6 +103,7 @@
             Name = "MainForm";
             Text = "Object Oriented Practics";
             UseWaitCursor = true;
+            Load += MainForm_Load;
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             CustomersPage.ResumeLayout(false);
@@ -114,6 +116,6 @@
         private TabPage tabPage1;
         private View.Panels.ItemsTabs ItemsTabs;
         private TabPage CustomersPage;
-        private View.Panels.CustomersTab customersTab1;
+        private View.Panels.CustomersTab CustomersTab;
     }
 }

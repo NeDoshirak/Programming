@@ -18,37 +18,28 @@ namespace ObjectOrientedPractics.View.Panels
             InitializeComponent();
         }
 
-        List<Customer> _customers = new List<Customer>();
+        internal List<Customer> Customers { get; set; } = new List<Customer>();
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            Customer customer = new Customer("---", "---");
-            _customers.Add(customer);
+            Customer customer = new Customer("---", new Address());
+            Customers.Add(customer);
             CustomersListBox.Items.Add(customer);
-            CustomersListBox.SelectedIndex = _customers.Count - 1;
-            UpdateTextBoxInfo(_customers[CustomersListBox.SelectedIndex]);
-        }
-
-        private void UpdateTextBoxInfo(Customer customer)
-        {
-            IdTextBox.Text = customer.Id.ToString();
-            FullNameTextBox.Text = customer.FullName.ToString();
-            AddressTextBox.Text = customer.Address.ToString();
+            CustomersListBox.SelectedIndex = Customers.Count - 1;
         }
 
         private void ClearTextBox()
         {
             IdTextBox.Clear();
             FullNameTextBox.Clear();
-            AddressTextBox.Clear();
         }
 
         private void DelButton_Click(object sender, EventArgs e)
         {
-            if (CustomersListBox.SelectedIndex != -1) 
+            if (CustomersListBox.SelectedIndex != -1)
             {
                 var index = CustomersListBox.SelectedIndex;
-                _customers.RemoveAt(index);
+                Customers.RemoveAt(index);
                 CustomersListBox.Items.RemoveAt(index);
                 ClearTextBox();
             }
@@ -58,11 +49,14 @@ namespace ObjectOrientedPractics.View.Panels
         {
             if (CustomersListBox.SelectedIndex != -1)
             {
-                UpdateTextBoxInfo(_customers[CustomersListBox.SelectedIndex]);
+                var _currentCustomer = Customers[CustomersListBox.SelectedIndex];
+                IdTextBox.Text = _currentCustomer.Id.ToString();
+                FullNameTextBox.Text = _currentCustomer.FullName;
+                AddressControl.currentAddress = _currentCustomer.Address;
+                AddressControl.UpdateControl();
             }
 
         }
-
 
         private void FullNameTextBox_TextChanged(object sender, EventArgs e)
         {
@@ -72,7 +66,7 @@ namespace ObjectOrientedPractics.View.Panels
                 int index = CustomersListBox.SelectedIndex;
                 if (index >= 0)
                 {
-                    _customers[index].FullName = FullNameTextBox.Text;
+                    Customers[index].FullName = FullNameTextBox.Text;
                 }
             }
             catch
@@ -81,36 +75,20 @@ namespace ObjectOrientedPractics.View.Panels
             };
         }
 
-        private void AddressTextBox_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                AddressTextBox.BackColor = Color.White;
-                int index = CustomersListBox.SelectedIndex;
-                if (index >= 0)
-                {
-                    _customers[index].Address = AddressTextBox.Text;
-                }
-            }
-            catch
-            {
-                AddressTextBox.BackColor = Color.Red;
-            };
-        }
 
         private void FullNameTextBox_Leave(object sender, EventArgs e)
         {
             if (CustomersListBox.SelectedIndex != -1)
             {
-                CustomersListBox.Items[CustomersListBox.SelectedIndex] = _customers[CustomersListBox.SelectedIndex];
+                CustomersListBox.Items[CustomersListBox.SelectedIndex] = Customers[CustomersListBox.SelectedIndex];
             }
         }
 
-        private void AddressTextBox_Leave(object sender, EventArgs e)
+        private void AddressControl_Leave(object sender, EventArgs e)
         {
             if (CustomersListBox.SelectedIndex != -1)
             {
-                CustomersListBox.Items[CustomersListBox.SelectedIndex] = _customers[CustomersListBox.SelectedIndex];
+                CustomersListBox.Items[CustomersListBox.SelectedIndex] = Customers[CustomersListBox.SelectedIndex];
             }
         }
     }
