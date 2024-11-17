@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using ObjectOrientedPractics.Services;
@@ -74,6 +75,14 @@ namespace ObjectOrientedPractics.Model
             Info = info;
             Cost = cost;
             Category = category;
+        }
+
+        public Item(Item item)
+        {
+            Name = item.Name;
+            Info = item.Info;
+            Cost = item.Cost;
+            Category = item.Category;
         }
 
         /// <summary>

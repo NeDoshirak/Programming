@@ -21,6 +21,12 @@ namespace ObjectOrientedPractics.Model
 
         private string _fullname;
         private Address _address;
+        private Cart _cart;
+        private List<Order> _orders;
+
+        public List<Order> Orders { get; set; } = new List<Order>();
+
+        public Cart Cart { get; set; } = new Cart();
 
         /// <summary>
         /// Полное имя клиента
