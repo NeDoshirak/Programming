@@ -11,7 +11,7 @@ namespace ObjectOrientedPractics.Model
     internal class Order
     {
         private readonly int _id = IdGenerator.GetNextId;
-        private readonly DateTime _creationDate = DateTime.Now;
+        private readonly DateTime _creationDate;
         private Address _address;
         public List<Item> Items { get; set; } = new List<Item>();
 
@@ -36,11 +36,12 @@ namespace ObjectOrientedPractics.Model
             }
         }
 
-        public Order(OrderStatus status, Address address, List<Item> items)
+        public Order(OrderStatus status, Address address, List<Item> items, DateTime dateTime)
         {
             Status = status;
             Address = address;
             Items = items;
+            CreationDate = dateTime;
         }
     }
 }

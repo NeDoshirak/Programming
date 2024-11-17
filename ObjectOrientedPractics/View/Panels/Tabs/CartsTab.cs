@@ -85,6 +85,7 @@ namespace ObjectOrientedPractics.View.Panels
         private void CreateButton_Click(object sender, EventArgs e)
         {
             int CurrentCustomer = CustomersComboBox.SelectedIndex;
+            Customer test = Customers[CurrentCustomer];
             if (CurrentCustomer < 0 || CartListBox.Items.Count == 0)
             {
                 return;
@@ -100,7 +101,8 @@ namespace ObjectOrientedPractics.View.Panels
             var order = new Order(
                 OrderStatus.New,
                 Customers[CurrentCustomer].Address,
-                items);
+                items,
+                DateTime.Now);
 
             Customers[CurrentCustomer].Orders.Add(order);
             Customers[CurrentCustomer].Cart.Items.Clear();

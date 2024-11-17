@@ -111,13 +111,13 @@ namespace ObjectOrientedPractics.View.Panels
 
             var selectedIndex = OrdersDataGridView.SelectedCells[0].RowIndex;
 
-            Order order = Orders[selectedIndex];
-
             IdTextBox.Text = Orders[selectedIndex].Id.ToString();
             CreatedTextBox.Text = Orders[selectedIndex].CreationDate.ToString();
             StatusComboBox.SelectedItem = Orders[selectedIndex].Status;
             StatusComboBox.Enabled = true;
             AddressControl.currentAddress = Orders[selectedIndex].Address;
+            AddressControl.UpdateControl();
+            AddressControl.DisableInput();
             OrderItemsListBox.DataSource = GetItemNames(Orders[selectedIndex].Items);
             AmountLabel.Text = Orders[selectedIndex].Amount.ToString();
         }
