@@ -26,7 +26,7 @@ namespace ObjectOrientedPractics.Model
 
         public List<Order> Orders { get; set; } = new List<Order>();
 
-        public Cart Cart { get; set; }
+        public Cart Cart { get; set; } = new Cart();
 
         /// <summary>
         /// Полное имя клиента

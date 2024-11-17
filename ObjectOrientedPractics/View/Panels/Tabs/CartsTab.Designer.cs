@@ -34,15 +34,15 @@
             label1 = new Label();
             RemoveButton = new Button();
             AddButton = new Button();
-            label5 = new Label();
+            CartListBox = new ListBox();
+            AmouthLabel = new Label();
             label4 = new Label();
             RemoveItemButton = new Button();
             ClearCartButton = new Button();
             CreateButton = new Button();
             label3 = new Label();
-            CustomerComboBox = new ComboBox();
+            CustomersComboBox = new ComboBox();
             label2 = new Label();
-            CartListBox = new ListBox();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -66,13 +66,13 @@
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.Controls.Add(CartListBox);
-            splitContainer1.Panel2.Controls.Add(label5);
+            splitContainer1.Panel2.Controls.Add(AmouthLabel);
             splitContainer1.Panel2.Controls.Add(label4);
             splitContainer1.Panel2.Controls.Add(RemoveItemButton);
             splitContainer1.Panel2.Controls.Add(ClearCartButton);
             splitContainer1.Panel2.Controls.Add(CreateButton);
             splitContainer1.Panel2.Controls.Add(label3);
-            splitContainer1.Panel2.Controls.Add(CustomerComboBox);
+            splitContainer1.Panel2.Controls.Add(CustomersComboBox);
             splitContainer1.Panel2.Controls.Add(label2);
             splitContainer1.Size = new Size(766, 531);
             splitContainer1.SplitterDistance = 244;
@@ -87,6 +87,7 @@
             AddToCartButton.TabIndex = 5;
             AddToCartButton.Text = "Add To Cart";
             AddToCartButton.UseVisualStyleBackColor = true;
+            AddToCartButton.Click += AddToCartButton_Click;
             // 
             // ItemsListBox
             // 
@@ -127,15 +128,25 @@
             AddButton.Text = "Add";
             AddButton.UseVisualStyleBackColor = true;
             // 
-            // label5
+            // CartListBox
             // 
-            label5.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            label5.AutoSize = true;
-            label5.Location = new Point(397, 296);
-            label5.Name = "label5";
-            label5.Size = new Size(22, 15);
-            label5.TabIndex = 10;
-            label5.Text = "0.0";
+            CartListBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            CartListBox.FormattingEnabled = true;
+            CartListBox.ItemHeight = 15;
+            CartListBox.Location = new Point(14, 69);
+            CartListBox.Name = "CartListBox";
+            CartListBox.Size = new Size(484, 199);
+            CartListBox.TabIndex = 11;
+            // 
+            // AmouthLabel
+            // 
+            AmouthLabel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            AmouthLabel.AutoSize = true;
+            AmouthLabel.Location = new Point(397, 296);
+            AmouthLabel.Name = "AmouthLabel";
+            AmouthLabel.Size = new Size(22, 15);
+            AmouthLabel.TabIndex = 10;
+            AmouthLabel.Text = "0.0";
             // 
             // label4
             // 
@@ -156,6 +167,7 @@
             RemoveItemButton.TabIndex = 8;
             RemoveItemButton.Text = "Remove Item";
             RemoveItemButton.UseVisualStyleBackColor = true;
+            RemoveItemButton.Click += RemoveItemButton_Click;
             // 
             // ClearCartButton
             // 
@@ -166,6 +178,7 @@
             ClearCartButton.TabIndex = 7;
             ClearCartButton.Text = "Clear Cart";
             ClearCartButton.UseVisualStyleBackColor = true;
+            ClearCartButton.Click += ClearCartButton_Click;
             // 
             // CreateButton
             // 
@@ -176,6 +189,7 @@
             CreateButton.TabIndex = 6;
             CreateButton.Text = "Create Order";
             CreateButton.UseVisualStyleBackColor = true;
+            CreateButton.Click += CreateButton_Click;
             // 
             // label3
             // 
@@ -186,13 +200,15 @@
             label3.TabIndex = 2;
             label3.Text = "Cart:";
             // 
-            // CustomerComboBox
+            // CustomersComboBox
             // 
-            CustomerComboBox.FormattingEnabled = true;
-            CustomerComboBox.Location = new Point(79, 10);
-            CustomerComboBox.Name = "CustomerComboBox";
-            CustomerComboBox.Size = new Size(249, 23);
-            CustomerComboBox.TabIndex = 1;
+            CustomersComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            CustomersComboBox.FormattingEnabled = true;
+            CustomersComboBox.Location = new Point(79, 10);
+            CustomersComboBox.Name = "CustomersComboBox";
+            CustomersComboBox.Size = new Size(249, 23);
+            CustomersComboBox.TabIndex = 1;
+            CustomersComboBox.SelectedIndexChanged += CustomersComboBox_SelectedIndexChanged;
             // 
             // label2
             // 
@@ -202,16 +218,6 @@
             label2.Size = new Size(59, 15);
             label2.TabIndex = 0;
             label2.Text = "Customer";
-            // 
-            // CartListBox
-            // 
-            CartListBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            CartListBox.FormattingEnabled = true;
-            CartListBox.ItemHeight = 15;
-            CartListBox.Location = new Point(14, 69);
-            CartListBox.Name = "CartListBox";
-            CartListBox.Size = new Size(484, 199);
-            CartListBox.TabIndex = 11;
             // 
             // CartsTab
             // 
@@ -242,8 +248,8 @@
         private Button CreateButton;
         private ListBox listBox1;
         private Label label3;
-        private ComboBox CustomerComboBox;
-        private Label label5;
+        private ComboBox CustomersComboBox;
+        private Label AmouthLabel;
         private Label label4;
         public Label label2;
         private ListBox CartListBox;
