@@ -99,10 +99,8 @@ namespace ObjectOrientedPractics.View.Panels
             }
 
             var order = new Order(
-                OrderStatus.New,
                 Customers[CurrentCustomer].Address,
-                items,
-                DateTime.Now);
+                items);
 
             Customers[CurrentCustomer].Orders.Add(order);
             Customers[CurrentCustomer].Cart.Items.Clear();
