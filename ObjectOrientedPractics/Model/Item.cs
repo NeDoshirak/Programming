@@ -13,11 +13,25 @@ namespace ObjectOrientedPractics.Model
     /// </summary>
     public class Item : ICloneable, IEquatable<Item>, IComparable<Item>
     {
+        public readonly int Id = IdGenerator.GetNextId;
         private string _name;
         private string _info;
         private double _cost;
 
-        public readonly int Id = IdGenerator.GetNextId;
+        /// <summary>
+        /// Событие при обновлении <see cref="Cost"/> объекта <see cref="Item"/>.
+        /// </summary>
+        public event EventHandler<EventArgs> CostChanged;
+
+        /// <summary>
+        /// Событие при обновлении <see cref="Name"/> объекта <see cref="Item"/>.
+        /// </summary>
+        public event EventHandler<EventArgs> NameChanged;
+
+        /// <summary>
+        /// Событие при обновлении <see cref="Info"/> объекта <see cref="Item"/>.
+        /// </summary>
+        public event EventHandler<EventArgs> InfoChanged;
 
         /// <summary>
         /// Название товара
@@ -32,6 +46,7 @@ namespace ObjectOrientedPractics.Model
             {
                 ValueValidator.AssertStringOnLength(value, 200, "name");
                 _name = value;
+                NameChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -45,6 +60,7 @@ namespace ObjectOrientedPractics.Model
             {
                 ValueValidator.AssertStringOnLength(value, 1000, "info");
                 _info = value;
+                InfoChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -58,6 +74,7 @@ namespace ObjectOrientedPractics.Model
             {
                 ValueValidator.AssertValueInRange(value, 0, 100000, "cost");
                 _cost = value;
+                CostChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 

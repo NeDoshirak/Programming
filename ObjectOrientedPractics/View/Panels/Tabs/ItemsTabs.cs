@@ -28,6 +28,11 @@ namespace ObjectOrientedPractics.View.Panels
         private List<Item> _displayedItems;
 
         /// <summary>
+        /// Событие при обновлении информации о товарах <see cref="Item"/>.
+        /// </summary>
+        public event EventHandler<EventArgs> ItemsChanged;
+
+        /// <summary>
         /// Возвращает и задает список товаров класса <see cref="Item"/>.
         /// </summary>
         public List<Item> Items
@@ -41,6 +46,7 @@ namespace ObjectOrientedPractics.View.Panels
                 {
                     UpdateDisplayedItems();
                     OrderByComboBox.SelectedIndex = 0;
+                    ItemsChanged?.Invoke(this, EventArgs.Empty);
                 }
             }
         }
@@ -158,6 +164,7 @@ namespace ObjectOrientedPractics.View.Panels
                 ItemsListBox.Items.Add(item);
                 ItemsListBox.SelectedIndex = Items.Count - 1;
                 UpdateTextBoxInfo(Items[ItemsListBox.SelectedIndex]);
+                ItemsChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -169,6 +176,7 @@ namespace ObjectOrientedPractics.View.Panels
                 Items.RemoveAt(index);
                 ItemsListBox.Items.RemoveAt(index);
                 ClearTextBox();
+                ItemsChanged?.Invoke(this, EventArgs.Empty);
             }
 
         }
@@ -186,6 +194,7 @@ namespace ObjectOrientedPractics.View.Panels
             if (ItemsListBox.SelectedIndex != -1)
             { 
                 Items[ItemsListBox.SelectedIndex].Category = Enum.Parse<Category>(CategoryComboBox.Text);
+                ItemsChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -263,6 +272,7 @@ namespace ObjectOrientedPractics.View.Panels
             if (ItemsListBox.SelectedIndex != -1)
             {
                 ItemsListBox.Items[ItemsListBox.SelectedIndex] = Items[ItemsListBox.SelectedIndex];
+                ItemsChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -271,6 +281,7 @@ namespace ObjectOrientedPractics.View.Panels
             if (ItemsListBox.SelectedIndex != -1)
             {
                 ItemsListBox.Items[ItemsListBox.SelectedIndex] = Items[ItemsListBox.SelectedIndex];
+                ItemsChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -279,6 +290,7 @@ namespace ObjectOrientedPractics.View.Panels
             if (ItemsListBox.SelectedIndex != -1)
             {
                 ItemsListBox.Items[ItemsListBox.SelectedIndex] = Items[ItemsListBox.SelectedIndex];
+                ItemsChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
