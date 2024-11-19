@@ -84,29 +84,34 @@ namespace ObjectOrientedPractics.View.Panels
 
         private void CreateButton_Click(object sender, EventArgs e)
         {
-            int CurrentCustomer = CustomersComboBox.SelectedIndex;
-            Customer test = Customers[CurrentCustomer];
-            if (CurrentCustomer < 0 || CartListBox.Items.Count == 0)
+            if (_currentCustomer != null)
             {
-                return;
+                var items = new List<Item>();
+
+                foreach (var item in _currentCustomer.Cart.Items)
+                {
+                    items.Add(new Item(item));
+                }
+
+                if (_currentCustomer.IsPriority)
+                {
+                    var order = new Order(
+                        _currentCustomer.Address,
+                        items);
+                    _currentCustomer.Orders.Add(order);
+                }
+                else
+                {
+                    var order = new PriorityOrder(
+                    _currentCustomer.Address,
+                    items,DateTime.Now,OrderTime.f9t11);
+
+                    _currentCustomer.Orders.Add(order);
+                }
+                
+                _currentCustomer.Cart.Items.Clear();
+                UpdateInfo();
             }
-
-            var items = new List<Item>();
-
-            foreach (var item in Customers[CurrentCustomer].Cart.Items)
-            {
-                items.Add(new Item(item));
-            }
-
-            var order = new Order(
-                OrderStatus.New,
-                Customers[CurrentCustomer].Address,
-                items,
-                DateTime.Now);
-
-            Customers[CurrentCustomer].Orders.Add(order);
-            Customers[CurrentCustomer].Cart.Items.Clear();
-            UpdateInfo();
         }
     }
 }

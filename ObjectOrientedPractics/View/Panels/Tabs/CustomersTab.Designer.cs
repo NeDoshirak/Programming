@@ -34,6 +34,7 @@
             CustomersListBox = new ListBox();
             label1 = new Label();
             splitContainer2 = new SplitContainer();
+            CheckBox = new CheckBox();
             AddressControl = new AddressControl();
             label4 = new Label();
             label3 = new Label();
@@ -120,6 +121,7 @@
             // 
             // splitContainer2.Panel1
             // 
+            splitContainer2.Panel1.Controls.Add(CheckBox);
             splitContainer2.Panel1.Controls.Add(AddressControl);
             splitContainer2.Panel1.Controls.Add(label4);
             splitContainer2.Panel1.Controls.Add(label3);
@@ -130,9 +132,20 @@
             splitContainer2.SplitterDistance = 323;
             splitContainer2.TabIndex = 0;
             // 
+            // CheckBox
+            // 
+            CheckBox.AutoSize = true;
+            CheckBox.Location = new Point(6, 81);
+            CheckBox.Name = "CheckBox";
+            CheckBox.Size = new Size(72, 19);
+            CheckBox.TabIndex = 8;
+            CheckBox.Text = "IsPriority";
+            CheckBox.UseVisualStyleBackColor = true;
+            CheckBox.CheckedChanged += checkBox1_CheckedChanged;
+            // 
             // AddressControl
             // 
-            AddressControl.Location = new Point(-10, 89);
+            AddressControl.Location = new Point(-10, 104);
             AddressControl.Name = "AddressControl";
             AddressControl.Size = new Size(528, 171);
             AddressControl.TabIndex = 7;
@@ -216,5 +229,6 @@
         private TextBox FullNameTextBox;
         private TextBox IdTextBox;
         private AddressControl AddressControl;
+        private CheckBox CheckBox;
     }
 }

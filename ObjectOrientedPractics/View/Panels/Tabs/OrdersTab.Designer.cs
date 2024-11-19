@@ -51,6 +51,10 @@ namespace ObjectOrientedPractics.View.Panels
             DataPanel = new Panel();
             OrdersLabel = new Label();
             SelectedOrderPanel = new Panel();
+            panel1 = new Panel();
+            DeliveryTimeComboBox = new ComboBox();
+            label2 = new Label();
+            label1 = new Label();
             AmountLabel = new Label();
             OrderItemsListBox = new ListBox();
             StatusComboBox = new ComboBox();
@@ -67,6 +71,7 @@ namespace ObjectOrientedPractics.View.Panels
             MainTableLayoutPanel.SuspendLayout();
             DataPanel.SuspendLayout();
             SelectedOrderPanel.SuspendLayout();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // OrdersDataGridView
@@ -183,6 +188,7 @@ namespace ObjectOrientedPractics.View.Panels
             // 
             // SelectedOrderPanel
             // 
+            SelectedOrderPanel.Controls.Add(panel1);
             SelectedOrderPanel.Controls.Add(AmountLabel);
             SelectedOrderPanel.Controls.Add(OrderItemsListBox);
             SelectedOrderPanel.Controls.Add(StatusComboBox);
@@ -201,6 +207,46 @@ namespace ObjectOrientedPractics.View.Panels
             SelectedOrderPanel.Name = "SelectedOrderPanel";
             SelectedOrderPanel.Size = new Size(576, 643);
             SelectedOrderPanel.TabIndex = 2;
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(DeliveryTimeComboBox);
+            panel1.Controls.Add(label2);
+            panel1.Controls.Add(label1);
+            panel1.Location = new Point(310, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(260, 84);
+            panel1.TabIndex = 15;
+            // 
+            // DeliveryTimeComboBox
+            // 
+            DeliveryTimeComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            DeliveryTimeComboBox.FormattingEnabled = true;
+            DeliveryTimeComboBox.Location = new Point(89, 31);
+            DeliveryTimeComboBox.Name = "DeliveryTimeComboBox";
+            DeliveryTimeComboBox.Size = new Size(147, 23);
+            DeliveryTimeComboBox.TabIndex = 18;
+            DeliveryTimeComboBox.SelectedIndexChanged += DeliveryTimeComboBox_SelectedIndexChanged;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(4, 35);
+            label2.Name = "label2";
+            label2.Size = new Size(79, 15);
+            label2.TabIndex = 17;
+            label2.Text = "Delivery time:";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.Location = new Point(4, 0);
+            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(50, 13);
+            label1.TabIndex = 16;
+            label1.Text = "Priority ";
             // 
             // AmountLabel
             // 
@@ -343,6 +389,8 @@ namespace ObjectOrientedPractics.View.Panels
             DataPanel.PerformLayout();
             SelectedOrderPanel.ResumeLayout(false);
             SelectedOrderPanel.PerformLayout();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -371,5 +419,9 @@ namespace ObjectOrientedPractics.View.Panels
         private System.Windows.Forms.DataGridViewTextBoxColumn FullName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Address;
         private System.Windows.Forms.DataGridViewTextBoxColumn Amount;
+        private Panel panel1;
+        private Label label2;
+        private Label label1;
+        public ComboBox DeliveryTimeComboBox;
     }
 }

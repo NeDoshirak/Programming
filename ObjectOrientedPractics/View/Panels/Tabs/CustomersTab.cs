@@ -53,6 +53,7 @@ namespace ObjectOrientedPractics.View.Panels
                 IdTextBox.Text = _currentCustomer.Id.ToString();
                 FullNameTextBox.Text = _currentCustomer.FullName;
                 AddressControl.currentAddress = _currentCustomer.Address;
+                CheckBox.Checked = _currentCustomer.IsPriority;
                 AddressControl.UpdateControl();
             }
 
@@ -89,6 +90,14 @@ namespace ObjectOrientedPractics.View.Panels
             if (CustomersListBox.SelectedIndex != -1)
             {
                 CustomersListBox.Items[CustomersListBox.SelectedIndex] = Customers[CustomersListBox.SelectedIndex];
+            }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (CustomersListBox.SelectedIndex != -1)
+            {
+                Customers[CustomersListBox.SelectedIndex].IsPriority = CheckBox.Checked;
             }
         }
     }

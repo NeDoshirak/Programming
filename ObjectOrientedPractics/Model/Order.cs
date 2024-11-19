@@ -21,7 +21,7 @@ namespace ObjectOrientedPractics.Model
 
         public int Id { get { return _id; } }
 
-        public OrderStatus Status { get; set; }
+        public OrderStatus Status { get; set; } = new OrderStatus();
 
         public double Amount
         {
@@ -36,12 +36,16 @@ namespace ObjectOrientedPractics.Model
             }
         }
 
-        public Order(OrderStatus status, Address address, List<Item> items, DateTime dateTime)
+        public Order(Address address, List<Item> items)
         {
-            Status = status;
             Address = address;
             Items = items;
-            CreationDate = dateTime;
+            CreationDate = DateTime.Now;
+        }
+
+        public Order()
+        {
+
         }
     }
 }
