@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ObjectOrientedPractics.Model
 {
-    public class Address
+    public class Address : ICloneable, IEquatable<Address>
     {
         private int _index;
         private string _country;
@@ -90,5 +90,37 @@ namespace ObjectOrientedPractics.Model
 
         public Address() { }
 
+        public object Clone()
+        {
+            return new Address(
+                this.Index,
+                this.Country,
+                this.City,
+                this.Street,
+                this.Building,
+                this.Apartment);
+        }
+
+        public bool Equals(Address other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (object.ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            var result = this.Index == other.Index;
+            result &= this.Country == other.Country;
+            result &= this.City == other.City;
+            result &= this.Street == other.Street;
+            result &= this.Building == other.Building;
+            result &= this.Apartment == other.Apartment;
+
+            return result;
+        }
     }
 }

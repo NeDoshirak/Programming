@@ -7,7 +7,7 @@ using ObjectOrientedPractics.Services;
 
 namespace ObjectOrientedPractics.Model
 {
-    public class Cart
+    public class Cart : ICloneable
     {
         /// <summary>
         /// Список товаров <see cref="Item"/> в корзине.
@@ -34,6 +34,18 @@ namespace ObjectOrientedPractics.Model
 
                 return total;
             }
+        }
+
+        public object Clone()
+        {
+            var cart = new Cart();
+
+            foreach (var item in this.Items)
+            {
+                cart.Items.Add((Item)item.Clone());
+            }
+
+            return cart;
         }
     }
 }
