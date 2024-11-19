@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ObjectOrientedPractics.Model.Orders
 {
-    public class Order
+    public class Order : IEquatable<Order>
     {
         private readonly int _id = IdGenerator.GetNextId;
         private readonly DateTime _creationDate;
@@ -56,6 +56,21 @@ namespace ObjectOrientedPractics.Model.Orders
         public Order()
         {
 
+        }
+
+        public bool Equals(Order other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (object.ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            return this.Id == other.Id;
         }
     }
 }

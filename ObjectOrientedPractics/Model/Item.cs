@@ -11,7 +11,7 @@ namespace ObjectOrientedPractics.Model
     /// <summary>
     /// Класс для представления товара
     /// </summary>
-    public class Item
+    public class Item : ICloneable, IEquatable<Item>, IComparable<Item>
     {
         private string _name;
         private string _info;
@@ -94,6 +94,47 @@ namespace ObjectOrientedPractics.Model
         /// Метод для строкового представления товара
         /// </summary>
         public override string ToString() => $"Item name: {Name} cost: {Cost}";
+
+        public object Clone()
+        {
+            var item = new Item();
+            item.Name = this.Name;
+            item.Info = this.Info;
+            item.Cost = this.Cost;
+            item.Category = this.Category;
+            return item;
+        }
+
+        public bool Equals(Item other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+
+            if (object.ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            return this.Id == other.Id;
+        }
+
+        public int CompareTo(Item other)
+        {
+            if (this.Cost == other.Cost)
+            {
+                return 0;
+            }
+            else if (this.Cost > other.Cost)
+            {
+                return 1;
+            }
+            else
+            {
+                return -1;
+            }
+        }
     }
 
 
