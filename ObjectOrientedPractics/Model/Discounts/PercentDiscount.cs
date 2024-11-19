@@ -117,7 +117,7 @@ namespace ObjectOrientedPractics.Model.Discounts
         }
 
         /// <summary>
-        /// Создает экзепляр класса <see cref="PercentDiscount"/>.
+        /// Создает экзепляр класса   <see cref="PercentDiscount"/>.
         /// </summary>
         /// <param name="category">Категория товара, на которую действует скидка.</param>
         /// <param name="discount">Размер скидки в процентах.</param>
