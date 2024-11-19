@@ -17,6 +17,11 @@ namespace ObjectOrientedPractics.Model
         private string _building;
         private string _apartment;
 
+        /// <summary>
+        /// Событие при обновлении любого поля объекта <see cref="Address"/>.
+        /// </summary>
+        public event EventHandler<EventArgs> AddressChanged;
+
         public int Index { get { return _index; } 
             set 
             { 
@@ -24,7 +29,8 @@ namespace ObjectOrientedPractics.Model
                 {
                     throw new ArgumentException("index");
                 }
-                _index = value; 
+                _index = value;
+                AddressChanged?.Invoke(this, EventArgs.Empty);
             } 
         }
 
@@ -35,6 +41,7 @@ namespace ObjectOrientedPractics.Model
             {
                 ValueValidator.AssertStringOnLength(value, 50, "country");
                 _country = value;
+                AddressChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -45,6 +52,7 @@ namespace ObjectOrientedPractics.Model
             {
                 ValueValidator.AssertStringOnLength(value, 50, "city");
                 _city = value;
+                AddressChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -55,6 +63,7 @@ namespace ObjectOrientedPractics.Model
             {
                 ValueValidator.AssertStringOnLength(value, 100, "street");
                 _street = value;
+                AddressChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -65,6 +74,7 @@ namespace ObjectOrientedPractics.Model
             {
                 ValueValidator.AssertStringOnLength(value, 10, "building");
                 _building = value;
+                AddressChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -75,6 +85,7 @@ namespace ObjectOrientedPractics.Model
             {
                 ValueValidator.AssertStringOnLength(value, 10, "apartment");
                 _apartment = value;
+                AddressChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 

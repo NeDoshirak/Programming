@@ -20,6 +20,13 @@ namespace ObjectOrientedPractics
             CartTab.Customers = _store.Customers;
             CartTab.Items = _store.Items;
             OrdersTab.Customers = _store.Customers;
+            ItemsTabs.ItemsChanged += DataChanged;
+        }
+
+        private void DataChanged(object sender, EventArgs e)
+        {
+            CartTab.RefreshData();
+            OrdersTab.RefreshData();
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
