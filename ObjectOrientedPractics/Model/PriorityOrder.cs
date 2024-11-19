@@ -28,7 +28,6 @@ namespace ObjectOrientedPractics.Model
         /// /// <param name="deliveryDate">Delivery time.</param>
         /// </summary>
         public PriorityOrder(
-            OrderStatus status, 
             Address address,
             List<Item> items,
             DateTime deliveryDate,
@@ -37,6 +36,11 @@ namespace ObjectOrientedPractics.Model
         {
             DeliveryDate = deliveryDate;
             DeliveryTime = deliveryTime;
+        }
+
+        public PriorityOrder()
+        {
+
         }
     }
 }

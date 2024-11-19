@@ -42,5 +42,10 @@ namespace ObjectOrientedPractics.Model
             Items = items;
             CreationDate = DateTime.Now;
         }
+
+        public Order()
+        {
+
+        }
     }
 }

@@ -18,6 +18,7 @@ namespace ObjectOrientedPractics.View.Panels
             InitializeComponent();
             AddressControl.DisableInput();
             StatusComboBox.DataSource = Enum.GetValues(typeof(OrderStatus));
+            panel1.Visible = false;
         }
 
         /// <summary>
@@ -29,6 +30,8 @@ namespace ObjectOrientedPractics.View.Panels
         /// Возвращает список заказов.
         /// </summary>
         private List<Order> Orders { get; } = new List<Order>();
+
+        PriorityOrder _selectedPriorityOrder = null;
 
         /// <summary>
         /// Обновляет данные вкладки заказов <see cref="OrdersTab"/>.
@@ -111,6 +114,23 @@ namespace ObjectOrientedPractics.View.Panels
 
             var selectedIndex = OrdersDataGridView.SelectedCells[0].RowIndex;
 
+
+            if (Orders[selectedIndex].GetType() == typeof(PriorityOrder))
+            {
+                panel1.Visible = false;
+                _selectedPriorityOrder = (PriorityOrder)Orders[selectedIndex];
+                DeliveryTimeComboBox.Items.Clear();
+                DeliveryTimeComboBox.Items.AddRange(new String[6] { "9-11", "11-13", "13-15", "15-17", "17-19", "19-21" });
+                DeliveryTimeComboBox.SelectedIndex = (int)_selectedPriorityOrder.DeliveryTime;
+            
+
+            }
+            else
+            {
+                panel1.Visible = true;
+                _selectedPriorityOrder = null;
+            }
+
             IdTextBox.Text = Orders[selectedIndex].Id.ToString();
             CreatedTextBox.Text = Orders[selectedIndex].CreationDate.ToString();
             StatusComboBox.SelectedItem = Orders[selectedIndex].Status;
@@ -120,6 +140,28 @@ namespace ObjectOrientedPractics.View.Panels
             AddressControl.DisableInput();
             OrderItemsListBox.DataSource = GetItemNames(Orders[selectedIndex].Items);
             AmountLabel.Text = Orders[selectedIndex].Amount.ToString();
+        }
+
+        private void DeliveryTimeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (_selectedPriorityOrder == null)
+            {
+                return;
+            }
+
+            if (DeliveryTimeComboBox.SelectedItem == null)
+            {
+                return;
+            }
+
+            _selectedPriorityOrder.DeliveryTime = (OrderTime)DeliveryTimeComboBox.SelectedIndex;
+
+
+        }
+
+        private void DeliveryTimeComboBox_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

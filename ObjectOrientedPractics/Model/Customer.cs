@@ -28,6 +28,8 @@ namespace ObjectOrientedPractics.Model
 
         public Cart Cart { get; set; } = new Cart();
 
+        public bool IsPriority { get; set; } = false;
+
         /// <summary>
         /// Полное имя клиента
         /// </summary>
