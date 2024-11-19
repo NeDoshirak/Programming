@@ -1,4 +1,5 @@
 ﻿using ObjectOrientedPractics.Model;
+using ObjectOrientedPractics.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,7 +20,126 @@ namespace ObjectOrientedPractics.View.Panels
             InitializeComponent();
         }
 
-        internal List<Item> Items { get; set; } = new List<Item>();
+        private List<Item> _items;
+
+        /// <summary>
+        /// Список товаров класса <see cref="Item"/>, выведенный на экран.
+        /// </summary>
+        private List<Item> _displayedItems;
+
+        /// <summary>
+        /// Возвращает и задает список товаров класса <see cref="Item"/>.
+        /// </summary>
+        public List<Item> Items
+        {
+            get => _items;
+            set
+            {
+                _items = value;
+
+                if (Items != null)
+                {
+                    UpdateDisplayedItems();
+                    OrderByComboBox.SelectedIndex = 0;
+                }
+            }
+        }
+
+        private void UpdateItemsListBox()
+        {
+            var selectedItem = ItemsListBox.SelectedItem;
+            ItemsListBox.Items.Clear();
+
+            foreach (var item in DisplayedItems)
+            {
+                ItemsListBox.Items.Add(item);
+            }
+
+            ItemsListBox.SelectedItem = selectedItem;
+        }
+
+
+        /// <summary>
+        /// Возвращает и задает список товаров класса <see cref="Item"/>, выведенный на экран.
+        /// </summary>
+        public List<Item> DisplayedItems
+        {
+            get => _displayedItems;
+            set
+            {
+                _displayedItems = value;
+
+                if (DisplayedItems != null)
+                {
+                    UpdateItemsListBox();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Возвращает и задает делигат критерия сортировки.
+        /// </summary>
+        private DataTools.CompareProperties SortCompare { get; set; }
+
+        /// <summary>
+        /// Возвращает и задает делигат критерия фильтрации.
+        /// </summary>
+        private Predicate<Item> FilterCompare { get; set; }
+
+
+        /// <summary>
+        /// Обновить список товаров, который будет выведен на экран.
+        /// </summary>
+        /// <param name="compare">Метод критерия проверки товаров.</param>
+        private void UpdateDisplayedItems()
+        {
+            var displayedItems = Items;
+
+            if (FilterCompare != null)
+            {
+                displayedItems = DataTools.FilterItems(displayedItems, FilterCompare);
+            }
+
+            if (SortCompare != null)
+            {
+                displayedItems = DataTools.SortItems(displayedItems, SortCompare);
+            }
+
+            DisplayedItems = displayedItems;
+            SetTextBoxes();
+        }
+
+        /// <summary>
+        /// Устанавливает корректные данные в текстовых окнах 
+        /// в зависимости от индекса товара в списке.
+        /// </summary>
+        /// <param name="selectedIndex">Индекс товара в списке.</param>
+        private void SetTextBoxes()
+        {
+            var isSelectedIndexCorrect = ItemsListBox.SelectedItem != null;
+            CostTextBox.Enabled = isSelectedIndexCorrect;
+            NameTextBox.Enabled = isSelectedIndexCorrect;
+            DescriptionTextBox.Enabled = isSelectedIndexCorrect;
+            CategoryComboBox.Enabled = isSelectedIndexCorrect;
+
+            if (isSelectedIndexCorrect)
+            {
+                var selectedItem = ItemsListBox.SelectedItem as Item;
+                NameTextBox.Text = selectedItem.Name;
+                CostTextBox.Text = selectedItem.Cost.ToString();
+                IdTextBox.Text = selectedItem.Id.ToString();
+                DescriptionTextBox.Text = selectedItem.Info;
+                CategoryComboBox.SelectedIndex = (int)selectedItem.Category;
+            }
+            else
+            {
+                NameTextBox.Text = string.Empty;
+                CostTextBox.Text = string.Empty;
+                IdTextBox.Text = string.Empty;
+                DescriptionTextBox.Text = string.Empty;
+                CategoryComboBox.SelectedIndex = -1;
+            }
+        }
 
         private void CategoryComboBox_Enter(object sender, EventArgs e)
         {
@@ -162,6 +282,65 @@ namespace ObjectOrientedPractics.View.Panels
             }
         }
 
+        /// <summary>
+        /// Событие при изменении текста в текстовом поле поиска товаров.
+        /// </summary>
+        /// <param name="sender">Элемент управления, вызвавший событие.</param>
+        /// <param name="e">Данные о событии.</param>
+        private void FindTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (FindTextBox.Text.Length == 0)
+            {
+                FilterCompare = null;
+            }
+            else
+            {
+                FilterCompare = (item) => { return item.Name.Contains(FindTextBox.Text); };
+            }
 
+            UpdateDisplayedItems();
+        }
+
+        /// <summary>
+        /// Событие при изменении выбора в списке сортировок товара.
+        /// </summary>
+        /// <param name="sender">Элемент управления, вызвавший событие.</param>
+        /// <param name="e">Данные о событии.</param>
+        private void OrderByComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (OrderByComboBox.SelectedIndex)
+            {
+                case 0:
+                    {
+                        SortCompare = (firstItem, secondItem) =>
+                        {
+                            return firstItem.Name.CompareTo(secondItem.Name) < 0;
+                        };
+
+                        break;
+                    }
+                case 1:
+                    {
+                        SortCompare = (firstItem, secondItem) =>
+                        {
+                            return firstItem.Cost.CompareTo(secondItem.Cost) < 0;
+                        };
+
+                        break;
+                    }
+                case 2:
+                    {
+                        SortCompare = (firstItem, secondItem) =>
+                        {
+                            return firstItem.Cost.CompareTo(secondItem.Cost) > 0;
+                        };
+
+                        break;
+                    }
+            }
+
+            var selectedItem = ItemsListBox.SelectedItem;
+            UpdateDisplayedItems();
+        }
     }
 }
