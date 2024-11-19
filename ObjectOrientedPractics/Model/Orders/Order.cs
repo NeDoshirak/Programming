@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ObjectOrientedPractics.Model
+namespace ObjectOrientedPractics.Model.Orders
 {
-    internal class Order
+    public class Order
     {
         private readonly int _id = IdGenerator.GetNextId;
         private readonly DateTime _creationDate;
@@ -22,6 +22,16 @@ namespace ObjectOrientedPractics.Model
         public int Id { get { return _id; } }
 
         public OrderStatus Status { get; set; } = new OrderStatus();
+
+        public double Total
+        {
+            get
+            {
+                return Amount - DiscountAmount;
+            }
+        }
+
+        public double DiscountAmount { get; }
 
         public double Amount
         {

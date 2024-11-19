@@ -1,4 +1,6 @@
-﻿using ObjectOrientedPractics.Services;
+﻿using ObjectOrientedPractics.Model.Discounts;
+using ObjectOrientedPractics.Model.Orders;
+using ObjectOrientedPractics.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +14,7 @@ namespace ObjectOrientedPractics.Model
     /// <summary>
     /// Класс для представления клиента
     /// </summary>
-    internal class Customer
+    public class Customer
     {
         /// <summary>
         /// Уникальный идентификатор клиента
@@ -29,6 +31,8 @@ namespace ObjectOrientedPractics.Model
         public Cart Cart { get; set; } = new Cart();
 
         public bool IsPriority { get; set; } = false;
+
+        public List<IDiscount> Discounts { get; set; }
 
         /// <summary>
         /// Полное имя клиента
@@ -64,6 +68,7 @@ namespace ObjectOrientedPractics.Model
         {
             FullName = fullname;
             Address = address;
+            Discounts = new List<IDiscount>() {new PointsDiscount() };
         }
 
         /// <summary>

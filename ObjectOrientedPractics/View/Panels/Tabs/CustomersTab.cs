@@ -1,4 +1,5 @@
 ﻿using ObjectOrientedPractics.Model;
+using ObjectOrientedPractics.Model.Discounts;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,6 +33,16 @@ namespace ObjectOrientedPractics.View.Panels
         {
             IdTextBox.Clear();
             FullNameTextBox.Clear();
+        }
+
+        private void UpdateDiscountsListBox(Customer customer)
+        {
+            DiscountsListBox.Items.Clear();
+
+            foreach (var discount in customer.Discounts)
+            {
+                DiscountsListBox.Items.Add(discount.Info);
+            }
         }
 
         private void DelButton_Click(object sender, EventArgs e)
@@ -100,5 +111,48 @@ namespace ObjectOrientedPractics.View.Panels
                 Customers[CustomersListBox.SelectedIndex].IsPriority = CheckBox.Checked;
             }
         }
+
+        private void AddDiscountButton_Click(object sender, EventArgs e)
+        {
+            if (CustomersListBox.SelectedIndex != -1)
+            {
+                var addDiscountPopUp = new AddDiscountPopUp(Customers[CustomersListBox.SelectedIndex]);
+
+                if (addDiscountPopUp.ShowDialog() != DialogResult.OK)
+                {
+                    return;
+                }
+
+                var discount = new PercentDiscount(addDiscountPopUp.Category);
+                Customers[CustomersListBox.SelectedIndex].Discounts.Add(discount);
+                UpdateDiscountsListBox(Customers[CustomersListBox.SelectedIndex]);
+            }
+        }
+
+        private void RemoveDiscountButton_Click(object sender, EventArgs e)
+        {
+            if (CustomersListBox.SelectedIndex != -1)
+            {
+                var removedIndex = DiscountsListBox.SelectedIndex;
+                Customers[CustomersListBox.SelectedIndex].Discounts.RemoveAt(
+                    DiscountsListBox.SelectedIndex);
+                UpdateDiscountsListBox(Customers[CustomersListBox.SelectedIndex]);
+
+                if (removedIndex >= DiscountsListBox.Items.Count)
+                {
+                    DiscountsListBox.SelectedIndex = removedIndex - 1;
+                }
+                else
+                {
+                    DiscountsListBox.SelectedIndex = removedIndex;
+                }
+            }
+        }
+
+        private void DiscountsListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            RemoveDiscountButton.Enabled = DiscountsListBox.SelectedIndex > 0;
+        }
+
     }
 }

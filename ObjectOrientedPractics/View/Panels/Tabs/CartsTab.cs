@@ -1,4 +1,6 @@
 ﻿using ObjectOrientedPractics.Model;
+using ObjectOrientedPractics.Model.Enums;
+using ObjectOrientedPractics.Model.Orders;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 
 
 namespace ObjectOrientedPractics.View.Panels
@@ -23,15 +26,65 @@ namespace ObjectOrientedPractics.View.Panels
         internal List<Customer> Customers { get; set; } = new List<Customer>();
         private Customer _currentCustomer;
 
+        public double DiscountAmount { get; set; }
+
         private void UpdateInfo()
         {
-            if (_currentCustomer.Cart!= null)
+            if (_currentCustomer.Cart != null)
             {
                 CartListBox.Items.Clear();
                 CartListBox.Items.AddRange(_currentCustomer.Cart.Items.ToArray());
                 AmouthLabel.Text = _currentCustomer.Cart.Amount.ToString();
             }
         }
+
+        private void UpdateDiscountsCheckedListBox()
+        {
+            var CurrentCustomer = CustomersComboBox.SelectedIndex;
+            if (Customers.Count == 0 || CurrentCustomer < 0)
+            {
+                DiscountsCheckedListBox.Items.Clear();
+                DiscountsCheckedListBox.Enabled = false;
+                return;
+            }
+
+            DiscountsCheckedListBox.Items.Clear();
+
+            foreach (var discount in Customers[CurrentCustomer].Discounts)
+            {
+                DiscountsCheckedListBox.Items.Add(discount.Info);
+            }
+
+            for (int i = 0; i < DiscountsCheckedListBox.Items.Count; i++)
+            {
+                DiscountsCheckedListBox.SetItemChecked(i, true);
+            }
+
+            DiscountAmountLabel.Text = Customers[CurrentCustomer].Cart.Amount.ToString();
+            DiscountsCheckedListBox.Enabled = true;
+            DiscountAmountLabel.Text = "0";
+            TotalLabel.Text = DiscountAmountLabel.Text;
+        }
+
+        private void UpdateAmountLabels()
+        {
+            DiscountAmount = 0.0;
+            var CurrentCustomer = CustomersComboBox.SelectedIndex;
+
+            foreach (var item in DiscountsCheckedListBox.CheckedItems)
+            {
+                var index = DiscountsCheckedListBox.Items.IndexOf(item);
+                DiscountAmount += Customers[CurrentCustomer].Discounts[index].Calculate(
+                    Customers[CurrentCustomer].Cart.Items);
+            }
+
+            var amount = Customers[CurrentCustomer].Cart.Amount;
+            DiscountAmountLabel.Text = amount.ToString();
+            DiscountAmountLabel.Text = DiscountAmount.ToString();
+            TotalLabel.Text = (amount - DiscountAmount).ToString();
+        }
+
+
 
         public void RefreshData()
         {
@@ -48,6 +101,7 @@ namespace ObjectOrientedPractics.View.Panels
             {
                 _currentCustomer = Customers[CustomersComboBox.SelectedIndex];
                 UpdateInfo();
+                UpdateDiscountsCheckedListBox();
             }
             else
             {
@@ -84,7 +138,7 @@ namespace ObjectOrientedPractics.View.Panels
 
         private void CreateButton_Click(object sender, EventArgs e)
         {
-            if (_currentCustomer != null)
+            if (_currentCustomer != null && _currentCustomer.Cart.Items.Count != 0)
             {
                 var items = new List<Item>();
 
@@ -104,14 +158,19 @@ namespace ObjectOrientedPractics.View.Panels
                 {
                     var order = new PriorityOrder(
                     _currentCustomer.Address,
-                    items,DateTime.Now,OrderTime.f9t11);
+                    items, DateTime.Now, OrderTime.f9t11);
 
                     _currentCustomer.Orders.Add(order);
                 }
-                
+
                 _currentCustomer.Cart.Items.Clear();
                 UpdateInfo();
             }
+        }
+
+        private void DiscountsCheckedListBox_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            UpdateAmountLabels();
         }
     }
 }

@@ -41,12 +41,17 @@
             FullNameTextBox = new TextBox();
             IdTextBox = new TextBox();
             label2 = new Label();
+            RemoveDiscountButton = new Button();
+            AddDiscountButton = new Button();
+            label5 = new Label();
+            DiscountsListBox = new ListBox();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer2).BeginInit();
             splitContainer2.Panel1.SuspendLayout();
+            splitContainer2.Panel2.SuspendLayout();
             splitContainer2.SuspendLayout();
             SuspendLayout();
             // 
@@ -128,6 +133,13 @@
             splitContainer2.Panel1.Controls.Add(FullNameTextBox);
             splitContainer2.Panel1.Controls.Add(IdTextBox);
             splitContainer2.Panel1.Controls.Add(label2);
+            // 
+            // splitContainer2.Panel2
+            // 
+            splitContainer2.Panel2.Controls.Add(RemoveDiscountButton);
+            splitContainer2.Panel2.Controls.Add(AddDiscountButton);
+            splitContainer2.Panel2.Controls.Add(label5);
+            splitContainer2.Panel2.Controls.Add(DiscountsListBox);
             splitContainer2.Size = new Size(504, 549);
             splitContainer2.SplitterDistance = 323;
             splitContainer2.TabIndex = 0;
@@ -196,6 +208,48 @@
             label2.TabIndex = 1;
             label2.Text = "Selected Customer";
             // 
+            // RemoveDiscountButton
+            // 
+            RemoveDiscountButton.Anchor = AnchorStyles.Right;
+            RemoveDiscountButton.Location = new Point(302, 82);
+            RemoveDiscountButton.Name = "RemoveDiscountButton";
+            RemoveDiscountButton.Size = new Size(101, 42);
+            RemoveDiscountButton.TabIndex = 3;
+            RemoveDiscountButton.Text = "Remove";
+            RemoveDiscountButton.UseVisualStyleBackColor = true;
+            RemoveDiscountButton.Click += RemoveDiscountButton_Click;
+            // 
+            // AddDiscountButton
+            // 
+            AddDiscountButton.Anchor = AnchorStyles.Right;
+            AddDiscountButton.Location = new Point(302, 30);
+            AddDiscountButton.Name = "AddDiscountButton";
+            AddDiscountButton.Size = new Size(101, 42);
+            AddDiscountButton.TabIndex = 2;
+            AddDiscountButton.Text = "Add";
+            AddDiscountButton.UseVisualStyleBackColor = true;
+            AddDiscountButton.Click += AddDiscountButton_Click;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(6, 12);
+            label5.Name = "label5";
+            label5.Size = new Size(59, 15);
+            label5.TabIndex = 1;
+            label5.Text = "Discounts";
+            // 
+            // DiscountsListBox
+            // 
+            DiscountsListBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            DiscountsListBox.FormattingEnabled = true;
+            DiscountsListBox.ItemHeight = 15;
+            DiscountsListBox.Location = new Point(6, 30);
+            DiscountsListBox.Name = "DiscountsListBox";
+            DiscountsListBox.Size = new Size(290, 94);
+            DiscountsListBox.TabIndex = 0;
+            DiscountsListBox.SelectedIndexChanged += DiscountsListBox_SelectedIndexChanged;
+            // 
             // CustomersTab
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -210,6 +264,8 @@
             splitContainer1.ResumeLayout(false);
             splitContainer2.Panel1.ResumeLayout(false);
             splitContainer2.Panel1.PerformLayout();
+            splitContainer2.Panel2.ResumeLayout(false);
+            splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer2).EndInit();
             splitContainer2.ResumeLayout(false);
             ResumeLayout(false);
@@ -230,5 +286,9 @@
         private TextBox IdTextBox;
         private AddressControl AddressControl;
         private CheckBox CheckBox;
+        private Button RemoveDiscountButton;
+        private Button AddDiscountButton;
+        private Label label5;
+        private ListBox DiscountsListBox;
     }
 }
