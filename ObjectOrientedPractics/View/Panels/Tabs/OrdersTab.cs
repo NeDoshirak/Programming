@@ -1,5 +1,6 @@
 ﻿using ObjectOrientedPractics.Model;
 using ObjectOrientedPractics.Model.Enums;
+using ObjectOrientedPractics.Model.ObjectOrientedPractics.Model;
 using ObjectOrientedPractics.Model.Orders;
 using System;
 using System.Collections.Generic;
@@ -141,7 +142,7 @@ namespace ObjectOrientedPractics.View.Panels
             AddressControl.UpdateControl();
             AddressControl.DisableInput();
             OrderItemsListBox.DataSource = GetItemNames(Orders[selectedIndex].Items);
-            AmountLabel.Text = Orders[selectedIndex].Amount.ToString();
+            AmountLabel.Text = Orders[selectedIndex].Total.ToString();
         }
 
         private void DeliveryTimeComboBox_SelectedIndexChanged(object sender, EventArgs e)
