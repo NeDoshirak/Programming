@@ -102,6 +102,10 @@
             // 
             OrderByComboBox.Anchor = AnchorStyles.Bottom;
             OrderByComboBox.FormattingEnabled = true;
+            this.OrderByComboBox.Items.AddRange(new object[] {
+            "Name",
+            "Cost (Ascending)",
+            "Cost (Descending)"});
             OrderByComboBox.Location = new Point(67, 443);
             OrderByComboBox.Name = "OrderByComboBox";
             OrderByComboBox.Size = new Size(298, 23);
