@@ -22,18 +22,27 @@ namespace ObjectOrientedPractics.Model
         /// </summary>
         public event EventHandler<EventArgs> AddressChanged;
 
-        public int Index { get { return _index; } 
-            set 
-            { 
+        /// <summary>
+        /// Индекс адреса (почтовый код).
+        /// </summary>
+        public int Index
+        {
+            get { return _index; }
+            set
+            {
+                // Проверка длины индекса.
                 if (Convert.ToString(value).Length != 6)
                 {
                     throw new ArgumentException("index");
                 }
                 _index = value;
                 AddressChanged?.Invoke(this, EventArgs.Empty);
-            } 
+            }
         }
 
+        /// <summary>
+        /// Страна, в которой находится адрес.
+        /// </summary>
         public string Country
         {
             get { return _country; }
@@ -45,6 +54,9 @@ namespace ObjectOrientedPractics.Model
             }
         }
 
+        /// <summary>
+        /// Город, в котором находится адрес.
+        /// </summary>
         public string City
         {
             get { return _city; }
@@ -56,6 +68,9 @@ namespace ObjectOrientedPractics.Model
             }
         }
 
+        /// <summary>
+        /// Улица, на которой находится адрес.
+        /// </summary>
         public string Street
         {
             get { return _street; }
@@ -67,6 +82,9 @@ namespace ObjectOrientedPractics.Model
             }
         }
 
+        /// <summary>
+        /// Здание, в котором находится адрес.
+        /// </summary>
         public string Building
         {
             get { return _building; }
@@ -78,6 +96,9 @@ namespace ObjectOrientedPractics.Model
             }
         }
 
+        /// <summary>
+        /// Квартира, в которой находится адрес.
+        /// </summary>
         public string Apartment
         {
             get { return _apartment; }
@@ -89,6 +110,15 @@ namespace ObjectOrientedPractics.Model
             }
         }
 
+        /// <summary>
+        /// Конструктор для инициализации адреса с параметрами.
+        /// </summary>
+        /// <param name="index">Индекс адреса (почтовый код).</param>
+        /// <param name="country">Страна.</param>
+        /// <param name="city">Город.</param>
+        /// <param name="street">Улица.</param>
+        /// <param name="building">Здание.</param>
+        /// <param name="apartment">Квартира.</param>
         public Address(int index, string country, string city, string street, string building, string apartment)
         {
             Index = index;
@@ -99,8 +129,15 @@ namespace ObjectOrientedPractics.Model
             Apartment = apartment;
         }
 
+        /// <summary>
+        /// Пустой конструктор для инициализации адреса без параметров.
+        /// </summary>
         public Address() { }
 
+        /// <summary>
+        /// Создает глубокую копию текущего адреса.
+        /// </summary>
+        /// <returns>Копия текущего адреса.</returns>
         public object Clone()
         {
             return new Address(
@@ -112,6 +149,11 @@ namespace ObjectOrientedPractics.Model
                 this.Apartment);
         }
 
+        /// <summary>
+        /// Сравнивает текущий экземпляр <see cref="Address"/> с другим экземпляром.
+        /// </summary>
+        /// <param name="other">Другой экземпляр адреса для сравнения.</param>
+        /// <returns>True, если адреса равны; иначе - False.</returns>
         public bool Equals(Address other)
         {
             if (other == null)
@@ -124,14 +166,14 @@ namespace ObjectOrientedPractics.Model
                 return true;
             }
 
-            var result = this.Index == other.Index;
-            result &= this.Country == other.Country;
-            result &= this.City == other.City;
-            result &= this.Street == other.Street;
-            result &= this.Building == other.Building;
-            result &= this.Apartment == other.Apartment;
-
-            return result;
+            // Сравнение всех полей адреса.
+            return this.Index == other.Index &&
+                   this.Country == other.Country &&
+                   this.City == other.City &&
+                   this.Street == other.Street &&
+                   this.Building == other.Building &&
+                   this.Apartment == other.Apartment;
         }
     }
+
 }

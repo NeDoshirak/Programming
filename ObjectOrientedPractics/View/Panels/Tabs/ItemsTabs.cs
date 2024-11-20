@@ -1,4 +1,5 @@
 ﻿using ObjectOrientedPractics.Model;
+using ObjectOrientedPractics.Model.ObjectOrientedPractics.Model;
 using ObjectOrientedPractics.Services;
 using System;
 using System.Collections.Generic;
@@ -45,7 +46,7 @@ namespace ObjectOrientedPractics.View.Panels
                 if (Items != null)
                 {
                     UpdateDisplayedItems();
-                    OrderByComboBox.SelectedIndex = 0;
+                    //OrderByComboBox.SelectedIndex = 0;
                     ItemsChanged?.Invoke(this, EventArgs.Empty);
                 }
             }
@@ -112,39 +113,7 @@ namespace ObjectOrientedPractics.View.Panels
             }
 
             DisplayedItems = displayedItems;
-            SetTextBoxes();
-        }
-
-        /// <summary>
-        /// Устанавливает корректные данные в текстовых окнах 
-        /// в зависимости от индекса товара в списке.
-        /// </summary>
-        /// <param name="selectedIndex">Индекс товара в списке.</param>
-        private void SetTextBoxes()
-        {
-            var isSelectedIndexCorrect = ItemsListBox.SelectedItem != null;
-            CostTextBox.Enabled = isSelectedIndexCorrect;
-            NameTextBox.Enabled = isSelectedIndexCorrect;
-            DescriptionTextBox.Enabled = isSelectedIndexCorrect;
-            CategoryComboBox.Enabled = isSelectedIndexCorrect;
-
-            if (isSelectedIndexCorrect)
-            {
-                var selectedItem = ItemsListBox.SelectedItem as Item;
-                NameTextBox.Text = selectedItem.Name;
-                CostTextBox.Text = selectedItem.Cost.ToString();
-                IdTextBox.Text = selectedItem.Id.ToString();
-                DescriptionTextBox.Text = selectedItem.Info;
-                CategoryComboBox.SelectedIndex = (int)selectedItem.Category;
-            }
-            else
-            {
-                NameTextBox.Text = string.Empty;
-                CostTextBox.Text = string.Empty;
-                IdTextBox.Text = string.Empty;
-                DescriptionTextBox.Text = string.Empty;
-                CategoryComboBox.SelectedIndex = -1;
-            }
+            UpdateItemsListBox();
         }
 
         private void CategoryComboBox_Enter(object sender, EventArgs e)

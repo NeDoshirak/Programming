@@ -74,7 +74,9 @@
             // 
             // ItemsTabs
             // 
+            ItemsTabs.DisplayedItems = null;
             ItemsTabs.Dock = DockStyle.Fill;
+            ItemsTabs.Items = null;
             ItemsTabs.Location = new Point(3, 3);
             ItemsTabs.Name = "ItemsTabs";
             ItemsTabs.Size = new Size(943, 576);
@@ -116,6 +118,7 @@
             // 
             // CartTab
             // 
+            CartTab.DiscountAmount = 0D;
             CartTab.Dock = DockStyle.Fill;
             CartTab.Location = new Point(3, 3);
             CartTab.Name = "CartTab";

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ObjectOrientedPractics.Model.Enums;
+using ObjectOrientedPractics.Model.ObjectOrientedPractics.Model;
 
 namespace ObjectOrientedPractics.Model.Orders
 {

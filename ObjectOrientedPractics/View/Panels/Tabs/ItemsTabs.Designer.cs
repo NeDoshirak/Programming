@@ -90,6 +90,7 @@
             // 
             // label9
             // 
+            label9.Anchor = AnchorStyles.Bottom;
             label9.AutoSize = true;
             label9.Location = new Point(5, 446);
             label9.Name = "label9";
@@ -99,6 +100,7 @@
             // 
             // OrderByComboBox
             // 
+            OrderByComboBox.Anchor = AnchorStyles.Bottom;
             OrderByComboBox.FormattingEnabled = true;
             OrderByComboBox.Location = new Point(67, 443);
             OrderByComboBox.Name = "OrderByComboBox";
