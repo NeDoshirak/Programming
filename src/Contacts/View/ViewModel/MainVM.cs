@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,7 +13,7 @@ using View.Model.Services;
 
 namespace View.ViewModel
 {
-    public class MainVM : INotifyPropertyChanged
+    public class MainVM : ObservableObject
     {
         private Contact _contact = new Contact();
         private static ContactSerializer _contactSerializer = new ContactSerializer();
@@ -27,8 +28,7 @@ namespace View.ViewModel
             }
             set
             {
-                _contact.Name = value;
-                NotifyPropertyChanged(nameof(Name));
+                SetProperty(_contact.Name, value, _contact, (u, n) => u.Name = n);
             }
         }
 
@@ -40,8 +40,7 @@ namespace View.ViewModel
             }
             set
             {
-                _contact.PhoneNumber = value;
-                NotifyPropertyChanged(nameof(PhoneNumber));
+                SetProperty(_contact.PhoneNumber, value, _contact, (u, n) => u.PhoneNumber = n);
             }
         }
 
@@ -53,16 +52,8 @@ namespace View.ViewModel
             }
             set
             {
-                _contact.Email = value;
-                NotifyPropertyChanged(nameof(Email));
+                SetProperty(_contact.Email, value, _contact, (u, n) => u.Email = n);
             }
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public MainVM()
