@@ -8,14 +8,18 @@ using System.Threading.Tasks;
 
 namespace View.Model.Services
 {
+    using System;
+    using System.Collections.ObjectModel;
+    using System.IO;
+    using Newtonsoft.Json;
+
     public class ContactSerializer
     {
-        private string _filePath;
+        private readonly string _filePath;
 
         public ContactSerializer()
         {
-            string documentsPath = 
-                Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             string contactsDirectory = Path.Combine(documentsPath, "Contacts");
             _filePath = Path.Combine(contactsDirectory, "contacts.json");
 
@@ -23,29 +27,24 @@ namespace View.Model.Services
             {
                 Directory.CreateDirectory(contactsDirectory);
             }
-
-            if (!File.Exists(_filePath))
-            {
-                File.WriteAllText(_filePath, "{}");
-            }
         }
 
-        public void SaveContact(Contact contact)
+        public void SaveContacts(ObservableCollection<Contact> contacts)
         {
-            string json = JsonConvert.SerializeObject(contact, Formatting.Indented);
+            string json = JsonConvert.SerializeObject(contacts, Formatting.Indented);
             File.WriteAllText(_filePath, json);
         }
 
-        public Contact LoadContact()
+        public ObservableCollection<Contact> LoadContacts()
         {
             if (!File.Exists(_filePath))
             {
-                throw new FileNotFoundException("Файл контактов не найден.");
+                return new ObservableCollection<Contact>();
             }
 
             string json = File.ReadAllText(_filePath);
-            return JsonConvert.DeserializeObject<Contact>(json) ;
+            return JsonConvert.DeserializeObject<ObservableCollection<Contact>>(json) ?? new ObservableCollection<Contact>();
         }
     }
-
 }
+

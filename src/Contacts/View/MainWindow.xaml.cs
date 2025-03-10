@@ -22,5 +22,6 @@ namespace View
             InitializeComponent();
             MainVM mainVM = new MainVM();
         }
+
     }
 }

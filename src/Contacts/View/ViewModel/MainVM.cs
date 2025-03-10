@@ -2,7 +2,9 @@
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -15,62 +17,23 @@ namespace View.ViewModel
 {
     public class MainVM : ObservableObject
     {
-        private Contact _contact = new Contact();
-        private static ContactSerializer _contactSerializer = new ContactSerializer();
-        public ICommand SaveCommand { get; }
-        public ICommand LoadCommand { get; }
+        private Contact _selectedContact;
 
-        public string Name
+        public ObservableCollection<Contact> Contacts { get; set; } = new ObservableCollection<Contact>()
         {
-            get
-            {
-                return _contact.Name;
-            }
-            set
-            {
-                SetProperty(_contact.Name, value, _contact, (u, n) => u.Name = n);
-            }
-        }
+            new Contact("Егор","номер","почта"),
+            new Contact("Ваня","номер","почта"),
+            new Contact("Дима","номер","почта")
+        };
 
-        public string PhoneNumber
+        public Contact SelectedContact
         {
-            get
-            {
-                return _contact.PhoneNumber;
-            }
-            set
-            {
-                SetProperty(_contact.PhoneNumber, value, _contact, (u, n) => u.PhoneNumber = n);
-            }
-        }
-
-        public string Email
-        {
-            get
-            {
-                return _contact.Email;
-            }
-            set
-            {
-                SetProperty(_contact.Email, value, _contact, (u, n) => u.Email = n);
-            }
+            get { return _selectedContact ?? new Contact(); }
+            set { SetProperty(ref _selectedContact, value); }
         }
 
         public MainVM()
         {
-            _contact = new Contact();
-            _contactSerializer = new ContactSerializer();
-
-            SaveCommand = new RelayCommand(() => _contactSerializer.SaveContact(_contact));
-            LoadCommand = new RelayCommand(() =>
-                                            {
-                                                Contact contact = _contactSerializer.LoadContact();
-                                                
-                                                _contact = contact;
-                                                Name = contact.Name;
-                                                PhoneNumber = contact.PhoneNumber;
-                                                Email = contact.Email;
-                                            });
         }
     }
 }

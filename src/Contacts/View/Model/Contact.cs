@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace View.Model
 {
-    public class Contact
+    public class Contact : ObservableObject
     {
         private string _name;
 
@@ -17,19 +18,19 @@ namespace View.Model
         public string Name 
         { 
             get { return _name; } 
-            set { _name = value; } 
+            set { SetProperty(ref _name, value); } 
         }
 
         public string PhoneNumber 
         { 
             get { return _phoneNumber; } 
-            set { _phoneNumber = value; } 
+            set { SetProperty(ref _phoneNumber, value); } 
         } 
 
         public string Email 
         { 
             get { return _email; } 
-            set { _email = value; } 
+            set { SetProperty(ref _email, value); } 
         }
 
         public Contact(string name, string phoneNumber, string email)
