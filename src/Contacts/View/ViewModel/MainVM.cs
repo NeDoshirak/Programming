@@ -65,6 +65,8 @@ namespace View.ViewModel
             LoadCommand = new RelayCommand(() =>
                                             {
                                                 Contact contact = _contactSerializer.LoadContact();
+                                                
+                                                _contact = contact;
                                                 Name = contact.Name;
                                                 PhoneNumber = contact.PhoneNumber;
                                                 Email = contact.Email;
