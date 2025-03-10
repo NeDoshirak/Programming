@@ -8,14 +8,23 @@ using System.Threading.Tasks;
 
 namespace View.Model.Services
 {
+    /// <summary>
+    /// Класс для сериализации и десериализации контактов в формате JSON.
+    /// </summary>
     public class ContactSerializer
     {
+        /// <summary>
+        /// Путь к файлу, в котором хранятся контакты.
+        /// </summary>
         private string _filePath;
 
+        /// <summary>
+        /// Конструктор класса ContactSerializer.
+        /// Инициализирует путь к файлу контактов и создает необходимые директории и файл, если они не существуют.
+        /// </summary>
         public ContactSerializer()
         {
-            string documentsPath = 
-                Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             string contactsDirectory = Path.Combine(documentsPath, "Contacts");
             _filePath = Path.Combine(contactsDirectory, "contacts.json");
 
@@ -30,12 +39,21 @@ namespace View.Model.Services
             }
         }
 
+        /// <summary>
+        /// Сохраняет контакт в файл в формате JSON.
+        /// </summary>
+        /// <param name="contact">Контакт, который необходимо сохранить.</param>
         public void SaveContact(Contact contact)
         {
             string json = JsonConvert.SerializeObject(contact, Formatting.Indented);
             File.WriteAllText(_filePath, json);
         }
 
+        /// <summary>
+        /// Загружает контакт из файла.
+        /// </summary>
+        /// <returns>Десериализованный объект Contact.</returns>
+        /// <exception cref="FileNotFoundException">Выбрасывается, если файл контактов не найден.</exception>
         public Contact LoadContact()
         {
             if (!File.Exists(_filePath))
@@ -44,7 +62,7 @@ namespace View.Model.Services
             }
 
             string json = File.ReadAllText(_filePath);
-            return JsonConvert.DeserializeObject<Contact>(json) ;
+            return JsonConvert.DeserializeObject<Contact>(json);
         }
     }
 
