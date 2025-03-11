@@ -51,13 +51,20 @@ namespace View.Model.Services
         /// <returns>Список контактов. Если файл не существует, возвращает пустую коллекцию.</returns>
         public ObservableCollection<Contact> LoadContacts()
         {
-            if (!File.Exists(_filePath))
+            try
+            {
+                if (!File.Exists(_filePath))
+                {
+                    return new ObservableCollection<Contact>();
+                }
+
+                string json = File.ReadAllText(_filePath);
+                return JsonConvert.DeserializeObject<ObservableCollection<Contact>>(json) ?? new ObservableCollection<Contact>();
+            }
+            catch (Exception ex)
             {
                 return new ObservableCollection<Contact>();
             }
-
-            string json = File.ReadAllText(_filePath);
-            return JsonConvert.DeserializeObject<ObservableCollection<Contact>>(json) ?? new ObservableCollection<Contact>();
         }
     }
 }
