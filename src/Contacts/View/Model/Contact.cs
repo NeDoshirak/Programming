@@ -6,21 +6,6 @@
     public class Contact
     {
         /// <summary>
-        /// Поле для хранения имени контакта.
-        /// </summary>
-        private string _name;
-
-        /// <summary>
-        /// Поле для хранения номера телефона контакта.
-        /// </summary>
-        private string _phoneNumber;
-
-        /// <summary>
-        /// Поле для хранения электронной почты контакта.
-        /// </summary>
-        private string _email;
-
-        /// <summary>
         /// Задает или возвращает имя контакта.
         /// </summary>
         public string Name { get; set; }
