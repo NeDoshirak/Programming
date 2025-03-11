@@ -20,7 +20,6 @@ namespace View
         public MainWindow()
         {
             InitializeComponent();
-            MainVM mainVM = new MainVM();
         }
     }
 }

@@ -6,49 +6,50 @@
         xmlns:local="clr-namespace:View"
         xmlns:ViewModel="clr-namespace:View.ViewModel" x:Class="View.MainWindow"
         mc:Ignorable="d"
-        Title="Contacts" Height="250" Width="400" Padding="15">
+        Title="Contacts" Height="270" Width="400" Padding="15">
     <Window.DataContext>
         <ViewModel:MainVM/>
     </Window.DataContext>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="37*"/>
-            <RowDefinition Height="197*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+    <StackPanel Orientation="Vertical" >
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="37*"/>
 
-        <GroupBox Header="Edit Contact" Grid.Column="0" Margin="3,3,3,3" Grid.RowSpan="2">
-            <StackPanel Margin="3">
-                <TextBlock Text="Name:"/>
-                <TextBox Text="{Binding Name}" Margin="3"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="200" />
+            </Grid.ColumnDefinitions>
 
-                <TextBlock Text="Phone Number:"/>
-                <TextBox Text="{Binding PhoneNumber}" Margin="3"/>
+            <GroupBox Header="Edit Contact" Grid.Column="0" Margin="15,15,3,3" Grid.RowSpan="2" Height="160.72">
+                <StackPanel Margin="3">
+                    <TextBlock Text="Name:"/>
+                    <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Margin="3"/>
 
-                <TextBlock Text="Email:"/>
-                <TextBox Text="{Binding Email}" Margin="3"/>
-            </StackPanel>
-        </GroupBox>
+                    <TextBlock Text="Phone Number:"/>
+                    <TextBox Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}" Margin="3"/>
 
-        <GroupBox Header="Read Contact" Grid.Column="1" Margin="3,3,3,3" Grid.RowSpan="2">
-            <StackPanel Margin="3">
-                <TextBlock><Bold><Run Text="Name: "/></Bold><Run Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/></TextBlock>
+                    <TextBlock Text="Email:"/>
+                    <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Margin="3"/>
+                </StackPanel>
+            </GroupBox>
 
-                <TextBlock><Bold><Run Text="Phone Number:"/></Bold><Run Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/></TextBlock>
+                <GroupBox Header="Read Contact" Grid.Column="1" Margin="3,15,15,3">
+                    <StackPanel Margin="3">
+                        <TextBlock><Bold><Run Text="Name: "/></Bold><Run Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/></TextBlock>
 
-                <TextBlock><Bold><Run Text="Email:"/></Bold><Run Text=" "/><InlineUIContainer> 
+                        <TextBlock><Bold><Run Text="Phone Number:"/></Bold><Run Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/></TextBlock>
+
+                    <TextBlock><Bold><Run Text="Email:"/></Bold><Run Text=" "/><InlineUIContainer> 
                     <TextBlock TextDecorations="Underline"><Run Text="{Binding Email, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/></TextBlock>
                     </InlineUIContainer></TextBlock>
-                <Grid Height="100"/>
-            </StackPanel>
-        </GroupBox>
+                </StackPanel>
+                </GroupBox>
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,3,3,3" Grid.Column="1" Grid.RowSpan="2">
+        </Grid>
+        <StackPanel Margin="15,3,15,15" Grid.Column="1" Grid.RowSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Content="Save" Command="{Binding SaveCommand}" Width="75" Height="25" Margin="3"/>
             <Button Content="Load" Command="{Binding LoadCommand}" Width="75" Height="25" Margin="3"/>
         </StackPanel>
-    </Grid>
+    </StackPanel>
 </Window>

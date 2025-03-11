@@ -99,7 +99,6 @@ namespace View.ViewModel
             {
                 Contact contact = _contactSerializer.LoadContact();
 
-                _contact = contact;
                 Name = contact.Name;
                 PhoneNumber = contact.PhoneNumber;
                 Email = contact.Email;
