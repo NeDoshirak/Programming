@@ -23,7 +23,10 @@
 
         <!-- Left Column -->
         <StackPanel Grid.Column="0" Background="#f8f8f8" Margin="15,15,3,15" >
-            <TextBox Margin="3" />
+            <StackPanel Orientation ="Horizontal">
+                <TextBlock Text="Find:"></TextBlock>
+                <TextBox Margin="3" Width="183" />
+            </StackPanel>
             <ListBox Margin="3" Height="300" VerticalAlignment="Bottom" ItemsSource="{Binding Contacts}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedContact, Mode=TwoWay}">
                 <!-- Другие элементы -->
             </ListBox>
