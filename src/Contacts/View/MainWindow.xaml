@@ -18,7 +18,7 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
             <GroupBox Header="Edit Contact" Grid.Column="0" Margin="15,15,3,3" Grid.RowSpan="2" Height="160.72">
@@ -47,9 +47,9 @@
                 </GroupBox>
 
         </Grid>
-        <StackPanel Margin="15,3,15,15" Grid.Column="1" Grid.RowSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
+        <StackPanel Margin="15,3,15,15" Grid.Column="1" Grid.RowSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" RenderTransformOrigin="0.506,0.462">
             <Button Content="Save" Command="{Binding SaveCommand}" Width="75" Height="25" Margin="3"/>
-            <Button Content="Load" Command="{Binding LoadCommand}" Width="75" Height="25" Margin="3"/>
+            <Button Content="Load" Command="{Binding LoadCommand}" Width="75" Height="25" Margin="3" VerticalAlignment="Bottom"/>
         </StackPanel>
     </StackPanel>
 </Window>
