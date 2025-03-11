@@ -51,13 +51,21 @@ namespace View.Model.Services
         /// <exception cref="FileNotFoundException">Выбрасывается, если файл контактов не найден.</exception>
         public Contact LoadContact()
         {
-            if (!File.Exists(_filePath))
+            try
             {
-                throw new FileNotFoundException("Файл контактов не найден.");
-            }
+                if (!File.Exists(_filePath))
+                {
+                    throw new FileNotFoundException("Файл контактов не найден.");
+                }
 
-            string json = File.ReadAllText(_filePath);
-            return JsonConvert.DeserializeObject<Contact>(json);
+                string json = File.ReadAllText(_filePath);
+
+                return JsonConvert.DeserializeObject<Contact>(json);
+            }
+            catch (Exception ex)
+            {
+                return new Contact();
+            }
         }
     }
 
