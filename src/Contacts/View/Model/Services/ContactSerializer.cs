@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -8,15 +9,20 @@ using System.Threading.Tasks;
 
 namespace View.Model.Services
 {
-    using System;
-    using System.Collections.ObjectModel;
-    using System.IO;
-    using Newtonsoft.Json;
-
+    /// <summary>
+    /// Класс для сериализации и десериализации списка контактов в формате JSON.
+    /// </summary>
     public class ContactSerializer
     {
+        /// <summary>
+        /// Путь к файлу, в котором хранятся контакты.
+        /// </summary>
         private readonly string _filePath;
 
+        /// <summary>
+        /// Инициализирует новый экземпляр класса ContactSerializer.
+        /// Создает директорию для хранения контактов, если она не существует.
+        /// </summary>
         public ContactSerializer()
         {
             string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -29,12 +35,20 @@ namespace View.Model.Services
             }
         }
 
+        /// <summary>
+        /// Сохраняет список контактов в файл в формате JSON.
+        /// </summary>
+        /// <param name="contacts">Список контактов для сохранения.</param>
         public void SaveContacts(ObservableCollection<Contact> contacts)
         {
             string json = JsonConvert.SerializeObject(contacts, Formatting.Indented);
             File.WriteAllText(_filePath, json);
         }
 
+        /// <summary>
+        /// Загружает список контактов из файла.
+        /// </summary>
+        /// <returns>Список контактов. Если файл не существует, возвращает пустую коллекцию.</returns>
         public ObservableCollection<Contact> LoadContacts()
         {
             if (!File.Exists(_filePath))

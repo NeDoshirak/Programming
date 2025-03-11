@@ -7,6 +7,9 @@
         xmlns:ViewModel="clr-namespace:View.ViewModel" x:Class="View.MainWindow"
         mc:Ignorable="d"
         Title="Contacts" Height="450" Width="600" MinWidth="600" MinHeight="450">
+    <Window.Resources>
+        <ViewModel:BoolToVisibilityConverterVM x:Key="BoolToVisibilityConverterVM"/>
+    </Window.Resources>
     <Window.DataContext>
         <ViewModel:MainVM/>
     </Window.DataContext>
@@ -25,9 +28,9 @@
                 <!-- Другие элементы -->
             </ListBox>
             <StackPanel Orientation="Horizontal" Margin="3" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Button Content="Add" Height="25" Width="57" Margin="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-                <Button Content="Edit" Height="25" Width="57" Margin="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-                <Button Content="Remove" Height="25" Width="57" Margin="3" RenderTransformOrigin="2.28,0.723" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+                <Button Content="Add" Height="25" Width="57" Margin="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Command="{Binding AddCommand}"/>
+                <Button Content="Edit" Height="25" Width="57" Margin="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Command="{Binding EditCommand}" IsEnabled="{Binding CanEdit}"/>
+                <Button Content="Remove" Height="25" Width="57" Margin="3" RenderTransformOrigin="2.28,0.723" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Command="{Binding RemoveCommand}" IsEnabled="{Binding CanRemove}"/>
             </StackPanel>
         </StackPanel>
 
@@ -44,14 +47,14 @@
                 <Image Width="100" Height="100" Margin="3" Grid.Column="0" />
                 <StackPanel Grid.Column="1" Margin="3">
                     <TextBlock Text="Name:" />
-                    <TextBox Margin="3" Text="{Binding SelectedContact.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                    <TextBox Margin="3" Text="{Binding SelectedContact.Name, Mode=TwoWay}" IsEnabled="{Binding IsEditing}"/>
                     <TextBlock Text="Phone Number:" />
-                    <TextBox Margin="3" Text="{Binding SelectedContact.PhoneNumber, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox Margin="3" Text="{Binding SelectedContact.PhoneNumber, Mode=TwoWay}" IsEnabled="{Binding IsEditing}"/>
                     <TextBlock Text="Email:" />
-                    <TextBox  Margin="3" Text="{Binding SelectedContact.Email, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox  Margin="3" Text="{Binding SelectedContact.Email, Mode=TwoWay}" IsEnabled="{Binding IsEditing}"/>
                 </StackPanel>
             </Grid>
-            <Button Content="Apply" Width="75" Height="25" Margin="3" VerticalAlignment="Top" />
+            <Button Content="Apply" Width="75" Height="25" Margin="3" VerticalAlignment="Top" Command="{Binding ApplyCommand}" Visibility="{Binding CanApply, Converter={StaticResource BoolToVisibilityConverterVM}}" IsEnabled="True"/>
         </StackPanel>
     </Grid>
 </Window>

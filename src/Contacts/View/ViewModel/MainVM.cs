@@ -15,25 +15,181 @@ using View.Model.Services;
 
 namespace View.ViewModel
 {
+    /// <summary>
+    /// Основная ViewModel для управления списком контактов.
+    /// </summary>
     public class MainVM : ObservableObject
     {
+        /// <summary>
+        /// Сериализатор для работы с контактами.
+        /// </summary>
+        private readonly ContactSerializer _contactSerializer = new();
+
+        /// <summary>
+        /// Выбранный контакт.
+        /// </summary>
         private Contact _selectedContact;
 
-        public ObservableCollection<Contact> Contacts { get; set; } = new ObservableCollection<Contact>()
-        {
-            new Contact("Егор","номер","почта"),
-            new Contact("Ваня","номер","почта"),
-            new Contact("Дима","номер","почта")
-        };
+        /// <summary>
+        /// Флаг, указывающий, находится ли выбранный контакт в режиме редактирования.
+        /// </summary>
+        private bool _isEditing;
 
+        /// <summary>
+        /// Задает или возвращает выбранный контакт.
+        /// </summary>
         public Contact SelectedContact
         {
-            get { return _selectedContact ?? new Contact(); }
-            set { SetProperty(ref _selectedContact, value); }
+            get => _selectedContact;
+            set
+            {
+                if (SetProperty(ref _selectedContact, value))
+                {
+                    IsEditing = false; // Отключаем редактирование при выборе нового контакта
+                    OnPropertyChanged(nameof(CanEdit));
+                    OnPropertyChanged(nameof(CanRemove));
+                    ((RelayCommand)EditCommand).NotifyCanExecuteChanged();
+                    ((RelayCommand)RemoveCommand).NotifyCanExecuteChanged();
+                }
+            }
         }
 
+        /// <summary>
+        /// Задает или возвращает флаг, указывающий, находится ли выбранный контакт в режиме редактирования.
+        /// </summary>
+        public bool IsEditing
+        {
+            get => _isEditing;
+            set
+            {
+                if (SetProperty(ref _isEditing, value))
+                {
+                    OnPropertyChanged(nameof(CanApply));
+                    ((RelayCommand)ApplyCommand).NotifyCanExecuteChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Возвращает коллекцию контактов.
+        /// </summary>
+        public ObservableCollection<Contact> Contacts { get; } = new();
+
+        /// <summary>
+        /// Возвращает значение, указывающее, можно ли редактировать выбранный контакт.
+        /// </summary>
+        public bool CanEdit => SelectedContact != null && !IsEditing;
+
+        /// <summary>
+        /// Возвращает значение, указывающее, можно ли удалить выбранный контакт.
+        /// </summary>
+        public bool CanRemove => SelectedContact != null;
+
+        /// <summary>
+        /// Возвращает значение, указывающее, можно ли применить изменения.
+        /// </summary>
+        public bool CanApply => IsEditing;
+
+        /// <summary>
+        /// Команда для добавления нового контакта.
+        /// </summary>
+        public ICommand AddCommand { get; }
+
+        /// <summary>
+        /// Команда для редактирования выбранного контакта.
+        /// </summary>
+        public ICommand EditCommand { get; }
+
+        /// <summary>
+        /// Команда для удаления выбранного контакта.
+        /// </summary>
+        public ICommand RemoveCommand { get; }
+
+        /// <summary>
+        /// Команда для применения изменений.
+        /// </summary>
+        public ICommand ApplyCommand { get; }
+
+        /// <summary>
+        /// Инициализирует новый экземпляр класса MainVM.
+        /// </summary>
         public MainVM()
         {
+            LoadContacts();
+
+            AddCommand = new RelayCommand(AddContact);
+            EditCommand = new RelayCommand(EditContact, () => CanEdit);
+            RemoveCommand = new RelayCommand(RemoveContact, () => CanRemove);
+            ApplyCommand = new RelayCommand(ApplyChanges, () => CanApply);
+        }
+
+        /// <summary>
+        /// Добавляет новый контакт в коллекцию.
+        /// </summary>
+        private void AddContact()
+        {
+            var newContact = new Contact();
+            Contacts.Add(newContact);
+            SelectedContact = newContact;
+            IsEditing = true;
+        }
+
+        /// <summary>
+        /// Включает режим редактирования для выбранного контакта.
+        /// </summary>
+        private void EditContact()
+        {
+            if (SelectedContact != null)
+            {
+                IsEditing = true;
+            }
+        }
+
+        /// <summary>
+        /// Применяет изменения и сохраняет контакты.
+        /// </summary>
+        private void ApplyChanges()
+        {
+            IsEditing = false;
+            SaveContacts();
+        }
+
+        /// <summary>
+        /// Удаляет выбранный контакт из коллекции.
+        /// </summary>
+        private void RemoveContact()
+        {
+            if (SelectedContact == null) return;
+
+            int index = Contacts.IndexOf(SelectedContact);
+            Contacts.Remove(SelectedContact);
+
+            SelectedContact = Contacts.Count > 0
+                ? (index < Contacts.Count ? Contacts[index] : Contacts[^1])
+                : null;
+
+            SaveContacts();
+        }
+
+        /// <summary>
+        /// Сохраняет список контактов в файл.
+        /// </summary>
+        private void SaveContacts()
+        {
+            _contactSerializer.SaveContacts(Contacts);
+        }
+
+        /// <summary>
+        /// Загружает список контактов из файла.
+        /// </summary>
+        private void LoadContacts()
+        {
+            var loadedContacts = _contactSerializer.LoadContacts();
+            foreach (var contact in loadedContacts)
+            {
+                Contacts.Add(contact);
+            }
         }
     }
+
 }
