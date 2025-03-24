@@ -8,8 +8,10 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Xml.Linq;
 using View.Model;
 using View.Model.Services;
 

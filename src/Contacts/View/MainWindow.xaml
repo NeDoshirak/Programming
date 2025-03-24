@@ -4,11 +4,27 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:View"
-        xmlns:ViewModel="clr-namespace:View.ViewModel" x:Class="View.MainWindow"
+        xmlns:ViewModel="clr-namespace:View.ViewModel" xmlns:controls="clr-namespace:View.Controls"
+        x:Class="View.MainWindow"
         mc:Ignorable="d"
         Title="Contacts" Height="450" Width="600" MinWidth="600" MinHeight="450">
     <Window.Resources>
         <ViewModel:BoolToVisibilityConverterVM x:Key="BoolToVisibilityConverterVM"/>
+        <DataTemplate x:Key="contactTemplate">
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Image Source="user-icon.ico" Width="40" Height="40" Margin="5"/>
+
+                <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                    <TextBlock Text="{Binding Name}" FontSize="14" FontWeight="Bold" Foreground="Black"/>
+                    <TextBlock Text="{Binding PhoneNumber}" FontSize="12" Foreground="Gray"/>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
     </Window.Resources>
     <Window.DataContext>
         <ViewModel:MainVM/>
@@ -22,14 +38,12 @@
         </Grid.ColumnDefinitions>
 
         <!-- Left Column -->
-        <StackPanel Grid.Column="0" Background="#f8f8f8" Margin="15,15,3,15" >
-            <StackPanel Orientation ="Horizontal">
+        <StackPanel Grid.Column="0" Background="#f8f8f8" Margin="15,15,3,15">
+            <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Find:"></TextBlock>
                 <TextBox Margin="3" Width="183" />
             </StackPanel>
-            <ListBox Margin="3" Height="300" VerticalAlignment="Bottom" ItemsSource="{Binding Contacts}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedContact, Mode=TwoWay}">
-                <!-- Другие элементы -->
-            </ListBox>
+            <ListBox Margin="3" Height="300" VerticalAlignment="Bottom" ItemsSource="{Binding Contacts}" SelectedItem="{Binding SelectedContact, Mode=TwoWay}" ItemTemplate="{StaticResource contactTemplate}" />
             <StackPanel Orientation="Horizontal" Margin="3" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Button Content="Add" Height="25" Width="57" Margin="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Command="{Binding AddCommand}"/>
                 <Button Content="Edit" Height="25" Width="57" Margin="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Command="{Binding EditCommand}" IsEnabled="{Binding CanEdit}"/>
@@ -41,23 +55,16 @@
         <GridSplitter Grid.Column="1" Width="3" Background="White" HorizontalAlignment="Stretch" />
 
         <!-- Right Column -->
-        <StackPanel Grid.Column="2" Background="White" Margin="8">
-            <Grid Margin="3,15,15,3">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Image Width="100" Height="100" Margin="3" Grid.Column="0" />
-                <StackPanel Grid.Column="1" Margin="3">
-                    <TextBlock Text="Name:" />
-                    <TextBox Margin="3" Text="{Binding SelectedContact.Name, Mode=TwoWay}" IsEnabled="{Binding IsEditing}"/>
-                    <TextBlock Text="Phone Number:" />
-                    <TextBox Margin="3" Text="{Binding SelectedContact.PhoneNumber, Mode=TwoWay}" IsEnabled="{Binding IsEditing}"/>
-                    <TextBlock Text="Email:" />
-                    <TextBox  Margin="3" Text="{Binding SelectedContact.Email, Mode=TwoWay}" IsEnabled="{Binding IsEditing}"/>
-                </StackPanel>
-            </Grid>
-            <Button Content="Apply" Width="75" Height="25" Margin="3" VerticalAlignment="Top" Command="{Binding ApplyCommand}" Visibility="{Binding CanApply, Converter={StaticResource BoolToVisibilityConverterVM}}" IsEnabled="True"/>
+        <StackPanel Grid.Column="2" Margin="7,3,2,0" VerticalAlignment="Top">
+            <!-- Ваш элемент управления -->
+            <controls:ContactControl Margin="7,3,2,0" VerticalAlignment="Top" DataContext="{Binding SelectedContact}" />
+
+            <!-- Кнопка Apply, закрепленная после элемента управления -->
+            <Button Content="Apply" Width="75" Height="25" Margin="3" VerticalAlignment="Top" 
+                    Command="{Binding ApplyCommand}" 
+                    Visibility="{Binding CanApply, Converter={StaticResource BoolToVisibilityConverterVM}}" 
+                    IsEnabled="True"/>
         </StackPanel>
     </Grid>
 </Window>
+

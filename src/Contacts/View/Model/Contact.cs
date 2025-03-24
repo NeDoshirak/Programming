@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +12,7 @@ namespace View.Model
     /// <summary>
     /// Класс, представляющий контакт с именем, номером телефона и электронной почтой.
     /// </summary>
-    public class Contact : ObservableObject, ICloneable
+    public class Contact : ObservableObject, ICloneable 
     {
         /// <summary>
         /// Поле для хранения имени контакта.
