@@ -10,7 +10,7 @@ namespace View.Model
     /// <summary>
     /// Класс, представляющий контакт с именем, номером телефона и электронной почтой.
     /// </summary>
-    public class Contact : ObservableObject
+    public class Contact : ObservableObject, ICloneable
     {
         /// <summary>
         /// Поле для хранения имени контакта.
@@ -71,5 +71,14 @@ namespace View.Model
         /// Инициализирует новый экземпляр класса Contact без параметров.
         /// </summary>
         public Contact() { }
+
+        /// <summary>
+        /// Создает копию текущего контакта.
+        /// </summary>
+        /// <returns> Копия объекта Contact.</returns>
+        public object Clone()
+        {
+            return new Contact(Name, PhoneNumber, Email);
+        }
     }
 }

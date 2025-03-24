@@ -36,6 +36,11 @@ namespace View.ViewModel
         private bool _isEditing;
 
         /// <summary>
+        /// Индекс редактируемого контакта. Равен -1 при добавлении контакта. 
+        /// </summary>
+        private int _indexContact;
+
+        /// <summary>
         /// Задает или возвращает выбранный контакт.
         /// </summary>
         public Contact SelectedContact
@@ -129,9 +134,10 @@ namespace View.ViewModel
         private void AddContact()
         {
             var newContact = new Contact();
-            Contacts.Add(newContact);
+            SelectedContact = null;
             SelectedContact = newContact;
             IsEditing = true;
+            _indexContact = -1;
         }
 
         /// <summary>
@@ -141,7 +147,9 @@ namespace View.ViewModel
         {
             if (SelectedContact != null)
             {
-                IsEditing = true;
+                _indexContact = Contacts.IndexOf(SelectedContact);
+                SelectedContact = (Contact)Contacts[_indexContact].Clone();
+                                IsEditing = true;
             }
         }
 
@@ -150,6 +158,18 @@ namespace View.ViewModel
         /// </summary>
         private void ApplyChanges()
         {
+            if (SelectedContact != null && !Contacts.Contains(SelectedContact) && _indexContact == -1)
+            {
+
+                Contacts.Add(SelectedContact);
+
+            }
+
+            if (SelectedContact != null && _indexContact != -1)
+            {
+                Contacts[_indexContact] = SelectedContact;
+            }
+
             IsEditing = false;
             SaveContacts();
         }
