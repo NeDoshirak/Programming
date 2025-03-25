@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace View.Model
@@ -12,7 +13,7 @@ namespace View.Model
     /// <summary>
     /// Класс, представляющий контакт с именем, номером телефона и электронной почтой.
     /// </summary>
-    public class Contact : ObservableObject, ICloneable 
+    public class Contact : ObservableObject, ICloneable, IDataErrorInfo
     {
         /// <summary>
         /// Поле для хранения имени контакта.
@@ -55,6 +56,44 @@ namespace View.Model
             get { return _email; }
             set { SetProperty(ref _email, value); }
         }
+
+        // IDataErrorInfo implementation
+        public string this[string columnName]
+        {
+            get
+            {
+                switch (columnName)
+                {
+                    case nameof(Name):
+                        if (string.IsNullOrWhiteSpace(Name))
+                            return "Name is required.";
+                        if (Name.Length > 100)
+                            return "Name cannot be longer than 100 characters.";
+                        break;
+
+                    case nameof(PhoneNumber):
+                        if (string.IsNullOrWhiteSpace(PhoneNumber))
+                            return "Phone number is required.";
+                        if (PhoneNumber.Length > 100)
+                            return "Phone number cannot be longer than 100 characters.";
+                        if (!Regex.IsMatch(PhoneNumber, @"^[\d\+\-\(\)\s]+$"))
+                            return "Phone number can only contain digits, +, -, (, ) and spaces.";
+                        break;
+
+                    case nameof(Email):
+                        if (string.IsNullOrWhiteSpace(Email))
+                            return "Email is required.";
+                        if (Email.Length > 100)
+                            return "Email cannot be longer than 100 characters.";
+                        if (!Regex.IsMatch(Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+                            return "Invalid email format.";
+                        break;
+                }
+                return null;
+            }
+        }
+
+        public string Error => null;
 
         /// <summary>
         /// Инициализирует новый экземпляр класса Contact с указанными именем, номером телефона и электронной почтой.

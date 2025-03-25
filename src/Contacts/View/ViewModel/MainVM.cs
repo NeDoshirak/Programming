@@ -50,13 +50,25 @@ namespace View.ViewModel
             get => _selectedContact;
             set
             {
+                if (_selectedContact != null)
+                {
+                    _selectedContact.PropertyChanged -= OnContactPropertyChanged;
+                }
+
                 if (SetProperty(ref _selectedContact, value))
                 {
-                    IsEditing = false; // Отключаем редактирование при выборе нового контакта
+                    IsEditing = false;
                     OnPropertyChanged(nameof(CanEdit));
                     OnPropertyChanged(nameof(CanRemove));
+                    OnPropertyChanged(nameof(IsContactValid));
                     ((RelayCommand)EditCommand).NotifyCanExecuteChanged();
                     ((RelayCommand)RemoveCommand).NotifyCanExecuteChanged();
+                    ((RelayCommand)ApplyCommand).NotifyCanExecuteChanged();
+                }
+
+                if (_selectedContact != null)
+                {
+                    _selectedContact.PropertyChanged += OnContactPropertyChanged;
                 }
             }
         }
@@ -72,6 +84,7 @@ namespace View.ViewModel
                 if (SetProperty(ref _isEditing, value))
                 {
                     OnPropertyChanged(nameof(CanApply));
+                    OnPropertyChanged(nameof(IsContactValid));
                     ((RelayCommand)ApplyCommand).NotifyCanExecuteChanged();
                 }
             }
@@ -127,7 +140,7 @@ namespace View.ViewModel
             AddCommand = new RelayCommand(AddContact);
             EditCommand = new RelayCommand(EditContact, () => CanEdit);
             RemoveCommand = new RelayCommand(RemoveContact, () => CanRemove);
-            ApplyCommand = new RelayCommand(ApplyChanges, () => CanApply);
+            ApplyCommand = new RelayCommand(ApplyChanges, () => CanApply && IsContactValid);
         }
 
         /// <summary>
@@ -151,7 +164,7 @@ namespace View.ViewModel
             {
                 _indexContact = Contacts.IndexOf(SelectedContact);
                 SelectedContact = (Contact)Contacts[_indexContact].Clone();
-                                IsEditing = true;
+                IsEditing = true;
             }
         }
 
@@ -172,6 +185,8 @@ namespace View.ViewModel
                 Contacts[_indexContact] = SelectedContact;
             }
 
+            OnPropertyChanged(nameof(IsContactValid)); 
+            ((RelayCommand)ApplyCommand).NotifyCanExecuteChanged(); 
             IsEditing = false;
             SaveContacts();
         }
@@ -212,6 +227,30 @@ namespace View.ViewModel
                 Contacts.Add(contact);
             }
         }
-    }
 
+        private void OnContactPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Contact.Name) ||
+                e.PropertyName == nameof(Contact.PhoneNumber) ||
+                e.PropertyName == nameof(Contact.Email))
+            {
+                OnPropertyChanged(nameof(IsContactValid));
+                ((RelayCommand)ApplyCommand).NotifyCanExecuteChanged();
+            }
+        }
+
+        public bool IsContactValid
+        {
+            get
+            {
+                if (SelectedContact != null)
+                {
+                    return string.IsNullOrEmpty(SelectedContact[nameof(Contact.Name)]) &&
+                           string.IsNullOrEmpty(SelectedContact[nameof(Contact.PhoneNumber)]) &&
+                           string.IsNullOrEmpty(SelectedContact[nameof(Contact.Email)]);
+                }
+                return false;
+            }
+        }
+    }
 }
