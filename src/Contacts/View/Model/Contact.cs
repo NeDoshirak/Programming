@@ -57,7 +57,12 @@ namespace View.Model
             set { SetProperty(ref _email, value); }
         }
 
-        // IDataErrorInfo implementation
+        /// <summary>
+        /// Индексатор для валидации свойств объекта (реализация IDataErrorInfo).
+        /// Выполняет проверки для указанного свойства и возвращает сообщение об ошибке или null, если ошибок нет.
+        /// </summary>
+        /// <param name="columnName">Имя проверяемого свойства</param>
+        /// <returns>Сообщение об ошибке или null, если свойство валидно</returns>
         public string this[string columnName]
         {
             get
@@ -67,6 +72,7 @@ namespace View.Model
                     case nameof(Name):
                         if (string.IsNullOrWhiteSpace(Name))
                             return "Name is required.";
+
                         if (Name.Length > 100)
                             return "Name cannot be longer than 100 characters.";
                         break;
@@ -74,8 +80,10 @@ namespace View.Model
                     case nameof(PhoneNumber):
                         if (string.IsNullOrWhiteSpace(PhoneNumber))
                             return "Phone number is required.";
+
                         if (PhoneNumber.Length > 100)
                             return "Phone number cannot be longer than 100 characters.";
+
                         if (!Regex.IsMatch(PhoneNumber, @"^[\d\+\-\(\)\s]+$"))
                             return "Phone number can only contain digits, +, -, (, ) and spaces.";
                         break;
@@ -83,16 +91,23 @@ namespace View.Model
                     case nameof(Email):
                         if (string.IsNullOrWhiteSpace(Email))
                             return "Email is required.";
+
                         if (Email.Length > 100)
                             return "Email cannot be longer than 100 characters.";
+
                         if (!Regex.IsMatch(Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
                             return "Invalid email format.";
                         break;
                 }
+
                 return null;
             }
         }
 
+        /// <summary>
+        /// Реализация свойства Error интерфейса IDataErrorInfo.
+        /// Всегда возвращает null, что означает отсутствие ошибок на уровне объекта.
+        /// </summary>
         public string Error => null;
 
         /// <summary>

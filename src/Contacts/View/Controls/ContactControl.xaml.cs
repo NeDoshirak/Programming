@@ -26,17 +26,18 @@ namespace View.Controls
             InitializeComponent();
         }
 
-        private void PhoneNumberTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            e.Handled = !IsTextAllowed(e.Text);
-        }
-
-        // Обработчик для запрета вставки некорректных символов
+        /// <summary>
+        /// Обработчик события вставки текста в текстовое поле номера телефона.
+        /// Проверяет допустимость вставляемого текста и отменяет вставку при необходимости.
+        /// </summary>
+        /// <param name="sender">Источник события </param>
+        /// <param name="e">Аргументы события вставки</param>
         private void PhoneNumberTextBox_Pasting(object sender, DataObjectPastingEventArgs e)
         {
             if (e.DataObject.GetDataPresent(DataFormats.Text))
             {
                 string text = (string)e.DataObject.GetData(DataFormats.Text);
+
                 if (!IsTextAllowed(text))
                 {
                     e.CancelCommand();
@@ -48,10 +49,16 @@ namespace View.Controls
             }
         }
 
-        // Проверка допустимых символов
+        /// <summary>
+        /// Проверяет, содержит ли текст только допустимые для номера телефона символы.
+        /// </summary>
+        /// <param name="text">Проверяемый текст</param>
+        /// <returns>
+        /// true - если текст содержит только цифры, '+', '-', '(', ')' и пробелы;
+        /// false - если найдены другие символы
+        /// </returns>
         private bool IsTextAllowed(string text)
         {
             return Regex.IsMatch(text, @"^[\d\+\-\(\)\s]+$");
         }
     }
-}
