@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35219.272
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "View", "View\View.csproj", "{385600DB-E2BB-453F-ABC8-F939E00662DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "View", "View\View.csproj", "{385600DB-E2BB-453F-ABC8-F939E00662DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{0BC02691-BB92-4250-942E-6824C2D7F5C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModel", "ViewModel\ViewModel.csproj", "{620EF56F-1801-4295-9818-B636A2A8F0BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{385600DB-E2BB-453F-ABC8-F939E00662DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{385600DB-E2BB-453F-ABC8-F939E00662DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{385600DB-E2BB-453F-ABC8-F939E00662DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BC02691-BB92-4250-942E-6824C2D7F5C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BC02691-BB92-4250-942E-6824C2D7F5C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BC02691-BB92-4250-942E-6824C2D7F5C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BC02691-BB92-4250-942E-6824C2D7F5C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{620EF56F-1801-4295-9818-B636A2A8F0BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{620EF56F-1801-4295-9818-B636A2A8F0BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{620EF56F-1801-4295-9818-B636A2A8F0BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{620EF56F-1801-4295-9818-B636A2A8F0BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

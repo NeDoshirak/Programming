@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Data;
 using System.Windows;
+using System.Windows.Data;
 
-namespace View.ViewModel
+namespace View
 {
     /// <summary>
     /// Конвертер, преобразующий значение типа <see cref="bool"/> в значение перечисления <see cref="Visibility"/> и обратно.
     /// </summary>
-    public class BoolToVisibilityConverterVM : IValueConverter
+    public class BoolToVisibilityConverter : IValueConverter
     {
         /// <summary>
         /// Преобразует значение типа <see cref="bool"/> в значение перечисления <see cref="Visibility"/>.

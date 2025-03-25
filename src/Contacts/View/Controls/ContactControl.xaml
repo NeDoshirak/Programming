@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:View.Controls" xmlns:ViewModel="clr-namespace:View.ViewModel"
+             xmlns:local="clr-namespace:View.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -36,8 +36,8 @@
                     <TextBox Margin="3" Text="{Binding Name, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
                     <TextBlock Text="Phone Number:" />
                     <TextBox Margin="3" Text="{Binding PhoneNumber, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                             PreviewTextInput="PhoneNumberTextBox_PreviewTextInput"
-                             DataObject.Pasting="PhoneNumberTextBox_Pasting"/>
+                             DataObject.Pasting="PhoneNumberTextBox_Pasting"
+                             PreviewTextInput="PhoneNumber_PreviewTextInput"/>
                     <TextBlock Text="Email:" />
                     <TextBox  Margin="3" Text="{Binding Email, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>

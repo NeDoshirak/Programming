@@ -3,13 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:View"
-        xmlns:ViewModel="clr-namespace:View.ViewModel" xmlns:controls="clr-namespace:View.Controls"
+        xmlns:ViewModel="clr-namespace:ViewModel;assembly=ViewModel"
+        xmlns:controls="clr-namespace:View.Controls"
+        xmlns:conv="clr-namespace:View"
         x:Class="View.MainWindow"
-        mc:Ignorable="d"
         Title="Contacts" Height="450" Width="600" MinWidth="600" MinHeight="450">
     <Window.Resources>
-        <ViewModel:BoolToVisibilityConverterVM x:Key="BoolToVisibilityConverterVM"/>
+        <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
         <DataTemplate x:Key="contactTemplate">
             <Grid Margin="5">
                 <Grid.ColumnDefinitions>
@@ -17,7 +17,7 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <Image Source="user-icon.ico" Width="40" Height="40" Margin="5"/>
+                <Image Source="/Resources/user-icon.ico" Width="40" Height="40" Margin="5"/>
 
                 <StackPanel Grid.Column="1" Margin="10,0,0,0">
                     <TextBlock Text="{Binding Name}" FontSize="14" FontWeight="Bold" Foreground="Black"/>
@@ -33,37 +33,33 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" MinWidth="150" />
             <ColumnDefinition Width="3" />
-            <!-- GridSplitter -->
             <ColumnDefinition Width="3*" MinWidth="250" />
         </Grid.ColumnDefinitions>
 
-        <!-- Left Column -->
         <StackPanel Grid.Column="0" Background="#f8f8f8" Margin="15,15,3,15">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Find:"></TextBlock>
                 <TextBox Margin="3" Width="183" />
             </StackPanel>
-            <ListBox Margin="3" Height="300" VerticalAlignment="Bottom" ItemsSource="{Binding Contacts}" SelectedItem="{Binding SelectedContact, Mode=TwoWay}" ItemTemplate="{StaticResource contactTemplate}" />
+            <ListBox Margin="3" Height="300" VerticalAlignment="Bottom" ItemsSource="{Binding Contacts}" 
+                     SelectedItem="{Binding SelectedContact, Mode=TwoWay}" 
+                     ItemTemplate="{StaticResource contactTemplate}" />
             <StackPanel Orientation="Horizontal" Margin="3" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Button Content="Add" Height="25" Width="57" Margin="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Command="{Binding AddCommand}"/>
-                <Button Content="Edit" Height="25" Width="57" Margin="3" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Command="{Binding EditCommand}" IsEnabled="{Binding CanEdit}"/>
-                <Button Content="Remove" Height="25" Width="57" Margin="3" RenderTransformOrigin="2.28,0.723" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Command="{Binding RemoveCommand}" IsEnabled="{Binding CanRemove}"/>
+                <Button Content="Add" Height="25" Width="57" Margin="3" Command="{Binding AddCommand}"/>
+                <Button Content="Edit" Height="25" Width="57" Margin="3" Command="{Binding EditCommand}" IsEnabled="{Binding CanEdit}"/>
+                <Button Content="Remove" Height="25" Width="57" Margin="3" Command="{Binding RemoveCommand}" IsEnabled="{Binding CanRemove}"/>
             </StackPanel>
         </StackPanel>
 
-        <!-- GridSplitter -->
         <GridSplitter Grid.Column="1" Width="3" Background="White" HorizontalAlignment="Stretch" />
 
-        <!-- Right Column -->
         <StackPanel Grid.Column="2" Margin="7,3,2,0" VerticalAlignment="Top" IsEnabled="{Binding IsEditing}">
-
             <controls:ContactControl Margin="7,3,2,0" VerticalAlignment="Top" DataContext="{Binding SelectedContact}"/>
 
-            <Button Content="Apply" Width="75" Height="25" Margin="3" VerticalAlignment="Top" 
+            <Button Content="Apply" Width="75" Height="25" Margin="3" 
                     Command="{Binding ApplyCommand}" 
-                    Visibility="{Binding CanApply, Converter={StaticResource BoolToVisibilityConverterVM}}" 
+                    Visibility="{Binding CanApply, Converter={StaticResource BoolToVisibilityConverter}}" 
                     IsEnabled="{Binding IsContactValid}"/>
         </StackPanel>
     </Grid>
 </Window>
-
