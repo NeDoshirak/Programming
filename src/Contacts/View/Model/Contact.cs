@@ -1,16 +1,20 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace View.Model
 {
     /// <summary>
     /// Класс, представляющий контакт.
     /// </summary>
-    public class Contact : ObservableObject, ICloneable
+    public class Contact : ObservableObject, ICloneable, IDataErrorInfo
     {
         /// <summary>
         /// Поле для хранения имени контакта.
@@ -26,6 +30,11 @@ namespace View.Model
         /// Поле для хранения электронной почты контакта.
         /// </summary>
         private string _email;
+
+        /// <summary>
+        /// Поле для хранения ошибок.
+        /// </summary>
+        private readonly Dictionary<string, string> _errors = new Dictionary<string, string>();
 
         /// <summary>
         /// Задает или возвращает имя контакта.
@@ -53,6 +62,64 @@ namespace View.Model
             get { return _email; }
             set { SetProperty(ref _email, value); }
         }
+
+        /// <summary>
+        /// Индексатор для валидации свойств объекта (реализация IDataErrorInfo).
+        /// Выполняет проверки для указанного свойства и возвращает сообщение об ошибке или null, если ошибок нет.
+        /// </summary>
+        /// <param name="columnName">Имя проверяемого свойства</param>
+        /// <returns>Сообщение об ошибке или null, если свойство валидно</returns>
+        public string this[string columnName] => _errors.TryGetValue(columnName, out var error) ? error : null;
+
+
+        private void ValidateProperty(string propertyName, string value)
+        {
+            string error = null;
+
+            switch (propertyName)
+            {
+                case nameof(Name):
+                    if (string.IsNullOrWhiteSpace(Name))
+                        error = "Name is required.";
+
+                    if (Name.Length > 100)
+                        error = "Name cannot be longer than 100 characters.";
+                    break;
+
+                case nameof(PhoneNumber):
+                    if (string.IsNullOrWhiteSpace(PhoneNumber))
+                        error = "Phone number is required.";
+
+                    if (PhoneNumber.Length > 100)
+                        error = "Phone number cannot be longer than 100 characters.";
+
+                    if (!Regex.IsMatch(PhoneNumber, @"^[\d\+\-\(\)\s]+$"))
+                        error = "Phone number can only contain digits, +, -, (, ) and spaces.";
+                    break;
+
+                case nameof(Email):
+                    if (string.IsNullOrWhiteSpace(Email))
+                        error = "Email is required.";
+
+                    if (Email.Length > 100)
+                        error    = "Email cannot be longer than 100 characters.";
+
+                    if (!Regex.IsMatch(Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+                        error = "Invalid email format.";
+                    break;
+            }
+
+            if (error != null)
+                _errors[propertyName] = error;
+            else
+                _errors.Remove(propertyName);
+        }
+
+        /// <summary>
+        /// Реализация свойства Error интерфейса IDataErrorInfo.
+        /// Всегда возвращает null, что означает отсутствие ошибок на уровне объекта.
+        /// </summary>
+        public string Error => string.Join("\n", _errors.Values);
 
         /// <summary>
         /// Инициализирует новый экземпляр класса Contact с указанными именем, номером телефона и электронной почтой.

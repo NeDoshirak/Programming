@@ -8,8 +8,10 @@ using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Xml.Linq;
 using View.Model;
 using View.Model.Services;
 
@@ -48,13 +50,25 @@ namespace View.ViewModel
             get => _selectedContact;
             set
             {
+                if (_selectedContact != null)
+                {
+                    _selectedContact.PropertyChanged -= OnContactPropertyChanged;
+                }
+
                 if (SetProperty(ref _selectedContact, value))
                 {
-                    IsEditing = false; // Отключаем редактирование при выборе нового контакта
+                    IsEditing = false;
                     OnPropertyChanged(nameof(CanEdit));
                     OnPropertyChanged(nameof(CanRemove));
+                    OnPropertyChanged(nameof(IsContactValid));
                     ((RelayCommand)EditCommand).NotifyCanExecuteChanged();
                     ((RelayCommand)RemoveCommand).NotifyCanExecuteChanged();
+                    ((RelayCommand)ApplyCommand).NotifyCanExecuteChanged();
+                }
+
+                if (_selectedContact != null)
+                {
+                    _selectedContact.PropertyChanged += OnContactPropertyChanged;
                 }
             }
         }
@@ -70,6 +84,7 @@ namespace View.ViewModel
                 if (SetProperty(ref _isEditing, value))
                 {
                     OnPropertyChanged(nameof(CanApply));
+                    OnPropertyChanged(nameof(IsContactValid));
                     ((RelayCommand)ApplyCommand).NotifyCanExecuteChanged();
                 }
             }
@@ -125,7 +140,7 @@ namespace View.ViewModel
             AddCommand = new RelayCommand(AddContact);
             EditCommand = new RelayCommand(EditContact, () => CanEdit);
             RemoveCommand = new RelayCommand(RemoveContact, () => CanRemove);
-            ApplyCommand = new RelayCommand(ApplyChanges, () => CanApply);
+            ApplyCommand = new RelayCommand(ApplyChanges, () => CanApply && IsContactValid);
         }
 
         /// <summary>
@@ -149,7 +164,7 @@ namespace View.ViewModel
             {
                 _indexContact = Contacts.IndexOf(SelectedContact);
                 SelectedContact = (Contact)Contacts[_indexContact].Clone();
-                                IsEditing = true;
+                IsEditing = true;
             }
         }
 
@@ -170,6 +185,8 @@ namespace View.ViewModel
                 Contacts[_indexContact] = SelectedContact;
             }
 
+            OnPropertyChanged(nameof(IsContactValid)); 
+            ((RelayCommand)ApplyCommand).NotifyCanExecuteChanged(); 
             IsEditing = false;
             SaveContacts();
         }
@@ -210,6 +227,43 @@ namespace View.ViewModel
                 Contacts.Add(contact);
             }
         }
-    }
 
+        /// <summary>
+        /// Обработчик изменения свойства контакта.
+        /// Проверяет корректность свойства и обновляет состояние команды применения изменений.
+        /// </summary>
+        /// <param name="sender">Объект, вызвавший событие (контакт)</param>
+        /// <param name="e">Аргументы события, содержащие имя измененного свойства</param>
+        private void OnContactPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            // Проверяем, было ли изменено одно из ключевых свойств контакта
+            if (e.PropertyName == nameof(Contact.Name) ||
+                e.PropertyName == nameof(Contact.PhoneNumber) ||
+                e.PropertyName == nameof(Contact.Email))
+            {
+                OnPropertyChanged(nameof(IsContactValid));
+
+                ((RelayCommand)ApplyCommand).NotifyCanExecuteChanged();
+            }
+        }
+
+        /// <summary>
+        /// Проверяет валидность текущего выбранного контакта.
+        /// Контакт считается валидным, если все обязательные поля (Имя, Телефон, Email) заполнены.
+        /// </summary>
+        public bool IsContactValid
+        {
+            get
+            { 
+                if (SelectedContact != null)
+                {
+                    return !string.IsNullOrEmpty(SelectedContact[nameof(Contact.Name)]) &&
+                           !string.IsNullOrEmpty(SelectedContact[nameof(Contact.PhoneNumber)]) &&
+                           !string.IsNullOrEmpty(SelectedContact[nameof(Contact.Email)]);
+                }
+
+                return false;
+            }
+        }
+    }
 }
