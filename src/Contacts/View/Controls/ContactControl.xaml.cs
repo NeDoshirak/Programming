@@ -62,3 +62,4 @@ namespace View.Controls
             return Regex.IsMatch(text, @"^[\d\+\-\(\)\s]+$");
         }
     }
+}
