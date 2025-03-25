@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using View.Model;
 
 namespace View.Controls
 {
@@ -46,6 +47,22 @@ namespace View.Controls
             else
             {
                 e.CancelCommand();
+            }
+        }
+
+        /// <summary>
+        /// Обрабатывает ввод текста в поле номера телефона.
+        /// Разрешает ввод только цифр, символов '+', '(', ')', '-' и пробелов.
+        /// </summary>
+        /// <param name="sender">Источник события.</param>
+        /// <param name="e">Аргументы события, содержащие введённый текст.</param>
+        private void PhoneNumber_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            var textBox = sender as TextBox;
+            var newText = textBox.Text.Insert(textBox.CaretIndex, e.Text);
+            if (!Contact.PhoneNumberMask.IsMatch(newText))
+            {
+                e.Handled = true;
             }
         }
 

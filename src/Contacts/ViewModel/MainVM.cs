@@ -15,7 +15,7 @@ using System.Xml.Linq;
 using View.Model;
 using View.Model.Services;
 
-namespace View.ViewModel
+namespace ViewModel
 {
     /// <summary>
     /// Основная ViewModel для управления списком контактов.
@@ -257,9 +257,9 @@ namespace View.ViewModel
             { 
                 if (SelectedContact != null)
                 {
-                    return !string.IsNullOrEmpty(SelectedContact[nameof(Contact.Name)]) &&
-                           !string.IsNullOrEmpty(SelectedContact[nameof(Contact.PhoneNumber)]) &&
-                           !string.IsNullOrEmpty(SelectedContact[nameof(Contact.Email)]);
+                    return string.IsNullOrEmpty(SelectedContact[nameof(Contact.Name)]) &&
+                           string.IsNullOrEmpty(SelectedContact[nameof(Contact.PhoneNumber)]) &&
+                           string.IsNullOrEmpty(SelectedContact[nameof(Contact.Email)]);
                 }
 
                 return false;

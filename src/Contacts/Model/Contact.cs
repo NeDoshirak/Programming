@@ -32,6 +32,38 @@ namespace View.Model
         private string _email;
 
         /// <summary>
+        /// Максимальная длина имени контакта.
+        /// </summary>
+        private const int MaxNameLength = 100;
+
+        /// <summary>
+        /// Максимальная длина номера телефона.
+        /// </summary>
+        private const int MaxPhoneNumberLength = 100;
+
+        /// <summary>
+        /// Максимальная длина электронной почты.
+        /// </summary>
+        private const int MaxEmailLength = 100;
+
+        /// <summary>
+        /// Регулярное выражение для маски ввода номера телефона.
+        /// </summary>
+        public static readonly Regex PhoneNumberMask = new Regex(@"^[0-9+() -]*$");
+
+        /// <summary>
+        /// Регулярное выражение для проверки корректности номера телефона.
+        /// </summary>
+        public static readonly Regex PhoneNumberRegex =
+            new Regex(@"^\+?(\d{1,3})?[-. (]*(\d{1,4})[-. )]*(\d{1,4})[-. ]*(\d{1,9})$");
+
+        /// <summary>
+        /// Регулярное выражение для проверки корректности электронной почты.
+        /// </summary>
+        public static readonly Regex EmailRegex =
+            new Regex(@"^[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+$");
+
+        /// <summary>
         /// Поле для хранения ошибок.
         /// </summary>
         private readonly Dictionary<string, string> _errors = new Dictionary<string, string>();
@@ -42,7 +74,11 @@ namespace View.Model
         public string Name
         {
             get { return _name; }
-            set { SetProperty(ref _name, value); }
+            set 
+            {
+                ValidateProperty(nameof(Name), value);
+                SetProperty(ref _name, value); 
+            }
         }
 
         /// <summary>
@@ -51,7 +87,11 @@ namespace View.Model
         public string PhoneNumber
         {
             get { return _phoneNumber; }
-            set { SetProperty(ref _phoneNumber, value); }
+            set 
+            {
+                ValidateProperty(nameof(PhoneNumber), value);
+                SetProperty(ref _phoneNumber, value); 
+            }
         }
 
         /// <summary>
@@ -60,7 +100,10 @@ namespace View.Model
         public string Email
         {
             get { return _email; }
-            set { SetProperty(ref _email, value); }
+            set {
+                ValidateProperty(nameof(Email), value);
+                SetProperty(ref _email, value); 
+            }
         }
 
         /// <summary>
@@ -79,33 +122,40 @@ namespace View.Model
             switch (propertyName)
             {
                 case nameof(Name):
-                    if (string.IsNullOrWhiteSpace(Name))
-                        error = "Name is required.";
-
-                    if (Name.Length > 100)
-                        error = "Name cannot be longer than 100 characters.";
+                    if (string.IsNullOrWhiteSpace(value))
+                        error = "Имя не может быть пустым.";
+                    else if (value.Length > 100)
+                        error = "Имя не должно превышать 100 символов.";
                     break;
 
-                case nameof(PhoneNumber):
-                    if (string.IsNullOrWhiteSpace(PhoneNumber))
-                        error = "Phone number is required.";
-
-                    if (PhoneNumber.Length > 100)
-                        error = "Phone number cannot be longer than 100 characters.";
-
-                    if (!Regex.IsMatch(PhoneNumber, @"^[\d\+\-\(\)\s]+$"))
-                        error = "Phone number can only contain digits, +, -, (, ) and spaces.";
+                case nameof(Number):
+                    if (string.IsNullOrWhiteSpace(value))
+                    {
+                        error = "Номер телефона не может быть пустым.";
+                    }
+                    else
+                    {
+                        if (!PhoneNumberMask.IsMatch(value))
+                            error = "Номер телефона содержит недопустимые символы.";
+                        else if (value.Length > MaxPhoneNumberLength)
+                            error = "Номер телефона не должен превышать 100 символов.";
+                        else if (!PhoneNumberRegex.IsMatch(value))
+                            error = "Номер телефона имеет неверный формат. Пример: +7 (123) 456-7890";
+                    }
                     break;
 
                 case nameof(Email):
-                    if (string.IsNullOrWhiteSpace(Email))
-                        error = "Email is required.";
-
-                    if (Email.Length > 100)
-                        error    = "Email cannot be longer than 100 characters.";
-
-                    if (!Regex.IsMatch(Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
-                        error = "Invalid email format.";
+                    if (string.IsNullOrWhiteSpace(value))
+                    {
+                        error = "Email не может быть пустым.";
+                    }
+                    else
+                    {
+                        if (value.Length > MaxEmailLength)
+                            error = "Email не должен превышать 100 символов.";
+                        else if (!EmailRegex.IsMatch(value))
+                            error = "Email имеет неверный формат. Пример: example@domain.com";
+                    }
                     break;
             }
 
@@ -119,7 +169,7 @@ namespace View.Model
         /// Реализация свойства Error интерфейса IDataErrorInfo.
         /// Всегда возвращает null, что означает отсутствие ошибок на уровне объекта.
         /// </summary>
-        public string Error => string.Join("\n", _errors.Values);
+        public string Error => null;
 
         /// <summary>
         /// Инициализирует новый экземпляр класса Contact с указанными именем, номером телефона и электронной почтой.
