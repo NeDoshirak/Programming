@@ -12,7 +12,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace View.Model
 {
     /// <summary>
-    /// Класс, представляющий контакт с именем, номером телефона и электронной почтой.
+    /// Класс, представляющий контакт.
     /// </summary>
     public class Contact : ObservableObject, ICloneable, IDataErrorInfo
     {
